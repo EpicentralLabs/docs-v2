@@ -4,7 +4,7 @@ import {
   DocsDescription,
   DocsPage,
   DocsTitle,
-} from 'fumadocs-ui/page';
+} from '@/components/layout/page';
 import { notFound, redirect } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
@@ -28,6 +28,9 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       toc={page.data.toc} 
       full={page.data.full}
       lastUpdate={page.data.lastModified}
+      tableOfContent={{
+        style: 'clerk', // Change to 'clerk' for Clerk-style TOC
+      }}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
