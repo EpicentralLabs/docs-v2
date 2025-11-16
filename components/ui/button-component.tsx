@@ -56,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {/* Gradient background layer */}
         <span 
-          className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#4a85ff] to-[#000000] bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out group-hover:animate-[gradient-shift_2s_ease-in-out_infinite]"
+          className="absolute inset-0 bg-linear-to-r from-[#000000] via-[#4a85ff] to-[#000000] bg-size-[200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out group-hover:animate-[gradient-shift_2s_ease-in-out_infinite]"
           style={{
             backgroundPosition: '0% 50%',
           }}
