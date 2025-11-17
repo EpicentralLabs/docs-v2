@@ -98,68 +98,18 @@ pub const AUTHORITIES: [Pubkey; 2] = [
     pubkey!("3BEvopNQ89zkM4r6ADva18i5fao1sqR1pmswyQyfj838"), // DAO Main Treasury
     pubkey!("5aVw8DnKuxjYRhvBDkE9Khh5NbxjUyu1pjDkgS6bdNFF"), // Core Team Hot Wallet
 ];
-
-#[cfg(all(
-    feature = "devnet",
-    not(any(feature = "mainnet", feature = "localnet"))
-))]
-pub const AUTHORITIES: [Pubkey; 2] = [
-    pubkey!("8C9yaHEhc348upam4mJuY554ZvjrnmBsftcYTuRGZ4bT"),
-    pubkey!("EJXC56Podb1L6KhuQtVTME2eSbLrU3Y8k5mKwW2oX58S"),
-];
 ```
 
 Only addresses in `AUTHORITIES` can:
-- Initialize/update/delete stake pools
-- Initialize xLABS mint and metadata
-
-## Error Handling
-
-The program defines comprehensive error types:
-
-```rust
-#[error_code]
-pub enum StakingError {
-    #[msg("The provided vault account does not match the pool vault.")]
-    VaultMismatch,
-    #[msg("Insufficient staked amount or vault balance for this unstake operation.")]
-    InsufficientStakeBalance,
-    #[msg("Arithmetic operation failed (overflow, underflow, or conversion error).")]
-    ArithmeticError,
-    #[msg("The provided APR is identical to the current APR.")]
-    AprUnchanged,
-    #[msg("The provided stake mint does not match the config stake mint.")]
-    InvalidStakeMint,
-    #[msg("The provided reward mint does not match the config reward mint.")]
-    InvalidRewardMint,
-    #[msg("The signer is not the owner of this stake account.")]
-    UnauthorizedUser,
-    #[msg("Arithmetic overflow or underflow occurred.")]
-    Overflow,
-    #[msg("The provided mint decimals are too high. Maximum allowed is 12.")]
-    MintDecimalsTooHigh,
-    #[msg("Timestamp cannot be earlier than the last interest index update.")]
-    InvalidTimestamp,
-    #[msg("Stake amount must be greater than zero.")]
-    ZeroStakeAmount,
-    #[msg("Cannot close stake account with non-zero staked amount.")]
-    StakeAccountNotEmpty,
-    #[msg("Cannot close stake account with unclaimed pending rewards.")]
-    UnclaimedRewards,
-    #[msg("The stake pool's config does not match the provided config account.")]
-    ConfigPoolMismatch,
-    #[msg("The provided stake pool does not match the stake account's pool.")]
-    StakePoolMismatch,
-    #[msg("The provided APR (in basis points) is invalid.")]
-    InvalidAprBps,
-    #[msg("The vault account is not empty.")]
-    VaultNotEmpty,
-}
-```
+- `initialize_stake_pool`
+- `update_stake_pool`
+- `delete_stake_pool`
+- `initialize_xlabs_mint`
+- `initialize_metadata`
 
 ## Security Features
 
-- **Precise arithmetic**: All calculations use `PreciseNumber` to prevent rounding errors
+- **Precise arithmetic**: All calculations use [`PreciseNumber`](https://www.helius.dev/blog/solana-arithmetic) to prevent rounding errors
 - **Overflow protection**: All arithmetic operations use checked math
 - **Account validation**: Anchor constraints ensure account relationships via `has_one` checks
 - **PDA derivation**: Critical accounts use PDAs with deterministic seeds
