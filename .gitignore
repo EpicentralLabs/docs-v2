@@ -1,5 +1,5 @@
 # deps
-/node_modules
+node_modules
 
 # generated content
 .source
@@ -24,4 +24,3 @@ yarn-error.log*
 .env*.local
 .vercel
 next-env.d.ts
-node_modules

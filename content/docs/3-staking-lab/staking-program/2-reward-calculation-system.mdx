@@ -1,0 +1,120 @@
+---
+title: Reward Calculation System
+description: Understanding the importance of the Gloval Interest Index and how it affects the reward calculation.
+---
+
+import { Step, Steps } from '@/components/steps';
+
+# Global Interest Index
+
+Think of the **Global Interest Index** like a clock that keeps ticking up. Every second, it increases slightly based on the pool's Emission Rate (`apr_bps`). 
+Instead of tracking when each person staked, we just compare where the clock was when they started versus where it is now.
+
+## The Simple Idea
+
+Imagine you're tracking rewards like this:
+
+1. **Global Clock**: A number that grows over time (the Global Interest Index)
+2. **Your Starting Point**: When you stake, we save the current clock value
+3. **Your Rewards**: The difference between now and your starting point, multiplied by how much you staked
+
+This way, we don't need to remember timestamps for every staker—we just compare two numbers.
+
+<Steps>
+  <Step>
+
+## How the Global Index Grows
+
+The Global Interest Index increases every second based on the pool's APR. It's updated automatically whenever someone stakes, unstakes, or claims rewards.
+
+**The formula is simple:**
+
+```
+growth = (APR × time_elapsed) / seconds_per_year
+new_index = old_index + growth
+```
+
+Here's a simplified look at how it's calculated:
+
+```rust
+pub fn update_interest_index(&mut self, now: i64, apr_bps: u128) -> Result<u128> {
+    // Calculate how much time has passed
+    let elapsed_seconds = now - self.interest_index_last_updated;
+    
+    // Calculate growth based on APR and elapsed time
+    let growth = (apr_decimals * elapsed_seconds) / seconds_per_year;
+    
+    // Add growth to the existing index
+    self.interest_index += growth;
+    
+    Ok(self.interest_index)
+}
+```
+
+**Key Points:**
+- Starts at `0` when the pool is created
+- Grows continuously based on the APR
+- Only updates when someone interacts with the pool (lazy updates)
+
+</Step>
+  <Step>
+
+## How Your Rewards Are Calculated
+
+When you want to know your rewards, we simply compare:
+
+1. Where the global index is now
+2. Where it was when you staked (your baseline)
+
+Then multiply that difference by your staked amount.
+
+**The formula:**
+
+```
+your_rewards = (current_index - your_baseline_index) × your_staked_amount
+```
+
+Here's a simplified version:
+
+```rust
+pub fn update_pending_rewards(&mut self, current_interest_index: u128) -> Result<()> {
+    // Find the difference between now and when you staked
+    let index_difference = current_interest_index - self.interest_index_at_deposit;
+    
+    // Multiply by your staked amount
+    let new_rewards = index_difference * self.staked_amount;
+    
+    // Add to your existing pending rewards
+    self.pending_rewards += new_rewards;
+    
+    Ok(())
+}
+```
+
+**Example:**
+- You stake 1,000 tokens when the global index is `100`
+- Later, the global index reaches `150`
+- Your rewards = `(150 - 100) × 1,000 = 50,000` reward units
+
+</Step>
+</Steps>
+
+## Important Behaviors
+
+### What Happens When You Claim
+
+When you claim your rewards, your baseline index resets to the current global index. This means:
+- Future rewards are calculated from this new starting point
+- You won't double-count rewards you've already claimed
+- It's like starting fresh from today
+
+### Partial Unstaking
+
+If you unstake some (but not all) of your tokens, your baseline index resets. The remaining tokens are treated as if they were just staked, ensuring accurate reward calculations going forward.
+
+### Why Precision Matters
+
+The program uses precise decimal math to ensure accuracy, especially important when dealing with:
+- Large numbers
+- Small APR percentages
+- Precise time calculations
