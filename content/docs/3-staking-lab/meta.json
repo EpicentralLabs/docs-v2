@@ -1,5 +1,8 @@
 {
     "title": "Staking Lab",
     "description": "Stake LABS. Mint xLABS.",
-    "root": true
-  }
+    "root": true,
+    "children": [
+        "3-staking-lab/1-staking-program"
+    ]
+}

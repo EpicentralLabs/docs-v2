@@ -1,0 +1,167 @@
+---
+title: The Staking Program
+description: A technical overview of the Staking Program used for the Staking Lab and how it works.
+---
+
+# Instructions
+
+The `staking_program` exposes eight main instructions defined in the program module:
+
+| Instruction                | Description                                         |
+|----------------------------|-----------------------------------------------------|
+| `initialize_stake_pool`    | Initialize the stake pool and config accounts.      |
+| `update_stake_pool`        | Update the stake pool and config accounts.          |
+| `delete_stake_pool`        | Delete the stake pool and config accounts.          |
+| `stake_to_stake_pool`      | Stake tokens to the stake pool.                     |
+| `unstake_from_stake_pool`  | Unstake tokens from the stake pool.                 |
+| `claim_rewards`            | Claim rewards from the stake pool.                  |
+| `initialize_xlabs_mint`    | Initialize the xLABS mint and metadata.             |
+| `initialize_metadata`      | Initialize the metadata for the xLABS mint.         |
+
+---
+
+# Core Account Types
+
+The program manages three primary account types:
+
+### `StakePoolConfig`
+
+The global configuration account that stores pool parameters:
+
+```rust
+#[account(discriminator = 1)]
+#[derive(InitSpace)]
+pub struct StakePoolConfig {
+    pub stake_mint: Pubkey,  // LABS address in this case
+    pub reward_mint: Pubkey, // xLABS address in this case
+    pub apr_bps: u128,       // Emission Rate in basis points (e.g., 10% is 1_000)
+    pub bump: u8,
+}
+```
+
+### `StakePool`
+
+The pool state account tracking the **Global Interest Index** and **Vault**:
+
+```rust
+#[account(discriminator = 2)]
+#[derive(InitSpace)]
+pub struct StakePool {
+    pub vault: Pubkey, // the vault where the staked tokens are held
+    pub config: Pubkey,
+    // used to track the cumulative global interest for the pool,
+    // to get the decimal of interest index, divide by 10^12
+    pub interest_index: u128,
+    pub interest_index_last_updated: i64, // timestamp of the last interest index update
+    pub bump: u8,
+}
+```
+
+- **Derived PDA**: Uses seed `["stake_pool"]`
+- **Key Fields**: 
+  - `vault`: Associated token account holding staked LABS tokens
+  - `interest_index`: Cumulative interest index (scaled by 10^12 for precision)
+  - `interest_index_last_updated`: Unix timestamp of last index update
+
+### `StakeAccount`
+
+Per-user account tracking individual stake positions:
+
+```rust
+#[account(discriminator = 3)]
+#[derive(InitSpace)]
+pub struct StakeAccount {
+    pub user: Pubkey,
+    pub stake_pool: Pubkey,
+
+    // We're using u64 here because that's the SPL token standard.
+    pub staked_amount: u64,
+    pub pending_rewards: u64,
+    pub interest_index_at_deposit: u128,
+    pub bump: u8,
+}
+```
+
+- **Derived PDA**: Uses seeds `["stake_account", stake_pool.key(), user.key()]`
+- **Key Fields**:
+  - `staked_amount`: Amount of LABS tokens currently staked (u64, SPL token standard)
+  - `pending_rewards`: Accumulated but unclaimed xLABS rewards
+  - `interest_index_at_deposit`: Baseline interest index for reward calculations
+
+
+## Access Control
+
+Authority checks are enforced via the `AUTHORITIES` constant, which varies by network:
+
+```rust
+pub const AUTHORITIES: [Pubkey; 2] = [
+    pubkey!("3BEvopNQ89zkM4r6ADva18i5fao1sqR1pmswyQyfj838"), // DAO Main Treasury
+    pubkey!("5aVw8DnKuxjYRhvBDkE9Khh5NbxjUyu1pjDkgS6bdNFF"), // Core Team Hot Wallet
+];
+
+#[cfg(all(
+    feature = "devnet",
+    not(any(feature = "mainnet", feature = "localnet"))
+))]
+pub const AUTHORITIES: [Pubkey; 2] = [
+    pubkey!("8C9yaHEhc348upam4mJuY554ZvjrnmBsftcYTuRGZ4bT"),
+    pubkey!("EJXC56Podb1L6KhuQtVTME2eSbLrU3Y8k5mKwW2oX58S"),
+];
+```
+
+Only addresses in `AUTHORITIES` can:
+- Initialize/update/delete stake pools
+- Initialize xLABS mint and metadata
+
+## Error Handling
+
+The program defines comprehensive error types:
+
+```rust
+#[error_code]
+pub enum StakingError {
+    #[msg("The provided vault account does not match the pool vault.")]
+    VaultMismatch,
+    #[msg("Insufficient staked amount or vault balance for this unstake operation.")]
+    InsufficientStakeBalance,
+    #[msg("Arithmetic operation failed (overflow, underflow, or conversion error).")]
+    ArithmeticError,
+    #[msg("The provided APR is identical to the current APR.")]
+    AprUnchanged,
+    #[msg("The provided stake mint does not match the config stake mint.")]
+    InvalidStakeMint,
+    #[msg("The provided reward mint does not match the config reward mint.")]
+    InvalidRewardMint,
+    #[msg("The signer is not the owner of this stake account.")]
+    UnauthorizedUser,
+    #[msg("Arithmetic overflow or underflow occurred.")]
+    Overflow,
+    #[msg("The provided mint decimals are too high. Maximum allowed is 12.")]
+    MintDecimalsTooHigh,
+    #[msg("Timestamp cannot be earlier than the last interest index update.")]
+    InvalidTimestamp,
+    #[msg("Stake amount must be greater than zero.")]
+    ZeroStakeAmount,
+    #[msg("Cannot close stake account with non-zero staked amount.")]
+    StakeAccountNotEmpty,
+    #[msg("Cannot close stake account with unclaimed pending rewards.")]
+    UnclaimedRewards,
+    #[msg("The stake pool's config does not match the provided config account.")]
+    ConfigPoolMismatch,
+    #[msg("The provided stake pool does not match the stake account's pool.")]
+    StakePoolMismatch,
+    #[msg("The provided APR (in basis points) is invalid.")]
+    InvalidAprBps,
+    #[msg("The vault account is not empty.")]
+    VaultNotEmpty,
+}
+```
+
+## Security Features
+
+- **Precise arithmetic**: All calculations use `PreciseNumber` to prevent rounding errors
+- **Overflow protection**: All arithmetic operations use checked math
+- **Account validation**: Anchor constraints ensure account relationships via `has_one` checks
+- **PDA derivation**: Critical accounts use PDAs with deterministic seeds
+- **Authority checks**: Admin operations require signer to be in `AUTHORITIES` list
+- **Vault safety**: Vault must be empty before pool deletion
