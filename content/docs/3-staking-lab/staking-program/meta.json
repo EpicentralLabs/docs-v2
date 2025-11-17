@@ -4,6 +4,7 @@
     "root": false,
     "children": [
         "3-staking-lab/staking-program/1-instruction-flow",
-        "3-staking-lab/staking-program/2-reward-calculation-system"
+        "3-staking-lab/staking-program/2-reward-calculation-system",
+        "3-staking-lab/staking-program/3-error-handling"
     ]
 }

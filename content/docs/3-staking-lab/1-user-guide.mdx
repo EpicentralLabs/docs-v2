@@ -1,0 +1,148 @@
+---
+title: User Guide
+description: Learn how to Stake and Unstake LABS and mint xLABS.
+---
+
+import { Step, Steps } from '@/components/steps';
+
+# Staking
+
+<Steps>
+    <Step>
+        ### Connect Wallet
+
+        On the [stake.opx.markets](https://stake.opx.markets) page, connect your wallet.
+
+        ![Connect Wallet](/staking-lab/sl-ug-1.png)
+    </Step>
+    <Step>
+        ### Approve Connection
+
+        Approve the connection of your wallet to the Staking Lab. 
+        This one-time approval is notifying you if you are ok with having the Staking Lab to see your wallet address and prompt you to signing transactions. 
+
+        ![Approve Connection](/staking-lab/sl-ug-2.png)
+    </Step>
+    <Step>
+        ### Stake LABS
+
+        Click the "**Stake LABS**" button to stake (deposit) your LABS tokens into the Staking Lab.
+
+        ![Stake LABS](/staking-lab/sl-ug-3.png)
+    </Step>
+    <Step>
+        ### Confirm Transaction
+        
+        Here you can input the amount of LABS you want to Stake (or click your available balance to deposit all).
+
+        ![Confirm Transaction](/staking-lab/sl-ug-4.png)
+
+        <Callout title="Fees">
+          There is a **refundable fee** of **0.0015 SOL** for first-time staking. This covers the <a href="https://docs.anza.xyz/implemented-proposals/rent" target="_blank" rel="noopener noreferrer">rent</a> required for the `StakeAccount` created for you.
+
+          ![RefundableFees](/staking-lab/sl-ug-5.png)
+        </Callout>
+    </Step>
+    <Step>
+        ### View Staked Balance
+
+        You can view your staked balance under "Current Stake" and the receipt on your stake should populate under "Transaction History".
+
+        ![Current Stake](/staking-lab/sl-ug-6.png)
+    </Step>
+</Steps>
+
+---
+
+# Unstaking
+
+<Steps>
+    <Step>
+        ### Unstake LABS
+
+        Click the "**Unstake LABS**" button to unstake (withdraw) your LABS tokens from the Staking Lab.
+
+        ![Unstake LABS](/staking-lab/sl-ug-7.png)
+        <Callout title="Note" type="warning">
+            Unstaking will immediately stop earning rewards on the **withdrawn amount**. Make sure this is what you want to do.
+        </Callout>
+    </Step>
+    <Step>
+        ### Confirm Transaction
+        
+        Here you can input the amount of LABS you want to Unstake (or click your full staked balance to withdraw all).
+
+        ![Confirm Transaction](/staking-lab/sl-ug-8.png)
+
+        <Callout title="Fee Refund">
+          `StakeAccount` <a href="https://docs.anza.xyz/implemented-proposals/rent" target="_blank" rel="noopener noreferrer">rent</a> is **not** refunded for partial-unstake. **0.0015 SOL** is *only* refunded for **full-unstake**. 
+          
+          #### Partial-Unstake
+
+          Partial unstake **will not** refund the 'StakeAccount' rent.
+
+          ![No Refund](/staking-lab/sl-ug-9.png)
+
+          #### Full-Unstake
+
+          Full unstake **will** refund the 'StakeAccount' rent.
+
+          ![Full Refund](/staking-lab/sl-ug-10.png)
+        </Callout>
+    </Step>
+</Steps>
+
+# Minting
+
+<Steps>
+    <Step>
+        ### Mint xLABS
+
+        Minting xLABS depends largely on the amount of LABS you have staked and the protocol-set **Emission Rate.** 
+        This happens over time where the longer you stake, the more xLABS you can mint. This is calculated autonomously using the [Reward Calculation System](/docs/3-staking-lab/staking-program/2-reward-calculation-system) defined in the Staking Program.
+        
+        ![Mint xLABS](/staking-lab/sl-ug-11.png)
+
+        <Callout title="Minting xLABS" type="warning">
+          xLABS are only **minted** after you have "**Claimed**".
+        </Callout>
+
+        <Callout title="No Minting Fees">
+          **No protocol fees** are taken when **minting** xLABS.
+        </Callout>
+    </Step>
+</Steps>
+
+# Claiming
+
+<Steps>
+    <Step>
+        ### Claiming xLABS
+
+        Click the "**Claim xLABS**" button to claim your xLABS tokens.
+
+        ![Claim xLABS](/staking-lab/sl-ug-12.png)
+        
+        <Callout title="No Claiming Fees">
+          **No protocol fees** are taken when **claiming** xLABS.
+        </Callout>
+    </Step>
+    <Step>
+        ### Confirm Transaction
+
+        Here you can input the amount of xLABS you want to Claim (or click your available balance to claim all).
+
+        ![Confirm Transaction](/staking-lab/sl-ug-13.png)
+
+        <Callout title="Numerical Mismatch">
+          When claiming, you may notice **a numerical mismatch between the amount of xLABS you see in your simulated transaction versus the amount of xLABS you actually receive**. 
+          This is because during the claiming process (signing and approving the transaction), they are still being accumulated so that by time of execution, there is a positive mismatch.
+        </Callout>
+    </Step>
+</Steps>
+
+# Redeem Rewards
+
+Redeeming Rewards is done using xLABS. It is the process of **spending your xLABS** to redeem rewards from the **Reward Pool**.
+
+*This is a feature still in development and will be available closer to the launch of OPX on mainnet.*
