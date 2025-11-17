@@ -20,12 +20,12 @@ export default function HomePage() {
         returnDuration={0.45}
       />
       <div className="relative z-10 drop-shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_0_30px_rgba(0,0,0,0.3)]">
-        <h1 className="text-6xl md:text-7xl mb-6">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6">
           <TextEffect per="char" preset="blur" as="span">
             Epicentral Docs
           </TextEffect>
         </h1>
-        <p className="mb-8 text-xl md:text-2xl font-bold">
+        <p className="mb-8 text-lg sm:text-xl md:text-2xl font-bold">
           <TextEffect per="word" preset="blur" as="span">
             Everything you need to know. All in one place.
           </TextEffect>
