@@ -11,6 +11,8 @@ import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { Edit } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { LLMCopyButton, ViewOptions } from '@/components/page-actions';
+import { buttonVariants } from '@/components/ui/button';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -44,19 +46,29 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <a
-          href={`https://github.com/EpicentralLabs/docs-v2/blob/master/content/docs/${filePath}`}
-          rel="noreferrer noopener"
-          target="_blank"
-          className={cn(
-            'inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground',
-            'transition-colors hover:text-fd-foreground',
-            'mb-6 not-prose'
-          )}
-        >
-          <Edit className="size-4" />
-          Edit on GitHub
-        </a>
+        <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6 mb-6">
+          <a
+            href={`https://github.com/EpicentralLabs/docs-v2/blob/master/content/docs/${filePath}`}
+            rel="noreferrer noopener"
+            target="_blank"
+            className={cn(
+              buttonVariants({
+                color: 'secondary',
+                size: 'sm',
+                className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground',
+              }),
+              'not-prose'
+            )}
+          >
+            <Edit />
+            Edit on GitHub
+          </a>
+          <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
+          <ViewOptions
+            markdownUrl={`${page.url}.mdx`}
+            githubUrl={`https://github.com/EpicentralLabs/docs-v2/blob/master/content/docs/${filePath}`}
+          />
+        </div>
         <MDX
           components={getMDXComponents({
             // this allows you to link to other pages with relative file paths

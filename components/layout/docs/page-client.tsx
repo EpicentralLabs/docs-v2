@@ -226,8 +226,20 @@ export function PageLastUpdate({
   const [date, setDate] = useState('');
 
   useEffect(() => {
-    // to the timezone of client
-    setDate(new Date(value).toLocaleDateString());
+    const dateObj = new Date(value);
+    // Format: Date HH:MM timezone
+    const dateStr = dateObj.toLocaleDateString();
+    const timeStr = dateObj.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short',
+    });
+    // Extract timezone abbreviation from the formatted string (e.g., "2:30 PM EST")
+    const parts = timeStr.split(' ');
+    const timeZoneAbbr = parts[parts.length - 1];
+    const timeOnly = parts.slice(0, -1).join(' ');
+    setDate(`${dateStr} ${timeOnly} ${timeZoneAbbr}`);
   }, [value]);
 
   return (
