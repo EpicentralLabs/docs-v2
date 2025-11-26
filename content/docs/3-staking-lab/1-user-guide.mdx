@@ -18,8 +18,8 @@ import { Step, Steps } from '@/components/steps';
     <Step>
         ### Approve Connection
 
-        Approve the connection of your wallet to the Staking Lab. 
-        This one-time approval is notifying you if you are ok with having the Staking Lab to see your wallet address and prompt you to signing transactions. 
+        Approve the connection request from the Staking Lab. 
+        This one-time approval lets the Staking Lab view your wallet address and prompt you to sign transactions.
 
         ![Approve Connection](/staking-lab/sl-ug-2.png)
     </Step>
@@ -85,7 +85,7 @@ import { Step, Steps } from '@/components/steps';
 
           #### Full-Unstake
 
-          Full unstake **will** refund the 'StakeAccount' rent.
+          Full unstake **will** refund the 'StakeAccount' rent and claim and pending rewards.
 
           ![Full Refund](/staking-lab/sl-ug-10.png)
         </Callout>
@@ -135,8 +135,8 @@ import { Step, Steps } from '@/components/steps';
         ![Confirm Transaction](/staking-lab/sl-ug-13.png)
 
         <Callout title="Numerical Mismatch">
-          When claiming, you may notice **a numerical mismatch between the amount of xLABS you see in your simulated transaction versus the amount of xLABS you actually receive**. 
-          This is because during the claiming process (signing and approving the transaction), they are still being accumulated so that by time of execution, there is a positive mismatch.
+          You may notice **the amount of xLABS shown in your simulated transaction doesn't match what you actually receive**. 
+          This happens because you continue accumulating xLABS during the claiming process (while you sign and approve the transaction). As a result, by the time the transaction executes, you'll receive more xLABS than the simulated amount.
         </Callout>
     </Step>
 </Steps>

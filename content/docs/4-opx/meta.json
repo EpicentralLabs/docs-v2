@@ -1,5 +1,8 @@
 {
     "title": "OPX",
     "description": "Trade DeFi Options on Solana.",
-    "root": true
+    "root": true,
+    "children": [
+        "1-omlp"
+    ]
 }

@@ -3,49 +3,65 @@ title: OPX
 description: Trade DeFi Options on Solana.
 ---
 
-# OPX
+OPX is a decentralized options exchange protocol and serves as the flagship product at the core of the platform. Through OPX, users can directly enter and exit option positions, enabling active management of profit and loss.
 
-**OPX** is an Options Trading Platform that that lets users create and trade option contracts (derivatives) for Solana tokens.
+The essence of OPX is defined by three words:
 
-Users can seamlessly act as traders, market makers, and provide liquidity for market makers on OPX, which unlocks real yield opportunities and advanced risk management strategies — such as: 
+- <span style={{ color: "#4a85ff" }}><strong>Design</strong></span>
+- <span style={{ color: "rgb(219, 74, 255)" }}><strong>Experience</strong></span>
+- <span style={{ color: "#4a85ff" }}><strong>Simplicity</strong></span>
 
-- speculation trading (long or short), 
-- multi-legged strategies, 
-- fractional option contract trading, 
-- leveraged market-making opportunities, and 
-- liquidity lending pools (OMLP)
+While options trading is often considered complex and intimidating, OPX is designed to remove such barriers. The intuitive user interface empowers traders of any experience level to trade confidently, including those new to options.
 
-The global derivatives market (all types — interest rate, FX, equity, credit, etc) has notional outstanding in the range of hundreds of trillions of USD. 
-For example, as of end-2023 the notional amount outstanding in OTC derivatives for interest-rate contracts alone was about USD *$530 trillion*.
+## Trade Page: For Buyers
 
-## Simplicity > Complexity
+OPX provides two distinct trading interfaces for buyers: **Degen Mode** and **Pro Mode**. The following describes the Pro Mode. Those seeking a lighter trading experience should refer to the [Degen Mode](/products/degen-mode) page.
 
-Options-trading can be complicated enough creating a high barrier of entry knowledgewise. 
-The goal with OPX is to ensure that the user-interface is user-friendly, so that even the first-time options traders can understand.
+The default trading interface presents all essential information—option values, strike prices, expiration dates, and clearly organized option [“Greeks”](/options-for-starters/the-greeks). This setup allows quick access to necessary data with minimal clutter, ensuring users can seamlessly track their positions.
 
-## Buyers (Takers) & Sellers (Makers)
+Buyers select from live positions created by sellers and can customize trade sizes thanks to DeFi's use of [fractionalized shares](/option-standard-sdk/opm#fractionalized-options-for-buyers-and-sellers):
 
-*Become the player, or become the game.* OPX allows users to either buy options or short-sell options... or both!
+> For example:
+>
+> - Quantity: 1 → 100× of the underlying asset
+> - Quantity: 0.5 → 50× of the underlying asset
+> - Quantity: 0.25 → 25× of the underlying asset
 
-### Buyers (Takers)
+## Option Lab: For Sellers
 
-Buyers (Takers) are the ones who pay the premium to the Seller, to buy the option contract. 
-In return, they receive the right to buy or sell the underlying asset at a predetermined price (strike price) on or before a specified date (expiration date).
+Sellers utilize one of two versions of the Option Lab to write new options contracts.
 
-Buyers can:
-- Speculate on the direction of the underlying asset
-- Hedge against over-exposure based on current and historical market volatility
-- Bet with the market sentiment
+When creating a contract, the interface guides the user through three clear steps:
+- Configure
+- Provide Collateral
+- Review & Mint
 
-### Sellers (Makers)
+### Configure Option
 
-Sellers (Makers) are the ones who sell the option contract to the Buyer.
-In return, they receive the premium from the Buyer. They are also known as "option writers" or "option sellers". 
-They are the ones who are willing to sell the option contract at a predetermined price (strike price) on or before a specified date (expiration date) to collect the premium over time (known as "Theta" or "time value" of the option).
+The process begins by specifying the fundamental parameters: Strike Price, Expiration Date, and Quantity.
 
-Sellers can:
-- Provide option liquidity to the market by selling the option contract to the Buyer
-- Earn from "time-decay" (Theta) of the option premium
-- Bet against the typical market sentiment
+Additionally, an “Advanced Option Details” section provides deeper context regarding the position, including values such as Implied Volatility, Risk-Free Rate, Moneyness, and Estimated Max Profit. Full definitions are available in the [Terminology](/options-for-starters/intro#terminology) section.
 
-## Providing Liquidity
+### Provide Collateral
+
+**Collateral Amount Panel:** Sellers determine the type and amount of collateral to be contributed to [cover](/option-standard-sdk/opm#no-naked-positions) their position. If more collateral is required, they may borrow the remainder from the [OMLP](/products/omlp), leveraging up to 5× through the leverage panel.
+
+**Collateral Status:** This section displays the current contribution, any additional coverage needed, and the overall coverage percentage.
+
+**Cost Breakdown Panel:** Sellers receive a full breakdown of creation-related costs:
+> - Borrow cost (split by day/hour)
+> - Maximum Profit Potential
+> - Option Creation Fee
+> - Transaction cost
+
+This approach provides a comprehensive overview of profit and loss potential before the contract is minted.
+
+### Review & Mint
+
+In the final step, users review all relevant details from previous stages before finalizing and minting the options contract.
+
+## Revenue
+
+OPX applies fees whenever positions are opened or closed.
+
+A comprehensive overview of these fees is available on the [Fees](/products/fees.md) page.
