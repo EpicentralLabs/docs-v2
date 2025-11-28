@@ -1,4 +1,5 @@
 import './global.css';
+import 'katex/dist/katex.min.css';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import { Inter } from 'next/font/google';
 import { OpenPanelComponent } from '@openpanel/nextjs';
