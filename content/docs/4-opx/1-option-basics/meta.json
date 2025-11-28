@@ -1,0 +1,11 @@
+{
+    "title": "Option Trading Basics",
+    "description": "A quick overview of what options are and how to trade them.",
+    "root": false,
+    "children": [
+        "1-option-basics/index",
+        "1-option-basics/1-calls-and-puts",
+        "1-option-basics/2-greeks",
+        "1-option-basics/3-spreads-intro"
+    ]
+}
