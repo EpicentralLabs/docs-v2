@@ -3,6 +3,7 @@
     "description": "Trade DeFi Options on Solana.",
     "root": true,
     "children": [
-        "1-omlp"
+        "1-omlp",
+        "2-fees"
     ]
 }

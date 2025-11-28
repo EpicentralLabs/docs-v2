@@ -1,0 +1,120 @@
+---
+title: Fees
+description: Overview of OPX fees.
+---
+
+# Overview
+
+OPX collects protocol-level fees when users open, close, or interact with options contracts and related platform features. These fees compensate ecosystem participants and fund continued protocol development, consistent with the non-custodial reward and operational models defined in the [Epicentral Labs DAO](/docs/2-epicentral-dao) governance framework.
+
+These fees are not investment returns, dividends, or profit-sharing mechanisms and do not imply ownership or entitlement to the protocol. Fee structures are transparent and displayed within the interface during position creation and management.
+
+---
+
+# Revenue Allocation
+
+OPX distributes all collected fees autonomously through smart contract logic. The protocol allocates fees according to the following structure:
+
+| Allocation Category | Percentage | Description |
+|---------------------|:----------:|-------------|
+| [Rewards Program](/docs/3-staking-lab) | 70% | Funds allocated to the Rewards Pool, where [LABS](/docs/2-epicentral-dao/2-labs-token) stakers receive participation-based distributions through the issuance of [xLABS](/docs/2-epicentral-dao/3-xlabs-token) |
+| Core Team | 20% | Compensation for ongoing development, maintenance, and operational labor |
+| Operations Expenses | 10% | Platform maintenance, infrastructure costs, and approved operational expenditures |
+
+<Callout title="Autonomous Distribution">
+    OPX distributes all fees autonomously through deterministic smart contract logic. The protocol executes fee allocation automatically without requiring manual intervention or discretionary management.
+</Callout>
+
+### Rewards Program — 70%
+
+OPX allocates seventy percent (70%) of all collected fees to the [Rewards Program](/docs/3-staking-lab). These funds support participation-based distributions to [LABS](/docs/2-epicentral-dao/2-labs-token) stakers through the issuance of [xLABS](/docs/2-epicentral-dao/3-xlabs-token). These allocations enable reward emissions without granting any rights to profits, dividends, equity, or redemption value.
+
+The protocol uses these funds strictly to fund participation incentives pursuant to the defined role of [xLABS](/docs/2-epicentral-dao/3-xlabs-token) and the [Rewards Program](/docs/3-staking-lab) framework.
+
+### Core Team — 20%
+
+OPX allocates twenty percent (20%) of all collected fees to Core Team compensation for ongoing development, maintenance, and operational labor. This allocation reflects the Core Team's role and is expressly permitted under the [Epicentral Labs DAO](/docs/2-epicentral-dao) governance framework.
+
+This allocation is not a royalty on token ownership, investment performance, or managerial effort; it compensates Core Team Members for protocol-related work approved through the [Realms governance mechanism](/docs/2-epicentral-dao). The Core Team executes these funds in a Procedural Capacity only and may not use them to speculate or influence token value.
+
+### Operations Expenses — 10%
+
+OPX allocates ten percent (10%) of all collected fees to operational overhead costs, including:
+
+* Platform maintenance
+* Infrastructure costs
+* Approved operational expenditures
+
+These funds support continued protocol development and ensure reliable platform operations. The protocol reserves these funds for operational purposes only and may not use them to speculate or influence token value.
+
+---
+
+None of these allocations constitute token repurchases, token price support, or financial returns and do not alter the rights or limitations of [LABS](/docs/2-epicentral-dao/2-labs-token) or [xLABS](/docs/2-epicentral-dao/3-xlabs-token) Holders.
+
+---
+
+# User Fees
+
+OPX charges fees based on user actions and position types. The protocol applies fees transparently, and users see all applicable fees displayed within the interface during position creation and management.
+
+<Callout title="Close Position Fee Responsibility">
+    The Buyer or Seller that initiates the close position order pays the close fee.
+</Callout>
+
+### Buyer Fees
+
+Buyers incur fees upon executing economically meaningful events rather than holding positions, consistent with non-custodial platform design.
+
+| Action | Fee Type |
+|--------|----------|
+| Bid Open Position | 0.02 SOL fixed rate |
+| Contract Premium | No fee charged |
+| Bid Close Position | 0.10% of realized PnL |
+| Exercise Option | 0.25% of position size |
+
+Buyers pay no fee on contract premiums received from sellers. The protocol charges buyers only for actions that consume platform resources or execute position changes.
+
+### Seller Fees
+
+Sellers incur fees based on their role in creating and managing options contracts. Contract originators (First Makers) receive preferential treatment to incentivize market creation.
+
+| Action | Fee Type |
+|--------|----------|
+| Ask Open Position (First Maker) | Free — No fee for creating a new option contract |
+| Ask Open Position (Existing Option Chain) | 0.02 SOL fixed rate — Fee applies when utilizing an existing contract template |
+| Seller Borrow Rate | 0.005% – 0.02% per hour, based on position size and indexed to utilization inside the [OMLP](/docs/4-opx/1-omlp) |
+| Ask Close Position | 0.075% of realized PnL — Sellers receive a 25% discount on close fees |
+| Seller Liquidation | 0.10% of collateral size |
+
+<Callout title="Partial Position Closures">
+    When a Seller closes only part of their position, the protocol fractionalizes participant Buyers' positions based on the quantity of option contracts remaining for that Seller's position. The protocol only closes out Buyers completely if the Seller closes their entire position.
+</Callout>
+
+Sellers benefit from reduced fees when creating new option contracts, encouraging market depth and liquidity provision. The protocol charges sellers for borrowing from the [OMLP](/docs/4-opx/1-omlp) based on utilization rates and position size.
+
+## Platform Swap Convenience Fee
+
+OPX charges a convenience fee for platform swap functionality:
+
+| Action | Fee Type |
+|--------|----------|
+| Platform Swap Convenience | 0.10% of position size |
+
+This fee applies when users utilize OPX's integrated swap functionality for position management.
+
+---
+
+# Summary
+
+The OPX fee framework:
+
+* Funds ecosystem participation without offering investment returns
+* Maintains strict alignment with the [Rewards Program](/docs/3-staking-lab) model
+* Distributes fees autonomously through smart contract logic
+* Allocates operating resources transparently
+* Compensates Core Team Members for approved labor, not token ownership
+* Incentivizes market creation by offering fee-free options contract creation for First Makers
+* Provides fee discounts to sellers to encourage liquidity provision
+* Avoids buybacks, dividends, or profit guarantees prohibited by the [Epicentral Labs DAO](/docs/2-epicentral-dao) governance framework
+
+All fee structures are transparent and displayed within the interface during position creation and management, ensuring users understand all costs before executing transactions.
