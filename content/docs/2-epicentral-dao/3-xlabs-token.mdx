@@ -1,0 +1,122 @@
+---
+title: xLABS
+description: Participation-based Rewards Token
+---
+
+| Token  | Address                                             |
+|--------|-----------------------------------------------------|
+| **xLABS**   | [`xLABSWsaKtCdzdqCqZrHyj6WxxKSQRPB9o2LXLwHfiT`](https://cabana.exchange/token/xLABSWsaKtCdzdqCqZrHyj6WxxKSQRPB9o2LXLwHfiT?partner=Epicentral)       |
+
+# Rewards Token
+
+**xLABS** is the on-chain reward token that the [Staking Lab](/docs/3-staking-lab) issues to participants who stake [LABS](/docs/2-epicentral-dao/2-labs-token) tokens. 
+The token serves as a time-based, proof-of-stake accounting unit that tracks a holder's participation in the [Epicentral Labs DAO](/docs/2-epicentral-dao)'s governance and rewards framework.
+
+xLABS represents the output of staking LABS—mechanically similar to a wrapped representation of governance participation—enabling holders to independently manage:
+
+1. Their governance power (via staked LABS), and
+2. Their participation-based rewards (via xLABS)
+
+—without forcing either function to depend on the other.
+
+<Callout title="Key Concept">
+    "LABS is the tree; xLABS is the fruit. You don't cut down the tree to harvest the fruit." — *Cyber Staker, Core Team*
+</Callout>
+
+---
+
+# Purpose
+
+Epicentral Labs designed xLABS to separate governance from participation-based compensation. Staking LABS produces xLABS; holding or transferring xLABS allows participants to decide how, when, and if they engage with the [Rewards Program](/docs/3-staking-lab).
+
+This model ensures that:
+
+* **LABS = governance foundation**
+* **xLABS = the participation output**
+
+## Why This Structure Exists
+
+The [Epicentral Labs DAO](/docs/2-epicentral-dao) required a mechanism that:
+
+* Recognizes governance participation without implying a capital interest
+* Allows users to realize participation-based rewards without selling LABS
+* Avoids investment-return expectations, dividend-like language, or buyback semantics
+* Maintains compliance with U.S. securities jurisprudence and the Howey Test by eliminating reliance on the managerial efforts of others, profit guarantees, or redemption rights
+
+This structure concentrates market activity and value considerations around xLABS—not LABS—reducing volatility pressure on the DAO's governance token.
+
+## How xLABS Works
+
+```
+Stake LABS → Receive xLABS → Use or transfer xLABS as desired
+```
+
+<Accordions type="multiple">
+  <Accordion title="Minting" value="minting">
+    When participants stake LABS through the [Staking Lab](/docs/3-staking-lab), the [Staking Program](/docs/3-staking-lab/staking-program) mints xLABS at an emission rate that the [Epicentral Labs DAO](/docs/2-epicentral-dao) sets through the [Realms governance platform](/docs/2-epicentral-dao). The [Reward Calculation System](/docs/3-staking-lab/staking-program/2-reward-calculation-system) determines the amount of xLABS that participants can claim based on their staked amount and time staked.
+  </Accordion>
+
+  <Accordion title="Holding" value="holding">
+    Stakers retain full governance power because their LABS remain staked and under their custodial control.
+  </Accordion>
+
+  <Accordion title="Transferability" value="transferability">
+    Unlike staked LABS, xLABS may be transferred, sold, or swapped without unbinding governance power. This allows holders to realize yield independently, similar in concept to U.S. Treasury STRIPS—a separation of principal and coupon rights—but applied algorithmically without debt, profit promises, or custodial obligations.
+  </Accordion>
+
+  <Accordion title="Termination" value="termination">
+    When participants unstake LABS, the [Staking Program](/docs/3-staking-lab/staking-program) halts xLABS minting and ends their participation in the [Rewards Program](/docs/3-staking-lab).
+  </Accordion>
+</Accordions>
+
+### What xLABS Is Not
+
+xLABS is not:
+
+* A dividend
+* An equity interest
+* A buyback instrument
+* An investment contract
+* Evidence of profit rights or revenue ownership
+
+The [Epicentral Labs DAO](/docs/2-epicentral-dao) expressly prohibits classification of xLABS as any of the above, and it does not repurchase xLABS from holders. When the DAO distributes rewards, they constitute participation-based compensation, not investment returns.
+
+---
+
+# Tokenomics
+
+| **Parameter**          | **Details**                                                                                                  |
+|------------------------|--------------------------------------------------------------------------------------------------------------|
+| **Token Name**     | Epicentral Labs Rewards Token                                                                                    |
+| **Symbol**         | xLABS                                                                                                            |
+| **Token Address**  | [FILL]        |
+| **Initial Supply** | 0 – The protocol creates xLABS exclusively through staking events; it begins with no tokens in circulation.      |
+| **Maximum Supply** | Unlimited – The [Staking Program](/docs/3-staking-lab/staking-program) mints xLABS dynamically as users stake.    |
+| **Decimals**       | 9                                                                                                                |
+| **Emission Rate**  | Adjustable by [Epicentral Labs DAO](/docs/2-epicentral-dao) via [Realms governance platform](/docs/2-epicentral-dao).  |
+
+## Allocations
+
+xLABS has no pre-allocated supply or vesting schedules. The [Staking Program](/docs/3-staking-lab/staking-program) mints the token dynamically as participants stake LABS tokens through the [Staking Lab](/docs/3-staking-lab). The [Epicentral Labs DAO](/docs/2-epicentral-dao) determines and adjusts the emission rate through [governance proposals](/docs/2-epicentral-dao/1-governance-process).
+
+<Callout title="Design Philosophy">
+    "xLABS is designed to be minted and redeemed for rewards... or just sold." — *TheLazySol, Founder*
+</Callout>
+
+---
+
+# Key Takeaways
+
+| **Element**        | **LABS**                        | **xLABS**                       |
+| -------------- | --------------------------- | --------------------------- |
+| Primary Role   | Governance Authority        | Participation Output        |
+| Transferable?  | Yes                         | Yes                         |
+| Minting        | Fixed supply                | Emitted by [Staking Lab](/docs/3-staking-lab)      |
+| Rights Granted | Voting via [Realms governance platform](/docs/2-epicentral-dao) | Access to [Rewards Program](/docs/3-staking-lab)   |
+| Classification | Utility governance token    | Proof-of-stake reward token |
+
+---
+
+# In One Sentence
+
+**The [Staking Program](/docs/3-staking-lab/staking-program) mints xLABS when participants stake LABS, enabling holders to separate governance participation from reward realization—giving users full control over when and how they claim the economic benefit of their protocol participation without selling LABS itself.**

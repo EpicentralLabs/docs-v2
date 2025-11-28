@@ -1,0 +1,132 @@
+---
+title: OMLP
+description: Option Margin Liquidity Pools
+---
+
+# Overview
+
+The **Option Margin Liquidity Pool (OMLP)** is a programmable, non-custodial liquidity architecture that enables users to access margin for options trading without relying on a traditional two-party negotiation. The protocol routes borrowing demand to a pool of liquidity providers, thereby allowing traders to construct options positions independently while liquidity providers earn participation-based fees for enabling those trades.
+
+The OMLP introduces a **single-party approach to options execution**, removing the dependency on locating a counterparty before entering an options contract. Instead of a trader requiring a seller to assume risk, the OMLP supplies margin liquidity on-demand through smart contracts governed by the [Epicentral Labs DAO](/docs/2-epicentral-dao).
+
+<Callout title="Key Innovation">
+    The OMLP transforms traditional bilateral options trading into a single-party system where traders interact with liquidity pools rather than individual counterparties, enabling autonomous options creation on [OPX](/docs/4-opx).
+</Callout>
+
+---
+
+## Traditional Options vs. OMLP Options
+
+### Traditional Structure
+
+Historically, every options contract involves two sides:
+
+* **A buyer** seeking optionality
+* **A seller** assuming the obligation
+
+This bilateral model often results in:
+
+* Latency in matching counterparties
+* Pricing inefficiencies
+* Limited market access for non-expert participants
+
+### OMLP Structure: The Single-Party Paradigm
+
+The OMLP replaces the seller with a **liquidity source**, enabling the trader to define key contract parameters—including expiration date and strike price—without coordinating with another human participant.
+
+```
+Traditional → Trader A vs Trader B  
+
+OMLP       → Trader A vs Liquidity Pool (SAP)
+```
+
+This evolution decentralizes the options selling role and transforms liquidity providers into passive enablers of margin rather than discretionary counterparties.
+
+---
+
+## Two-Tier Liquidity Architecture
+
+The OMLP utilizes a **dual-tier Single-Asset Pool (SAP) system**, which optimizes capital efficiency, ensures deep liquidity, and minimizes exposure to third-party risk.
+
+<Callout title="Single-Asset Pools (SAPs)">
+    Single-Asset Pools (SAPs) represent only one underlying asset. Liquidity providers deposit the underlying asset to enable margin for options trading. For a token to be tradable on [OPX](/docs/4-opx), there must be a SAP for it.
+</Callout>
+
+The system operates on a tiered priority basis:
+
+| Tier | Name | Source | Activation |
+|------|------|--------|------------|
+| **Tier 1** | [SAP1](#sap1-primary-liquidity-layer) | In-house pools governed by [Epicentral Labs DAO](/docs/2-epicentral-dao) | Primary liquidity source |
+| **Tier 2** | [SAP2](#sap2-integrated-external-liquidity) | External platforms (Kamino, Orca, etc.) | Activates when SAP1 reaches 95% utilization |
+
+<Accordions type="multiple">
+  <Accordion title="Tier 1: SAP1 — Primary Liquidity Layer" value="sap1" id="sap1-primary-liquidity-layer">
+    **SAP1** is the in-house liquidity source governed by [Epicentral Labs DAO](/docs/2-epicentral-dao). Liquidity providers deposit assets into SAP1 and receive participation-based fees derived from borrowing activity. These fees are paid in the same asset deposited—no synthetic, wrapped, or secondary reward token required.
+
+    **Example:**
+
+    SOL deposits into a SOL SAP1 pool produce SOL-denominated fee accrual for liquidity providers.
+
+    SAP1:
+
+    * Enables non-traders to participate in options markets
+    * Drives Total Value Locked (TVL) growth
+    * Avoids impermanent loss exposure by operating as a single-asset structure
+    * Prioritizes capital usage before external integrations
+
+    Once SAP1 reaches **100% utilization**, [SAP2](#sap2-integrated-external-liquidity) activates.
+  </Accordion>
+
+  <Accordion title="Tier 2: SAP2 — Integrated External Liquidity" value="sap2" id="sap2-integrated-external-liquidity">
+    **SAP2** sources liquidity from established Solana-based liquidity platforms such as **Kamino** and **Orca**. SAP2 guarantees continuous margin availability when [SAP1](#sap1-primary-liquidity-layer) liquidity is fully borrowed, preventing service interruptions and ensuring 24/7 options execution.
+
+    SAP2:
+
+    * Acts as an overflow system
+    * Maintains uninterrupted borrowing capacity
+    * Expands the OMLP's operational depth beyond native liquidity
+
+    This tiered sequence ensures that Epicentral Labs retains governance control over liquidity prioritization while leveraging proven external providers for scalability.
+  </Accordion>
+</Accordions>
+
+---
+
+## Token Eligibility
+
+The [Epicentral Labs DAO](/docs/2-epicentral-dao) determines which assets qualify for borrowing through [SAP1](#sap1-primary-liquidity-layer) and [SAP2](#sap2-integrated-external-liquidity). Eligibility is established through on-chain [governance proposals](/docs/2-epicentral-dao/1-governance-process), ensuring that the community—not any individual—selects supported tokens.
+
+<Callout title="Governance Control">
+    Token eligibility decisions require community approval through the [Epicentral Labs DAO governance process](/docs/2-epicentral-dao/1-governance-process). [LABS token](/docs/2-epicentral-dao/2-labs-token) holders vote on which assets become eligible for trading on the [OPX protocol](/docs/4-opx).
+</Callout>
+
+Details regarding token qualification criteria are available in the **Token Eligibility** section of the [OPX documentation](/docs/4-opx).
+
+---
+
+## Impact and Market Innovation
+
+The OMLP introduces a structural redesign to the options market:
+
+* **Retail lenders gain first-time access** to options exposure without requiring options trading expertise
+* Traders execute options positions autonomously through the [OPX platform](/docs/4-opx)
+* Liquidity providers earn deterministic, participation-based fees without exposing deposits to impermanent loss
+* The market gains a **third role** beyond buyer and seller: **the lender**
+
+**Buyer → Lender → Seller abstraction** transforms the traditional options workflow into a modular, composable system compatible with decentralized finance.
+
+The result is a scalable options infrastructure that delivers capital efficiency, user-sovereign execution, and continuous market access—all without centralized order routing, custodial control, or discretionary managerial intervention.
+
+---
+
+## Summary
+
+**The Option Margin Liquidity Pool enables:**
+
+* Single-party options creation
+* Programmable margin sourcing
+* Non-custodial liquidity deployment
+* Decentralized selection of eligible tokens through [Epicentral Labs DAO governance](/docs/2-epicentral-dao)
+* Participation opportunities for traders and liquidity providers alike
+
+The OMLP unlocks a form of options engagement previously unavailable to retail users and redefines how counterparties interact within decentralized derivatives markets. This innovation is central to the [OPX protocol's](/docs/4-opx) mission of making options trading accessible, efficient, and decentralized.
