@@ -3,65 +3,126 @@ title: OPX
 description: Trade DeFi Options on Solana.
 ---
 
-OPX is a decentralized options exchange protocol and serves as the flagship product at the core of the platform. Through OPX, users can directly enter and exit option positions, enabling active management of profit and loss.
+OPX is the flagship decentralized options protocol created by Epicentral Labs. The protocol enables users to construct, manage, and unwind on-chain options positions through a streamlined, non-custodial interface. OPX abstracts the complexity traditionally associated with options markets and introduces tools that allow users to fully understand, configure, and execute positions from their self-custodied wallets.
 
-The essence of OPX is defined by three words:
+The protocol embodies three core design pillars:
 
 - <span style={{ color: "#4a85ff" }}><strong>Design</strong></span>
 - <span style={{ color: "rgb(219, 74, 255)" }}><strong>Experience</strong></span>
 - <span style={{ color: "#4a85ff" }}><strong>Simplicity</strong></span>
 
-While options trading is often considered complex and intimidating, OPX is designed to remove such barriers. The intuitive user interface empowers traders of any experience level to trade confidently, including those new to options.
+Traditional options trading introduces steep knowledge and execution barriers. OPX reduces this friction by providing intuitive visualization, transparent pricing components, and modular workflows that guide users through each decision without diminishing optionality or sophistication.
 
-## Trade Page: For Buyers
+---
 
-OPX provides two distinct trading interfaces for buyers: **Degen Mode** and **Pro Mode**. The following describes the Pro Mode. Those seeking a lighter trading experience should refer to the [Degen Mode](/products/degen-mode) page.
+## Trade Page — For Option Buyers
 
-The default trading interface presents all essential information—option values, strike prices, expiration dates, and clearly organized option [“Greeks”](/options-for-starters/the-greeks). This setup allows quick access to necessary data with minimal clutter, ensuring users can seamlessly track their positions.
+Buyers interact with OPX through two versions of the trading interface: **Degen Mode** and **Pro Mode**. This page focuses on Pro Mode, which offers enhanced visibility and configuration options for users who require deeper insight into position mechanics.
 
-Buyers select from live positions created by sellers and can customize trade sizes thanks to DeFi's use of [fractionalized shares](/option-standard-sdk/opm#fractionalized-options-for-buyers-and-sellers):
+The Pro Mode interface displays:
 
-> For example:
->
-> - Quantity: 1 → 100× of the underlying asset
-> - Quantity: 0.5 → 50× of the underlying asset
-> - Quantity: 0.25 → 25× of the underlying asset
+* Available options markets
+* Strike prices and expiration dates
+* Pricing variables and option Greeks
+* Position details and cost metrics
 
-## Option Lab: For Sellers
+These elements are deliberately structured so users can interpret market conditions without becoming overwhelmed. OPX supports fractionalized exposure, allowing users to size positions dynamically rather than adopting the traditional "one contract = 100 units" convention.
 
-Sellers utilize one of two versions of the Option Lab to write new options contracts.
+### Examples of Fractional Sizing
 
-When creating a contract, the interface guides the user through three clear steps:
-- Configure
-- Provide Collateral
-- Review & Mint
+| Selected Quantity | Underlying Exposure |
+|-------------------|---------------------|
+| 1.00              | 100 units           |
+| 0.50              | 50 units            |
+| 0.25              | 25 units            |
+
+This granular sizing broadens access and improves capital efficiency, enabling buyers to enter markets according to individual risk tolerances and strategies.
+
+---
+
+## Option Lab — For Option Sellers
+
+The Option Lab is the OPX module used to create options contracts. Just like the Buy interface, the Option Lab provides two user experiences: a simplified mode and a professional mode. Sellers use the Option Lab to configure contract parameters, define collateral requirements, and mint options positions.
+
+The seller workflow consists of three pages:
+
+* Configure
+* Provide Collateral
+* Review & Mint
 
 ### Configure Option
 
-The process begins by specifying the fundamental parameters: Strike Price, Expiration Date, and Quantity.
+Sellers begin by selecting:
 
-Additionally, an “Advanced Option Details” section provides deeper context regarding the position, including values such as Implied Volatility, Risk-Free Rate, Moneyness, and Estimated Max Profit. Full definitions are available in the [Terminology](/options-for-starters/intro#terminology) section.
+* Strike price
+* Expiration date
+* Position size
+
+The module also presents advanced analytics that inform pricing and risk assumptions, including:
+
+* Implied Volatility
+* Risk-Free Rate
+* Moneyness metrics
+* Estimated Maximum Profit
+
+These values enable sellers to understand how the selected parameters influence potential outcomes.
 
 ### Provide Collateral
 
-**Collateral Amount Panel:** Sellers determine the type and amount of collateral to be contributed to [cover](/option-standard-sdk/opm#no-naked-positions) their position. If more collateral is required, they may borrow the remainder from the [OMLP](/products/omlp), leveraging up to 5× through the leverage panel.
+Collateralization ensures that sellers maintain sufficient backing for potential option obligations. This page contains three core components:
 
-**Collateral Status:** This section displays the current contribution, any additional coverage needed, and the overall coverage percentage.
+**Collateral Amount Panel**
 
-**Cost Breakdown Panel:** Sellers receive a full breakdown of creation-related costs:
-> - Borrow cost (split by day/hour)
-> - Maximum Profit Potential
-> - Option Creation Fee
-> - Transaction cost
+Sellers select the asset and quantity that will collateralize their position. If the provided collateral is insufficient, the seller may borrow additional coverage from the [Option Margin Liquidity Pool (OMLP)](/docs/4-opx/1-omlp) to complete the required margin structure.
 
-This approach provides a comprehensive overview of profit and loss potential before the contract is minted.
+**Leverage Panel**
+
+OPX supports up to 5× collateral leverage, enabling sellers to increase position capacity without committing the full notional amount upfront. This mechanism does not introduce custodial risk; all operations occur through deterministic smart contract logic.
+
+**Collateral Status & Cost Breakdown**
+
+The interface clearly displays:
+
+* Total collateral supplied
+* Outstanding coverage required
+* Final coverage percentage
+* Borrowing fees (expressed in daily or hourly intervals)
+* Option creation fee
+* Transaction/network fees
+* Estimated maximum profit exposure
+
+This transparency gives sellers a holistic understanding of the economic components associated with their position and enables informed decision-making.
 
 ### Review & Mint
 
-In the final step, users review all relevant details from previous stages before finalizing and minting the options contract.
+The final step surfaces a complete summary of:
 
-## Revenue
+* Contract structure
+* Collateral configuration
+* Borrowing details
+* Fee components
+* Position analytics
 
-OPX applies fees whenever positions are opened or closed.
+Once reviewed and approved, the seller mints an options contract directly on-chain. The OPX protocol does not hold, store, or intermediate user assets; minting occurs from the seller's non-custodial wallet through deterministic smart contracts.
 
-A comprehensive overview of these fees is available on the [Fees](/products/fees.md) page.
+---
+
+## Protocol Revenue
+
+OPX collects protocol-level fees when users open or close positions. These fees are not investment returns, dividends, or profit-sharing mechanisms and do not imply ownership or entitlement to the protocol. The DAO may allocate a portion of collected fees to eligible participants through separately governed programs.
+
+Fee structures are transparent and displayed within the interface during position creation and management.
+
+---
+
+## Summary
+
+OPX transforms decentralized options trading by:
+
+* Providing intuitive tools for both buyers and sellers
+* Enabling fractionalized, modular position sizing
+* Automating collateral and margin workflows
+* Allowing options to be created and managed without traditional counterparties
+* Maintaining full user custody and transparent fee structures
+
+OPX positions decentralized options as an accessible, configurable, and sovereign financial primitive—designed for anyone capable of connecting a wallet, not only for experts fluent in legacy derivatives systems.
