@@ -5,7 +5,11 @@ import { OpenPanelComponent } from '@openpanel/nextjs';
 
 export default function Layout({ children }: LayoutProps<'/docs'>) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions()}>
+    <DocsLayout
+      tree={source.pageTree}
+      sidebar={{ tabs: false }}
+      {...baseOptions()}
+    >
       <OpenPanelComponent
         clientId="your-client-id"
         trackScreenViews={true}
