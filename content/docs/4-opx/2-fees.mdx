@@ -17,7 +17,7 @@ OPX distributes all collected fees autonomously through smart contract logic. Th
 
 | Allocation Category | Percentage | Description |
 |---------------------|:----------:|-------------|
-| [Rewards Program](/docs/3-staking-lab) | 70% | Funds allocated to the Rewards Pool, where [LABS](/docs/2-epicentral-dao/2-labs-token) stakers receive participation-based distributions through the issuance of [xLABS](/docs/2-epicentral-dao/3-xlabs-token) |
+| [Rewards Program](/docs/3-staking-lab) | 70% | Claimable Funds allocated to the Rewards Pool intended to incentivize participation and contributions from LABS Token holders |
 | Core Team | 20% | Compensation for ongoing development, maintenance, and operational labor |
 | Operations Expenses | 10% | Platform maintenance, infrastructure costs, and approved operational expenditures |
 
@@ -25,31 +25,41 @@ OPX distributes all collected fees autonomously through smart contract logic. Th
     OPX distributes all fees autonomously through deterministic smart contract logic. The protocol executes fee allocation automatically without requiring manual intervention or discretionary management.
 </Callout>
 
-### Rewards Program — 70%
+<Accordions type="multiple">
+  <Accordion title="Rewards Program — 70%" value="rewards-program">
+    OPX allocates up to seventy percent (70%) of its protocol-designated incentive budgets directly to the <a href="/docs/3-staking-lab">Rewards Program</a>. These allocations exclusively support the ongoing operation of the Rewards Program. They do not establish, collateralize, or backstop the value of <a href="/docs/2-epicentral-dao/3-xlabs-token">xLABS</a>.
 
-OPX allocates seventy percent (70%) of all collected fees to the [Rewards Program](/docs/3-staking-lab). These funds support participation-based distributions to [LABS](/docs/2-epicentral-dao/2-labs-token) stakers through the issuance of [xLABS](/docs/2-epicentral-dao/3-xlabs-token). These allocations enable reward emissions without granting any rights to profits, dividends, equity, or redemption value.
+    The protocol mints xLABS solely through the <a href="/docs/3-staking-lab">Staking Lab</a> when participants stake <a href="/docs/2-epicentral-dao/2-labs-token">LABS</a>, following the predetermined emission logic defined in the protocol code. xLABS emissions remain independent from protocol revenue, fee performance, token price, or any other financial metric. Protocol logic mints xLABS regardless of the number of tokens or assets in the Rewards Program pool.
 
-The protocol uses these funds strictly to fund participation incentives pursuant to the defined role of [xLABS](/docs/2-epicentral-dao/3-xlabs-token) and the [Rewards Program](/docs/3-staking-lab) framework.
+    xLABS functions as a transferable participation credential that quantifies and weighs each user's engagement with <a href="/docs/2-epicentral-dao">Epicentral Labs DAO</a> governance and other verifiable contributions. Holding xLABS grants no rights or claims to profits, dividends, revenue share, equity, debt, redemption value, or any economic return.
 
-### Core Team — 20%
+    The protocol restricts access to the Rewards Program pool to users who satisfy specific participation requirements. OPX makes no guarantee regarding the amount of assets in the pool at any time and does not guarantee that xLABS holders can redeem a predetermined value, quantity, or share of protocol fees.
 
-OPX allocates twenty percent (20%) of all collected fees to Core Team compensation for ongoing development, maintenance, and operational labor. This allocation reflects the Core Team's role and is expressly permitted under the [Epicentral Labs DAO](/docs/2-epicentral-dao) governance framework.
+    Redemption eligibility and amounts change dynamically based on user participation, timing, and the pool's state at redemption. Neither <a href="/docs/2-epicentral-dao">Epicentral Labs DAO</a>, OPX, nor any related party commits to or assures the future pool value or assets claimable by xLABS holders. All redemptions are discretionary, conditional, and subject to nondeterministic protocol rules.
 
-This allocation is not a royalty on token ownership, investment performance, or managerial effort; it compensates Core Team Members for protocol-related work approved through the [Realms governance mechanism](/docs/2-epicentral-dao). The Core Team executes these funds in a Procedural Capacity only and may not use them to speculate or influence token value.
+    The Rewards Program does not create pro-rata, passive, or automatic entitlement to protocol revenue. Each user must actively participate to access rewards; merely holding LABS or xLABS never entitles a holder to distribution, yield, or any financial benefit. The Rewards Program strictly incentivizes engagement, not investment returns.
+  </Accordion>
 
-### Operations Expenses — 10%
+  <Accordion title="Core Team — 20%" value="core-team">
+    OPX allocates twenty percent (20%) of all collected fees to Core Team compensation, supporting ongoing development, maintenance, and operational labor. This allocation reflects the Core Team's responsibilities and follows the permissions set by the <a href="/docs/2-epicentral-dao">Epicentral Labs DAO</a> governance framework.
 
-OPX allocates ten percent (10%) of all collected fees to operational overhead costs, including:
+    This allocation is not a royalty based on token ownership, investment performance, or managerial actions. OPX compensates Core Team members for protocol-related work as approved through the <a href="/docs/2-epicentral-dao">Realms governance mechanism</a>. The Core Team utilizes these funds in a Procedural Capacity only and may not use them for speculation or to influence token value.
+  </Accordion>
 
-* Platform maintenance
-* Infrastructure costs
-* Approved operational expenditures
-
-These funds support continued protocol development and ensure reliable platform operations. The protocol reserves these funds for operational purposes only and may not use them to speculate or influence token value.
+  <Accordion title="Operations Expenses — 10%" value="operations-expenses">
+    OPX assigns ten percent (10%) of all collected fees to operational overhead, covering:
+    <ul>
+      <li>Platform maintenance</li>
+      <li>Infrastructure costs</li>
+      <li>Approved operational expenditures</li>
+    </ul>
+    These funds ensure reliable platform operations and continued protocol development. The protocol reserves these funds solely for operational use and will not apply them for speculation or token price influence.
+  </Accordion>
+</Accordions>
 
 ---
 
-None of these allocations constitute token repurchases, token price support, or financial returns and do not alter the rights or limitations of [LABS](/docs/2-epicentral-dao/2-labs-token) or [xLABS](/docs/2-epicentral-dao/3-xlabs-token) Holders.
+None of these allocations represent token repurchases, token price support, or financial returns. They do not affect the rights or limitations of <a href="/docs/2-epicentral-dao/2-labs-token">LABS</a> or <a href="/docs/2-epicentral-dao/3-xlabs-token">xLABS</a> holders.
 
 ---
 
@@ -101,20 +111,3 @@ OPX charges a convenience fee for platform swap functionality:
 | Platform Swap Convenience | 0.10% of position size |
 
 This fee applies when users utilize OPX's integrated swap functionality for position management.
-
----
-
-# Summary
-
-The OPX fee framework:
-
-* Funds ecosystem participation without offering investment returns
-* Maintains strict alignment with the [Rewards Program](/docs/3-staking-lab) model
-* Distributes fees autonomously through smart contract logic
-* Allocates operating resources transparently
-* Compensates Core Team Members for approved labor, not token ownership
-* Incentivizes market creation by offering fee-free options contract creation for First Makers
-* Provides fee discounts to sellers to encourage liquidity provision
-* Avoids buybacks, dividends, or profit guarantees prohibited by the [Epicentral Labs DAO](/docs/2-epicentral-dao) governance framework
-
-All fee structures are transparent and displayed within the interface during position creation and management, ensuring users understand all costs before executing transactions.

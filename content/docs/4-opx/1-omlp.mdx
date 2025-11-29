@@ -5,9 +5,9 @@ description: Option Margin Liquidity Pools
 
 # Overview
 
-The **Option Margin Liquidity Pool (OMLP)** is a programmable, non-custodial liquidity architecture that enables users to access margin for options trading without relying on a traditional two-party negotiation. The protocol routes borrowing demand to a pool of liquidity providers, thereby allowing traders to construct options positions independently while liquidity providers earn participation-based fees for enabling those trades.
+**Option Margin Liquidity Pool (OMLP)** is a programmable, non-custodial liquidity architecture that enables users to access margin for options trading without relying on a traditional two-party negotiation. The protocol routes borrowing demand to a pool of liquidity providers, thereby allowing traders to construct options positions independently while liquidity providers earn participation-based fees for enabling those trades.
 
-The OMLP introduces a **single-party approach to options execution**, removing the dependency on locating a counterparty before entering an options contract. Instead of a trader requiring a seller to assume risk, the OMLP supplies margin liquidity on-demand through smart contracts governed by the [Epicentral Labs DAO](/docs/2-epicentral-dao).
+OMLP introduces a **single-party approach to options execution**, removing the dependency on locating a counterparty before entering an options contract. Instead of a trader requiring a seller to assume risk, the OMLP supplies margin liquidity on-demand through smart contracts governed by the [Epicentral Labs DAO](/docs/2-epicentral-dao).
 
 <Callout title="Key Innovation">
     The OMLP transforms traditional bilateral options trading into a single-party system where traders interact with liquidity pools rather than individual counterparties, enabling autonomous options creation on [OPX](/docs/4-opx).
@@ -35,9 +35,9 @@ This bilateral model often results in:
 The OMLP replaces the seller with a **liquidity source**, enabling the trader to define key contract parameters—including expiration date and strike price—without coordinating with another human participant.
 
 ```
-Traditional → Trader A vs Trader B  
+Traditional  → Trader A vs Trader B  
 
-OMLP       → Trader A vs Liquidity Pool (SAP)
+OMLP         → Trader A vs (Trader B + Lender)
 ```
 
 This evolution decentralizes the options selling role and transforms liquidity providers into passive enablers of margin rather than discretionary counterparties.
@@ -116,17 +116,5 @@ The OMLP introduces a structural redesign to the options market:
 **Buyer → Lender → Seller abstraction** transforms the traditional options workflow into a modular, composable system compatible with decentralized finance.
 
 The result is a scalable options infrastructure that delivers capital efficiency, user-sovereign execution, and continuous market access—all without centralized order routing, custodial control, or discretionary managerial intervention.
-
----
-
-## Summary
-
-**The Option Margin Liquidity Pool enables:**
-
-* Single-party options creation
-* Programmable margin sourcing
-* Non-custodial liquidity deployment
-* Decentralized selection of eligible tokens through [Epicentral Labs DAO governance](/docs/2-epicentral-dao)
-* Participation opportunities for traders and liquidity providers alike
 
 The OMLP unlocks a form of options engagement previously unavailable to retail users and redefines how counterparties interact within decentralized derivatives markets. This innovation is central to the [OPX protocol's](/docs/4-opx) mission of making options trading accessible, efficient, and decentralized.
