@@ -2,6 +2,7 @@ import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
 import { CodeBlock, Pre } from '@/components/codeblock';
 import { Accordion, Accordions } from '@/components/accordion';
+import BlurText from '@/components/ui/blur-text';
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -14,6 +15,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ),
     Accordion,
     Accordions,
+    Blur: BlurText,
     ...components,
   };
 }

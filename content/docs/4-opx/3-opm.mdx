@@ -13,7 +13,7 @@ OPM derives from the widely accepted derivatives formula used in traditional fin
 
 ## Black-Scholes Model
 
-The Black-Scholes Model is a proven and reliable formula that traditional finance uses globally on a daily basis for derivatives pricing. However, using the Black-Scholes model within the DeFi environment presents unique challenges that require adaptation.
+The [Black-Scholes Model](https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model) is a proven and reliable formula that traditional finance uses globally on a daily basis for derivatives pricing. However, using the Black-Scholes model within the DeFi environment presents unique challenges that require adaptation.
 
 ---
 
@@ -43,7 +43,7 @@ Traders mitigate risk by encouraging capital efficiency through the use of [spre
 
 ## Black-Scholes Pricing Formulas
 
-The Black-Scholes model provides mathematical formulas for calculating European call and put option prices.
+The Black-Scholes model provides mathematical formulas for calculating call and put option prices.
 
 ### Call Option Price
 
@@ -108,6 +108,10 @@ d_2 = d_1 - \sigma\sqrt{T-t}
     - `time_to_expiry` ($T-t$): The time remaining until expiration, expressed in years
 
     **Purpose:** The `d2` parameter is used alongside `d1` in the Black-Scholes formula to calculate the option's price. It represents the adjusted probability of the option expiring in-the-money.
+
+  <Callout type="note" title="Note">
+    The Solana Options Pricing Model (OPM) for OPX uses historical volatility, not implied volatility, when calculating option prices. Participants should consider this difference when comparing model results to those produced by traditional options markets, where implied volatility is commonly used.
+  </Callout>
   </Accordion>
 </Accordions>
 
@@ -158,11 +162,13 @@ Understanding the mathematical notation used in the Black-Scholes formulas helps
 
 The Greeks serve as essential metrics for managing risk in options trading. They help traders understand how their portfolio value changes when specific market factors fluctuate. By analyzing each Greek independently, traders assess individual risk components and adjust their positions to maintain their target risk profile.
 
+An option's price changes based on how traders interact with it and on market conditions. The composition or structure of an option relies heavily on Greeks. Traders use Greeks to understand how various factors affect [option pricing](/docs/4-opx/1-option-basics) and to make informed trading decisions.
+
 [*Reference: Wikipedia - Option Greeks*](https://en.wikipedia.org/wiki/en:Greeks_(finance)?variant=zh-tw)
 
 <Accordions type="single" className="my-4">
   <Accordion title="Δ - Delta" value="delta">
-    Delta measures how much the option value changes when the underlying asset price changes. It represents the number of tokens needed to hedge the option.
+    Delta measures how much the option's price changes with every $1 change in the underlying token's price. Delta represents the number of tokens needed to hedge the option and helps traders understand how [call options](/docs/4-opx/1-option-basics/1-calls-and-puts#long-call-option-bullish) and [put options](/docs/4-opx/1-option-basics/1-calls-and-puts#long-put-option-bearish) respond to price movements in the underlying asset.
 
     ```math
     \Delta = \frac{\partial V}{\partial S}
@@ -170,8 +176,9 @@ The Greeks serve as essential metrics for managing risk in options trading. They
 
     | Aspect | Description |
     |--------|-------------|
-    | **Definition** | Rate of change of option price with respect to underlying asset price |
-    | **Range** | Typically 0 to 1 for calls, -1 to 0 for puts |
+    | **Definition** | Measures price sensitivity to underlying token price movements |
+    | **Calculation** | Change in option price per $1 change in underlying token price |
+    | **Range** | Typically between 0 and 1 for calls, -1 and 0 for puts |
     | **Interpretation** | Higher deltas indicate the option's price closely follows the token's price movements |
 
     <Callout>
@@ -179,8 +186,27 @@ The Greeks serve as essential metrics for managing risk in options trading. They
     </Callout>
   </Accordion>
 
+  <Accordion title="Γ - Gamma" value="gamma">
+    Gamma tracks how much delta changes when the underlying token's price changes by $1, reflecting the sensitivity of delta. Gamma measures how fast delta changes when the asset price moves and helps measure how stable an option position is.
+
+    ```math
+    \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 V}{\partial S^2}
+    ```
+
+    | Aspect | Description |
+    |--------|-------------|
+    | **Definition** | Measures the rate of change of delta |
+    | **Calculation** | Change in delta per $1 change in underlying token price |
+    | **Range** | Always positive (for both calls and puts) |
+    | **Interpretation** | Higher gamma means delta will adjust quickly with token price movements |
+
+    <Callout>
+        Gamma tracks how much delta changes when the underlying token's price changes by $1, reflecting the sensitivity of delta.
+    </Callout>
+  </Accordion>
+
   <Accordion title="Θ - Theta" value="theta">
-    Theta measures how much value an option loses as time passes. It represents the daily decay in option value as it approaches expiration.
+    Theta represents the option's time decay, showing how much value the option loses each day as the [expiration date](/docs/4-opx/1-option-basics#terminology) approaches. Theta quantifies the time value component of an option's [premium](/docs/4-opx/1-option-basics#terminology) and measures how much value an option loses as time passes.
 
     ```math
     \Theta = -\frac{\partial V}{\partial \tau}
@@ -188,7 +214,8 @@ The Greeks serve as essential metrics for managing risk in options trading. They
 
     | Aspect | Description |
     |--------|-------------|
-    | **Definition** | Rate of change of option price with respect to time |
+    | **Definition** | Measures time decay—the rate at which option value decreases over time |
+    | **Calculation** | Change in option price per day as expiration approaches |
     | **Range** | Typically negative (options lose value over time) |
     | **Interpretation** | A high theta means the option's value decreases faster with time |
 
@@ -198,7 +225,7 @@ The Greeks serve as essential metrics for managing risk in options trading. They
   </Accordion>
 
   <Accordion title="ν - Vega" value="vega">
-    Vega measures how much the option value changes when volatility changes. It quantifies the impact of a 1% change in volatility.
+    Vega measures the sensitivity of the option's price relative to changes in the underlying token's [volatility](/docs/4-opx/1-option-basics#terminology). Vega quantifies the impact of a 1% change in volatility and helps traders understand how market uncertainty affects option pricing.
 
     ```math
     \nu = \frac{\partial V}{\partial \sigma}
@@ -206,7 +233,8 @@ The Greeks serve as essential metrics for managing risk in options trading. They
 
     | Aspect | Description |
     |--------|-------------|
-    | **Definition** | Rate of change of option price with respect to volatility |
+    | **Definition** | Measures sensitivity to volatility changes |
+    | **Calculation** | Change in option price per 1% change in implied volatility |
     | **Range** | Always positive (for both calls and puts) |
     | **Interpretation** | Higher vega means the option's price is more affected by volatility shifts |
 
@@ -215,26 +243,8 @@ The Greeks serve as essential metrics for managing risk in options trading. They
     </Callout>
   </Accordion>
 
-  <Accordion title="Γ - Gamma" value="gamma">
-    Gamma measures how fast delta changes when the asset price moves. It helps measure how stable an option position is.
-
-    ```math
-    \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 V}{\partial S^2}
-    ```
-
-    | Aspect | Description |
-    |--------|-------------|
-    | **Definition** | Rate of change of delta with respect to underlying asset price |
-    | **Range** | Always positive (for both calls and puts) |
-    | **Interpretation** | Higher gamma means delta will adjust quickly with token price movements |
-
-    <Callout>
-        Gamma tracks how much delta changes when the underlying token's price changes by $1, reflecting the sensitivity of delta.
-    </Callout>
-  </Accordion>
-
   <Accordion title="ρ - Rho" value="rho">
-    Rho measures how much the option value changes when interest rates change. It quantifies the impact of a 1% change in rates.
+    Rho indicates how much the option's price changes in response to a 1% change in interest rates. Rho reflects sensitivity to changes in the [risk-free rate](/docs/4-opx/1-option-basics#terminology), which affects the cost of carrying positions.
 
     ```math
     \rho = \frac{\partial V}{\partial r}
@@ -242,7 +252,8 @@ The Greeks serve as essential metrics for managing risk in options trading. They
 
     | Aspect | Description |
     |--------|-------------|
-    | **Definition** | Rate of change of option price with respect to interest rate |
+    | **Definition** | Measures sensitivity to interest rate changes |
+    | **Calculation** | Change in option price per 1% change in risk-free interest rate |
     | **Range** | Positive for calls, negative for puts |
     | **Interpretation** | Higher rho indicates that the option's value is more sensitive to interest rate changes |
 
@@ -251,18 +262,6 @@ The Greeks serve as essential metrics for managing risk in options trading. They
     </Callout>
   </Accordion>
 </Accordions>
-
----
-
-## Design Philosophy
-
-The crypto space is highly competitive with many gifted developers. While Epicentral Labs cannot reveal too much about how OPM calculates prices, Epicentral Labs aims to express the basis and legitimacy of how it functions.
-
-<Callout title="Design Philosophy">
-    "We are not trying to be fancy and re-invent the wheel here. We want to make options trading more accessible for users, and we want to bring it to the Solana network." — TheLazySol, Founder.
-</Callout>
-
-OPM leverages the proven Black-Scholes model while adapting it to the unique requirements of decentralized finance on [OPX](/docs/4-opx), ensuring reliable and transparent option pricing for all participants.
 
 <Callout title="Disclaimer" type="warning">
     The Option Pricing Model (OPM) used by Epicentral Labs is derived from the Black-Scholes framework but modified for decentralized execution on Solana. As a result, outputs may differ from traditional Black-Scholes calculations. All valuations are provided for protocol functionality only and should not be relied upon as financial, investment, legal, or tax advice. Users must exercise independent judgment, verify any calculations as needed, and bear full responsibility for their decisions and transactions when interacting with the protocol.

@@ -17,14 +17,15 @@ Traditional options trading introduces steep knowledge and execution barriers. O
 
 ## Trade Page — For Option Buyers
 
-Buyers interact with OPX through two versions of the trading interface: **Degen Mode** and **Pro Mode**. This page focuses on Pro Mode, which offers enhanced visibility and configuration options for users who require deeper insight into position mechanics.
+Buyers interact with OPX through the Trade Page. This page offers enhanced visibility and configuration options for users who require deeper insight into position mechanics.
 
 The Pro Mode interface displays:
 
-* Available options markets
+* Available option chains
 * Strike prices and expiration dates
 * Pricing variables and option Greeks
 * Position details and cost metrics
+* Liquidation prices and risk metrics
 
 These elements are deliberately structured so users can interpret market conditions without becoming overwhelmed. OPX supports fractionalized exposure, allowing users to size positions dynamically rather than adopting the traditional "one contract = 100 units" convention.
 
@@ -42,7 +43,7 @@ This granular sizing broadens access and improves capital efficiency, enabling b
 
 ## Option Lab — For Option Sellers
 
-The Option Lab is the OPX module used to create options contracts. Just like the Buy interface, the Option Lab provides two user experiences: a simplified mode and a professional mode. Sellers use the Option Lab to configure contract parameters, define collateral requirements, and mint options positions.
+The Option Lab is the OPX module used to create options contracts. Sellers use the Option Lab to configure contract parameters, define collateral requirements, and mint options positions.
 
 The seller workflow consists of three pages:
 
@@ -77,7 +78,7 @@ Sellers select the asset and quantity that will collateralize their position. If
 
 **Leverage Panel**
 
-OPX supports up to 5× collateral leverage, enabling sellers to increase position capacity without committing the full notional amount upfront. This mechanism does not introduce custodial risk; all operations occur through deterministic smart contract logic.
+OPX supports up to 10× collateral leverage, enabling sellers to increase position capacity without committing the full notional amount upfront. This mechanism does not introduce custodial risk; all operations occur through deterministic smart contract logic.
 
 **Collateral Status & Cost Breakdown**
 
@@ -109,6 +110,6 @@ Once reviewed and approved, the seller mints an options contract directly on-cha
 
 ## Protocol Revenue
 
-OPX collects protocol-level fees when users open or close positions. These fees are not investment returns, dividends, or profit-sharing mechanisms and do not imply ownership or entitlement to the protocol. The DAO may allocate a portion of collected fees to eligible participants through separately governed programs.
+OPX collects protocol-level fees whenever users open, close, or interact with options positions. These fees do not represent investment returns, dividends, profit-sharing, or confer any form of ownership or entitlement in the protocol. The DAO may direct portions of fees to specific programs or participants according to separately governed mechanisms.
 
-Fee structures are transparent and displayed within the interface during position creation and management.
+For a comprehensive breakdown of the fee structure, allocation details, and user fee schedules, refer to the [Fees](/docs/4-opx/2-fees) page. All applicable fees and their breakdown are transparently displayed within the interface at each stage of position creation and management.

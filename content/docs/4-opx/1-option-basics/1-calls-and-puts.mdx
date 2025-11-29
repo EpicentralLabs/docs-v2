@@ -9,114 +9,128 @@ This page covers the basic foundation of **Call Options** and **Put Options**, h
 
 ---
 
-## Long Options
+## Long Options (Buyer-side)
 
-A **"Long Option"** gives the option buyer the right, *but not the obligation*, to buy the underlying token at a set price, known as a [**Strike Price**](/docs/4-opx/1-option-basics#terminology), within a specific time period.
+<Accordions type="single" className="my-6">
+  <Accordion title="Long Options" value="long-options-buyer">
+    A **Long Options** gives the buyer the right, <em>but not the obligation</em>, to buy the underlying token at a set price, called a <a href="/docs/4-opx/1-option-basics#terminology"><strong>Strike Price</strong></a>, within a specific time period.
 
-<Callout title="Movie Ticket Analogy">
-    Purchasing Long Options is like purchasing a movie ticket: When traders buy the ticket, it gives them the *right* to enter the theatre.
-</Callout>
+    <Callout title="Movie Ticket Analogy">
+      Purchasing Long Options is like purchasing a movie ticket: When buyers purchase the ticket, they receive the <em>right</em> to enter the theatre.
+    </Callout>
 
-Technically speaking, the option buyer (going Long) also has the right to sell the option position outright if they want to exit their position (realizing any gains or losses). They do not have to wait until the [**expiration date**](/docs/4-opx/1-option-basics#terminology) to realize any gains or losses.
+    Technically, a buyer who goes Long also has the right to sell the option position outright to exit and realize any gains or losses. There is no requirement to wait until the <a href="/docs/4-opx/1-option-basics#terminology"><strong>expiration date</strong></a>.
 
-<Callout>
-    Traders don't have to stay and watch the whole movie if they don't like it. They can exit the theatre *whenever* they want to.
-</Callout>
+    <Callout title="Movie Ticket Analogy">
+      Buyers have no obligation to stay and watch the whole movie if it is not enjoyable. They can exit the position <em>whenever</em> they desire.
+    </Callout>
 
-Here's another scenario: let's say traders bought the **last** movie ticket for a specific viewing. They could **sell** the ticket to someone else for profit *if* they wanted to. Option contracts work the same way where traders can sell their positions to realize their profits or losses.
+    For example, if someone buys the <strong>last</strong> movie ticket for a specific showing, that ticket can be <strong>sold</strong> to someone else for profit <em>if</em> desired. Option contracts work the same way: a trader may sell a position to realize profits or losses.
 
-### Long Call Option (Bullish)
+    <Accordions type="single" className="my-4">
+      <Accordion title="Long Call Option (Bullish)" value="long-call-bullish">
+        A Long <strong>Call</strong> means the trader specifically <strong>purchased a Call Option</strong>, typically representing a <a href="https://www.merriam-webster.com/dictionary/bullish">bullish</a> stance.
 
-Long **Call** generally means traders specifically **purchased a Call Option.** This type of option position is a ["bullish"](https://www.merriam-webster.com/dictionary/bullish) stance.
+        <div className="relative">
+          <img src="/guide-option-basics/Long_Call-LIGHT.png" alt="Long Call Option PNL Chart" className="dark:hidden" />
+          <img src="/guide-option-basics/Long_Call-DARK.png" alt="Long Call Option PNL Chart" className="hidden dark:block" />
+        </div>
 
-<div className="relative">
-  <img src="/guide-option-basics/Long_Call-LIGHT.png" alt="Long Call Option PNL Chart" className="dark:hidden" />
-  <img src="/guide-option-basics/Long_Call-DARK.png" alt="Long Call Option PNL Chart" className="hidden dark:block" />
-</div>
+        <Callout title="PNL Chart Explanation">
+          The <strong>PNL Chart</strong> above provides a generalized sense of a long <strong>call</strong> option when the token price <em>increases</em>. As the value of the token rises, so does the value of the Call Option.
+        </Callout>
 
-<Callout title="PNL Chart Explanation">
-    The **PNL Chart** above provides a generalized sense of a long **call** option when the token price *increases.* As the value of the token increases, so does the value of the Call Option.
-</Callout>
+        Buyers realize profit from the increasing token value without owning the token itself.
 
-Buyers realize profit from the increasing token value without owning the token itself.
+        <Callout title="Buyer Risk">
+          As an <strong>Option Buyer</strong>, traders limit their risk to the amount they pay as <a href="/docs/4-opx/1-option-basics#terminology"><strong>Premium</strong></a> for the option contract.
+        </Callout>
+      </Accordion>
+      <Accordion title="Long Put Option (Bearish)" value="long-put-bearish">
+        A <strong>Long Put</strong> means the trader <strong>purchased a Put Option</strong>, usually reflecting a <a href="https://www.merriam-webster.com/dictionary/bearish">bearish</a> stance.
 
-<Callout title="Buyer Risk">
-    As an **Option Buyer**, traders only risk losing whatever amount they paid in [**Premium**](/docs/4-opx/1-option-basics#terminology), the price they paid for the option contract when they bought it.
-</Callout>
+        <div className="relative">
+          <img src="/guide-option-basics/Long_Put-LIGHT.png" alt="Long Put Option PNL Chart" className="dark:hidden" />
+          <img src="/guide-option-basics/Long_Put-DARK.png" alt="Long Put Option PNL Chart" className="hidden dark:block" />
+        </div>
 
-### Long Put Option (Bearish)
+        <Callout title="PNL Chart Explanation">
+          The <strong>PNL Chart</strong> above provides a generalized sense of a long <strong>put</strong> option when the token price <em>decreases</em>. As the value of the token goes down, the value of the Put Option goes up.
+        </Callout>
 
-A **Long Put** means traders **purchased a Put Option.** This type of option position is a ["bearish"](https://www.merriam-webster.com/dictionary/bearish) stance.
-
-<div className="relative">
-  <img src="/guide-option-basics/Long_Put-LIGHT.png" alt="Long Put Option PNL Chart" className="dark:hidden" />
-  <img src="/guide-option-basics/Long_Put-DARK.png" alt="Long Put Option PNL Chart" className="hidden dark:block" />
-</div>
-
-<Callout title="PNL Chart Explanation">
-    The **PNL Chart** above provides a generalized sense of a long **put** option when the token price *decreases.* As the value of the token decreases, the value of the Put Option increases.
-</Callout>
-
-Buyers realize profit from the decreasing token value without owning the token itself. Put option value is inverse of the token value.
+        Buyers realize profit from a decrease in token value without owning the token directly. Put option value generally moves inversely to the token’s price.
+      </Accordion>
+    </Accordions>
+  </Accordion>
+</Accordions>
 
 ---
 
-## Short Options
+## Short Options (Seller-side)
 
-The "Long Call" and "Long Put" options referenced above represent the **buyer's** perspective.
+<Accordions type="single" className="my-6">
+  <Accordion title="Short Options" value="short-options-seller">
+    The "Long Call" and "Long Put" options referenced above represent the **buyer's** perspective.
 
-Now, let's discuss options from the **seller's** perspective.
+    Now, let's discuss options from the **seller's** perspective.
 
-Sellers are [market makers](https://www.citadelsecurities.com/what-we-do/what-is-a-market-maker/)—without them there would be no options contracts to purchase. They are Options Writers who create **Short Options.**
+    Sellers are [market makers](https://www.citadelsecurities.com/what-we-do/what-is-a-market-maker/)—without them there would be no options contracts to purchase. They are Options Writers who create **Short Options.**
 
-Unlike buyers—who are **NOT** obligated by the options contract—sellers **ARE** obligated by the options contract.
+    Unlike buyers—who are **NOT** obligated by the options contract—sellers **ARE** obligated by the options contract.
 
-Regardless of the price of the token, sellers are OBLIGATED to purchase the underlying token at a specified price **if/when** their option position is assigned, or expires.
+    <Callout title="Movie Ticket Analogy">
+      Selling Short Options is like being a theater owner who sells movie tickets. The owner collects money upfront but must honor the ticket if the buyer shows up—they are <em>obligated</em> to provide entry regardless of how popular the movie becomes.
+    </Callout>
 
-<Callout title="Assignment">
-    This is known as [**Assignment**](/docs/4-opx/1-option-basics#terminology).
-</Callout>
+    Regardless of the token price, sellers must purchase the underlying token at a specified price **if/when** their option position is **assigned** or expires.
 
-Although being a seller is more risky than being a buyer, they are motivated to write contracts because they are paid by the buyer per hour. As time to expiration draws closer, so does the amount earned per hour—like a complicated game of ["chicken"](https://www.collinsdictionary.com/us/dictionary/english/play-chicken).
+    <Callout title="Option Assignment">
+      This is known as [**Assignment**](/docs/4-opx/1-option-basics#terminology).
+    </Callout>
 
-<Callout>
-    If the buyer chooses to walk away from the option contract, then the seller earns the **full** premium.
-</Callout>
+    Although selling options carries more risk than buying, sellers write contracts because buyers pay them a [**Premium**](/docs/4-opx/1-option-basics#terminology) over time. As expiration approaches, the premium earned per hour increases—like a complicated game of ["chicken"](https://www.collinsdictionary.com/us/dictionary/english/play-chicken).
 
-### Short Call Option (Bearish)
+    <Callout title="Movie Ticket Analogy">
+      If the buyer chooses not to exercise the option contract, the seller keeps the **full** premium—similar to how a theater owner keeps the ticket price when a customer doesn't show up.
+    </Callout>
 
-A **Short Call** means traders went Short on a Call Option. This is considered a bearish stance since traders *anticipate* the underlying token price to *decrease*.
+    <Accordions type="single" className="my-4">
+      <Accordion title="Short Call Option (Bearish)" value="short-call-bearish">
+        A **Short Call** means traders sell a Call Option. This reflects a bearish stance since traders *anticipate* the underlying token price will *decrease*.
 
-<Callout>
-    In this scenario, traders are selling the contract, with a [**Premium**](/docs/4-opx/1-option-basics#terminology), to someone who anticipates the underlying asset will increase.
-</Callout>
+        <Callout title="Movie Ticket Analogy">
+          Traders sell the contract with a [**Premium**](/docs/4-opx/1-option-basics#terminology) to buyers who anticipate the underlying asset will increase—like a theater owner selling tickets for a movie they expect will be unpopular.
+        </Callout>
 
-<div className="relative">
-  <img src="/guide-option-basics/Short_Call-LIGHT.png" alt="Short Call Option PNL Chart" className="dark:hidden" />
-  <img src="/guide-option-basics/Short_Call-DARK.png" alt="Short Call Option PNL Chart" className="hidden dark:block" />
-</div>
+        <div className="relative">
+          <img src="/guide-option-basics/Short_Call-LIGHT.png" alt="Short Call Option PNL Chart" className="dark:hidden" />
+          <img src="/guide-option-basics/Short_Call-DARK.png" alt="Short Call Option PNL Chart" className="hidden dark:block" />
+        </div>
 
-<Callout title="PNL Chart Explanation">
-    The **PNL Chart** above provides a generalized sense of a short **call** option. As the value of the token increases, the value of the call option decreases.
-</Callout>
+        <Callout title="PNL Chart Explanation">
+          The **PNL Chart** above provides a generalized sense of a short **call** option. As the value of the token increases, the value of the call option decreases.
+        </Callout>
 
-Sellers realize profits from decreasing token value without owning the token itself.
+        Sellers realize profits from decreasing token value without owning the token itself.
+      </Accordion>
+      <Accordion title="Short Put Option (Bullish)" value="short-put-bullish">
+        A **Short Put** means traders sell a Put Option. This reflects a bullish position since traders anticipate the underlying token price will *increase*.
 
-### Short Put Option (Bullish)
+        <Callout title="Movie Ticket Analogy">
+          Similar to the Short Call, traders sell a Put Option to buyers and earn the Premium over time if the underlying price *increases*—like a theater owner selling tickets for a movie they expect will be popular.
+        </Callout>
 
-A **Short Put** means traders went Short on a Put Option. This is considered a bullish position since traders anticipate the underlying token price to *increase*.
+        <div className="relative">
+          <img src="/guide-option-basics/Short_Put-LIGHT.png" alt="Short Put Option PNL Chart" className="dark:hidden" />
+          <img src="/guide-option-basics/Short_Put-DARK.png" alt="Short Put Option PNL Chart" className="hidden dark:block" />
+        </div>
 
-<Callout>
-    Similar to the Short Call, selling a Put Option to a buyer earns traders the Premium of that Option Contract over time if the underlying price *increases*.
-</Callout>
+        <Callout title="PNL Chart Explanation">
+          The **PNL Chart** above provides a generalized sense of a short **put** option. As the value of the token increases, the value of the put option also increases.
+        </Callout>
 
-<div className="relative">
-  <img src="/guide-option-basics/Short_Put-LIGHT.png" alt="Short Put Option PNL Chart" className="dark:hidden" />
-  <img src="/guide-option-basics/Short_Put-DARK.png" alt="Short Put Option PNL Chart" className="hidden dark:block" />
-</div>
-
-<Callout title="PNL Chart Explanation">
-    The **PNL Chart** above provides a generalized sense of a short **put** option. As the value of the token increases, the value of the put option also increases.
-</Callout>
-
-Sellers realize profits from increasing token value without owning the token itself.
+        Sellers realize profits from increasing token value without owning the token itself.
+      </Accordion>
+    </Accordions>
+  </Accordion>
+</Accordions>
