@@ -3,6 +3,7 @@ import 'katex/dist/katex.min.css';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import { Inter } from 'next/font/google';
 import { OpenPanelComponent } from '@openpanel/nextjs';
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 
 const inter = Inter({
@@ -86,6 +87,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
             // profileId={'123'}
           />
           {children}
+          <Analytics />
         </RootProvider>
       </body>
     </html>
