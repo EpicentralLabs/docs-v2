@@ -15,10 +15,10 @@ import { Step, Steps } from '@/components/steps';
 The `initialize_stake_pool` instruction creates both the config and pool accounts atomically:
 
 ```rust
-pub fn initialize_pool_handler(ctx: Context<InitializeStakePool>, apr_bps: u128) -> Result<()> {
+pub fn initialize_pool_handler(ctx: Context<InitializeStakePool>, emission_bps: u128) -> Result<()> {
     require!(
-        apr_bps >= MIN_APR_BPS && apr_bps <= MAX_APR_BPS,
-        StakingError::InvalidAprBps
+        emission_bps >= MIN_EMISSION_BPS && emission_bps <= MAX_EMISSION_BPS,
+        StakingError::InvalidEmissionBps
     );
     require_gte!(
         12,
@@ -33,7 +33,7 @@ pub fn initialize_pool_handler(ctx: Context<InitializeStakePool>, apr_bps: u128)
     *ctx.accounts.config = StakePoolConfig {
         reward_mint: ctx.accounts.reward_mint.key(),
         stake_mint: ctx.accounts.stake_mint.key(),
-        apr_bps,
+        emission_bps,
         bump: ctx.bumps.config,
     };
     *ctx.accounts.stake_pool = StakePool {
@@ -49,7 +49,7 @@ pub fn initialize_pool_handler(ctx: Context<InitializeStakePool>, apr_bps: u128)
 ```
 
 **Constraints:**
-- APR must be between `MIN_APR_BPS` (1 bps = 0.01%) and `MAX_APR_BPS` (100,000 bps = 1000%)
+- Emission Rate must be between `MIN_EMISSION_BPS` (1 bps = 0.01%) and `MAX_EMISSION_BPS` (100,000 bps = 1000%)
 - `stake_mint` and `reward_mint` decimals cannot exceed `12`
 - Only signers listed in the [`AUTHORITIES`](./index.mdx#access-control) constant are permitted to initialize the pool
 
@@ -163,7 +163,7 @@ pub fn unstake_handler(ctx: Context<UnstakeFromStakePool>, amount: u64) -> Resul
         // Partial unstake: update interest and reset baseline
         let now = Clock::get()?.unix_timestamp;
         let interest_index = ctx.accounts.stake_pool
-            .update_interest_index(now, ctx.accounts.config.apr_bps)?;
+            .update_interest_index(now, ctx.accounts.config.emission_bps)?;
         ctx.accounts.stake_account.update_pending_rewards(interest_index)?;
         ctx.accounts.stake_account.interest_index_at_deposit = interest_index;
     }

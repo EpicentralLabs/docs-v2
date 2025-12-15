@@ -12,7 +12,7 @@ The program defines comprehensive error types:
 | `VaultMismatch`         | The provided vault account does not match the pool vault.                                           |
 | `InsufficientStakeBalance` | Insufficient staked amount or vault balance for this unstake operation.                         |
 | `ArithmeticError`       | Arithmetic operation failed (overflow, underflow, or conversion error).                             |
-| `AprUnchanged`          | The provided APR is identical to the current APR.                                                   |
+| `EmissionUnchanged`     | The provided Emission Rate is identical to the current Emission Rate.                               |
 | `InvalidStakeMint`      | The provided stake mint does not match the config stake mint.                                       |
 | `InvalidRewardMint`     | The provided reward mint does not match the config reward mint.                                     |
 | `UnauthorizedUser`      | The signer is not the owner of this stake account.                                                  |
@@ -24,5 +24,5 @@ The program defines comprehensive error types:
 | `UnclaimedRewards`      | Cannot close stake account with unclaimed pending rewards.                                          |
 | `ConfigPoolMismatch`    | The stake pool's config does not match the provided config account.                                 |
 | `StakePoolMismatch`     | The provided stake pool does not match the stake account's pool.                                    |
-| `InvalidAprBps`         | The provided APR (in basis points) is invalid.                                                      |
+| `InvalidEmissionBps`    | The provided Emission Rate (in basis points) is invalid.                                            |
 | `VaultNotEmpty`         | The vault account is not empty.                                                                     |

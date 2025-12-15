@@ -7,7 +7,7 @@ import { Step, Steps } from '@/components/steps';
 
 # Global Interest Index
 
-Think of the **Global Interest Index** like a clock that keeps ticking up. Every second, it increases slightly based on the pool's Emission Rate (`apr_bps`). 
+Think of the **Global Interest Index** like a clock that keeps ticking up. Every second, it increases slightly based on the pool's Emission Rate (`emission_bps`). 
 Instead of tracking when each person staked, we just compare where the clock was when they started versus where it is now.
 
 ## The Simple Idea
@@ -25,24 +25,24 @@ This way, we don't need to remember timestamps for every staker—we just compar
 
 ## How the Global Index Grows
 
-The Global Interest Index increases every second based on the pool's APR. It's updated automatically whenever someone stakes, unstakes, or claims rewards.
+The Global Interest Index increases every second based on the pool's Emission Rate. It's updated automatically whenever someone stakes, unstakes, or claims rewards.
 
 **The formula is simple:**
 
 ```
-growth = (APR × time_elapsed) / seconds_per_year
+growth = (Emission Rate × time_elapsed) / seconds_per_year
 new_index = old_index + growth
 ```
 
 Here's a simplified look at how it's calculated:
 
 ```rust
-pub fn update_interest_index(&mut self, now: i64, apr_bps: u128) -> Result<u128> {
+pub fn update_interest_index(&mut self, now: i64, emission_bps: u128) -> Result<u128> {
     // Calculate how much time has passed
     let elapsed_seconds = now - self.interest_index_last_updated;
     
-    // Calculate growth based on APR and elapsed time
-    let growth = (apr_decimals * elapsed_seconds) / seconds_per_year;
+    // Calculate growth based on Emission Rate and elapsed time
+    let growth = (emission_decimals * elapsed_seconds) / seconds_per_year;
     
     // Add growth to the existing index
     self.interest_index += growth;
@@ -53,7 +53,7 @@ pub fn update_interest_index(&mut self, now: i64, apr_bps: u128) -> Result<u128>
 
 **Key Points:**
 - Starts at `0` when the pool is created
-- Grows continuously based on the APR
+- Grows continuously based on the Emission Rate
 - Only updates when someone interacts with the pool (lazy updates)
 
 </Step>
@@ -116,5 +116,5 @@ If you unstake some (but not all) of your tokens, your baseline index resets. Th
 
 The program uses precise decimal math to ensure accuracy, especially important when dealing with:
 - Large numbers
-- Small APR percentages
+- Small Emission Rate percentages
 - Precise time calculations
