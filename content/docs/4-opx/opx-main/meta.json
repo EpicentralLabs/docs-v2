@@ -1,11 +1,9 @@
 {
     "title": "OPX",
-    "root": false,
     "children": [
-        "4-opx/opx-main/index",
-        "4-opx/opx-main/1-omlp",
-        "4-opx/opx-main/2-fees",
-        "4-opx/opx-main/3-opm"
+        "1-omlp",
+        "2-fees",
+        "3-opm"
     ]
 }
 

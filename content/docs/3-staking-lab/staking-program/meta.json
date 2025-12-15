@@ -1,11 +1,9 @@
 {
     "title": "For Developers",
     "description": "A technical overview of the Staking Program used for the Staking Lab and how it works.",
-    "root": false,
     "children": [
-        "3-staking-lab/staking-program/index",
-        "3-staking-lab/staking-program/1-instruction-flow",
-        "3-staking-lab/staking-program/2-reward-calculation-system",
-        "3-staking-lab/staking-program/3-error-handling"
+        "1-instruction-flow",
+        "2-reward-calculation-system",
+        "3-error-handling"
     ]
 }

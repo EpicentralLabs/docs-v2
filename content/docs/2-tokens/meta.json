@@ -1,11 +1,10 @@
 {
   "title": "Tokens",
   "description": "Learn about LABS and xLABS tokens",
-  "root": false,
   "children": [
-    "2-tokens/labs-token",
-    "2-tokens/wattlabs-token",
-    "2-tokens/xlabs-token"
+    "labs-token",
+    "wattlabs-token",
+    "xlabs-token"
   ]
 }
 

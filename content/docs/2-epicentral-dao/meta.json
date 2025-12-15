@@ -1,12 +1,10 @@
 {
   "title": "Epicentral DAO",
   "description": "Everything you need to know about the Epicentral DAO",
-  "root": false,
   "children": [
-    "2-epicentral-dao/index",
-    "2-epicentral-dao/1-governance-process",
-    "2-epicentral-dao/4-core-team",
-    "2-epicentral-dao/5-open-market-token-distribution-event"
+    "1-governance-process",
+    "4-core-team",
+    "5-open-market-token-distribution-event"
   ]
 }
 

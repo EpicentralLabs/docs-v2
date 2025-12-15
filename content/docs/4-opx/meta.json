@@ -1,10 +1,8 @@
 {
     "title": "OPX",
     "description": "Trade DeFi Options on Solana.",
-    "root": true,
-    "order": 3,
     "children": [
-        "4-opx/opx-main",
-        "4-opx/1-option-basics"
+        "opx-main",
+        "1-option-basics"
     ]
 }

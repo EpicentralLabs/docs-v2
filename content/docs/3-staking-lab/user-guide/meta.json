@@ -1,8 +1,4 @@
 {
-    "title": "User Guide",
-    "root": false,
-    "children": [
-        "3-staking-lab/user-guide/index"
-    ]
+    "title": "User Guide"
 }
 
