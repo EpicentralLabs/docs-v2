@@ -1,5 +1,11 @@
 {
     "title": "Staking Lab",
     "description": "Stake LABS. Mint xLABS.",
-    "root": true
+    "root": true,
+    "order": 2,
+    "children": [
+        "3-staking-lab/index",
+        "3-staking-lab/user-guide",
+        "3-staking-lab/staking-program"
+    ]
 }

@@ -3,10 +3,11 @@
   "description": "Everything you want to know about Epicentral Labs. All in one place.",
   "root": true,
   "order": 1,
-  "parent": "1-introduction",
   "children": [
     "1-introduction/about",
-    "1-introduction/history"
+    "1-introduction/history",
+    "2-epicentral-dao",
+    "2-tokens"
   ]
 }
 

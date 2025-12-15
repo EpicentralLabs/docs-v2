@@ -1,10 +1,10 @@
 {
-    "title": "Option Trading Basics",
+    "title": "Learn Option: Basics",
     "description": "A quick overview of what options are and how to trade them.",
     "root": false,
     "children": [
-        "1-option-basics/index",
-        "1-option-basics/1-calls-and-puts",
-        "1-option-basics/3-spreads-intro"
+        "4-opx/1-option-basics/index",
+        "4-opx/1-option-basics/1-calls-and-puts",
+        "4-opx/1-option-basics/3-spreads-intro"
     ]
 }
