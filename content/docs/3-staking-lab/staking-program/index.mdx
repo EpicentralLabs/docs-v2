@@ -34,7 +34,7 @@ The global configuration account that stores pool parameters:
 pub struct StakePoolConfig {
     pub stake_mint: Pubkey,  // LABS address in this case
     pub reward_mint: Pubkey, // xLABS address in this case
-    pub apr_bps: u128,       // Emission Rate in basis points (e.g., 10% is 1_000)
+    pub emission_bps: u128,  // Emission Rate in basis points (e.g., 10% is 1_000)
     pub bump: u8,
 }
 ```
