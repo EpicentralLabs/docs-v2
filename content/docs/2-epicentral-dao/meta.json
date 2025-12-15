@@ -1,6 +1,10 @@
 {
   "title": "Epicentral DAO",
   "description": "Everything you need to know about the Epicentral DAO",
-  "root": true
+  "children": [
+    "1-governance-process",
+    "4-core-team",
+    "5-open-market-token-distribution-event"
+  ]
 }
 

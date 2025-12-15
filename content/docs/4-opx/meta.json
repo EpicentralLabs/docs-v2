@@ -1,9 +1,8 @@
 {
     "title": "OPX",
     "description": "Trade DeFi Options on Solana.",
-    "root": true,
     "children": [
-        "1-omlp",
-        "2-fees"
+        "opx-main",
+        "1-option-basics"
     ]
 }

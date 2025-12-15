@@ -20,14 +20,14 @@ description: Option Margin Liquidity Pools
 | **Role of liquidity**    | Seller provides margin and assumes full obligation | 	Seller provides margin and assumes full obligation (allows for third party liquidity) |
 | **Contract flexibility** | Limited by seller availability and preferences     | 	Limited by seller availability and preferences                   |
 | **Trade Execution**    | Executed by custodial agents       | Executed by non-custodial smart contracts |
-| **Pricing**              | Vulnerable to inefficient brokerage bid/ask spreads    | Standardized, [Options Pricing Model (OPM)](/docs/4-opx/3-opm)               |
+| **Pricing**              | Vulnerable to inefficient brokerage bid/ask spreads    | Standardized, [Options Pricing Model (OPM)](/docs/4-opx/opx-main/3-opm)               |
 
 ## Two-Tier Liquidity Architecture
 
 The OMLP utilizes a **dual-tier Single-Asset Pool (SAP) system**, which optimizes capital efficiency, and allows for third-party integration for liquidity scaling.
 
 <Callout title="Single-Asset Pools (SAPs)">
-    Single-Asset Pools (SAPs) represent only one underlying asset. Liquidity providers deposit the underlying asset to enable margin for options trading. For a token to be tradable on [OPX](/docs/4-opx), there must be a SAP for it.
+    Single-Asset Pools (SAPs) represent only one underlying asset. Liquidity providers deposit the underlying asset to enable margin for options trading. For a token to be tradable on [OPX](/docs/4-opx/opx-main), there must be a SAP for it.
 </Callout>
 
 The system operates on a tiered priority basis:
@@ -72,7 +72,7 @@ The system operates on a tiered priority basis:
 
 ## Token Listing Eligibility
 
-The [Epicentral DAO](/docs/2-epicentral-dao) determines which assets qualify for trading on [OPX](/docs/4-opx). Eligibility is established through on-chain [governance proposals](/docs/2-epicentral-dao/1-governance-process), ensuring that the community selects supported tokens.
+The [Epicentral DAO](/docs/2-epicentral-dao) determines which assets qualify for trading on [OPX](/docs/4-opx/opx-main). Eligibility is established through on-chain [governance proposals](/docs/2-epicentral-dao/1-governance-process), ensuring that the community selects supported tokens.
 
 <Callout title="Key Impact & Market Innovation">
   Retail lenders receive direct exposure to options liquidity for the first time, without the need to open their own options positions.
@@ -85,3 +85,4 @@ The [Epicentral DAO](/docs/2-epicentral-dao) determines which assets qualify for
 <Callout title="Smart Contract Risk Disclosure" type="warning">
   All participants should understand that interactions with smart contracts involve inherent risks, including potential vulnerabilities, exploits, or loss of funds. Please review the official [Terms of Service](/docs/7-terms-of-service) for full details and disclaimers regarding smart contract risk on OPX.
 </Callout>
+
