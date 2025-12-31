@@ -1,0 +1,191 @@
+---
+title: Instruction Flow
+description: A detailed overview of the flow of instructions in the Staking Program.
+---
+
+import { Step, Steps } from '@/components/steps';
+
+# Instruction Flow
+
+<Steps>
+  <Step>
+
+### Pool Initialization
+
+The `initialize_stake_pool` instruction creates both the config and pool accounts atomically:
+
+```rust
+pub fn initialize_pool_handler(ctx: Context<InitializeStakePool>, emission_bps: u128) -> Result<()> {
+    require!(
+        emission_bps >= MIN_EMISSION_BPS && emission_bps <= MAX_EMISSION_BPS,
+        StakingError::InvalidEmissionBps
+    );
+    require_gte!(
+        12,
+        ctx.accounts.stake_mint.decimals,
+        StakingError::MintDecimalsTooHigh
+    );
+    require_gte!(
+        12,
+        ctx.accounts.reward_mint.decimals,
+        StakingError::MintDecimalsTooHigh
+    );
+    *ctx.accounts.config = StakePoolConfig {
+        reward_mint: ctx.accounts.reward_mint.key(),
+        stake_mint: ctx.accounts.stake_mint.key(),
+        emission_bps,
+        bump: ctx.bumps.config,
+    };
+    *ctx.accounts.stake_pool = StakePool {
+        config: ctx.accounts.config.key(),
+        vault: ctx.accounts.vault.key(),
+        interest_index: 0,
+        interest_index_last_updated: Clock::get()?.unix_timestamp,
+        bump: ctx.bumps.stake_pool,
+    };
+
+    Ok(())
+}
+```
+
+**Constraints:**
+- Emission Rate must be between `MIN_EMISSION_BPS` (1 bps = 0.01%) and `MAX_EMISSION_BPS` (100,000 bps = 1000%)
+- `stake_mint` and `reward_mint` decimals cannot exceed `12`
+- Only signers listed in the [`AUTHORITIES`](./index.mdx#access-control) constant are permitted to initialize the pool
+
+</Step>
+<Step>
+
+### Staking
+
+The `stake_to_stake_pool` instruction handles both new and existing stake accounts:
+
+```rust
+pub fn stake_handler(ctx: Context<StakeToStakePool>, amount: u64) -> Result<()> {
+    ctx.accounts.validate(amount)?;
+    let interest_index = ctx.accounts.update_pool_interest_index()?; // we return it because it's more efficient than reloading the whole account
+    if ctx.accounts.stake_account.staked_amount == 0 {
+        ctx.accounts.initialize_user_stake_account(
+            amount,
+            ctx.bumps.stake_account,
+            interest_index,
+        )?;
+    } else {
+        require_keys_eq!(
+            ctx.accounts.stake_pool.key(),
+            ctx.accounts.stake_account.stake_pool,
+            StakingError::StakePoolMismatch
+        );
+
+        ctx.accounts
+            .update_user_stake_account(amount, interest_index)?;
+    }
+    ctx.accounts.transfer_to_vault(amount)?;
+    Ok(())
+}
+```
+
+**Process:**
+<Steps>
+  <Step>
+    Validates `amount` > 0 and mint decimals
+  </Step>
+  <Step>
+    Updates [Global Interest Index](/docs/staking-lab/staking-program/reward-calculation-system#global-interest-index) to current time
+  </Step>
+  <Step>
+    Creates new `StakeAccount` if user has no stake, otherwise updates existing `StakeAccount`
+  </Step>
+  <Step>
+    Transfers `stake_mint` tokens from user's associated token account (ATA) to pool vault
+  </Step>
+</Steps>
+</Step>
+<Step>
+
+### Claiming Rewards
+
+The `claim_rewards` instruction mints `reward_mint` tokens based on accrued rewards:
+
+```rust
+pub fn claim_handler(ctx: Context<ClaimRewards>) -> Result<()> {
+    ctx.accounts.validate()?;
+    process_claim(
+        &mut ctx.accounts.stake_pool,
+        &ctx.accounts.config,
+        &mut ctx.accounts.stake_account,
+        &ctx.accounts.reward_mint,
+        &ctx.accounts.user_reward_associated_token_account,
+        &ctx.accounts.token_program,
+        ctx.bumps.reward_mint,
+    )?;
+    Ok(())
+}
+```
+
+The `process_claim` utility function orchestrates the complete claim flow:
+
+**Process:**
+<Steps>
+  <Step>
+    Updates the [Global Interest Index](/docs/staking-lab/staking-program/reward-calculation-system#global-interest-index) to the current time
+  </Step>
+  <Step>
+    Calculates pending rewards using `update_pending_rewards`
+  </Step>
+  <Step>
+    Mints `reward_mint` tokens if `pending_rewards` > 0
+  </Step>
+  <Step>
+    Resets the baseline interest index via `apply_claim`
+  </Step>
+</Steps>
+</Step>
+<Step>
+
+### Unstaking
+
+The `unstake_from_stake_pool` instruction handles both partial and full withdrawals:
+
+```rust
+pub fn unstake_handler(ctx: Context<UnstakeFromStakePool>, amount: u64) -> Result<()> {
+    require_keys_eq!(
+        ctx.accounts.stake_pool.key(),
+        ctx.accounts.stake_account.stake_pool
+    );
+    
+    let mut should_close = false;
+    if amount == ctx.accounts.stake_account.staked_amount {
+        // Full unstake: claim rewards and mark for closing
+        process_claim(/* ... */)?;
+        should_close = true;
+    } else {
+        // Partial unstake: update interest and reset baseline
+        let now = Clock::get()?.unix_timestamp;
+        let interest_index = ctx.accounts.stake_pool
+            .update_interest_index(now, ctx.accounts.config.emission_bps)?;
+        ctx.accounts.stake_account.update_pending_rewards(interest_index)?;
+        ctx.accounts.stake_account.interest_index_at_deposit = interest_index;
+    }
+    
+    ctx.accounts.transfer_staked_to_user(amount)?;
+    ctx.accounts.stake_account.staked_amount = ctx
+        .accounts.stake_account.staked_amount
+        .checked_sub(amount)
+        .ok_or(StakingError::Overflow)?;
+    
+    if should_close {
+        close_stake_account(&mut ctx.accounts.stake_account, &mut ctx.accounts.user)?;
+    }
+    
+    Ok(())
+}
+```
+
+| Type              | Behavior                                                                                                                                                 |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Full unstake**  | Automatically claims rewards and closes the `StakeAccount`, refunding the user's [`rent`](https://docs.anza.xyz/implemented-proposals/rent) on the account |
+| **Partial unstake** | Updates the [Global Interest Index](/docs/staking-lab/staking-program/reward-calculation-system#global-interest-index), recalculates pending rewards, and resets the baseline interest index |
+
+</Step>
+</Steps>

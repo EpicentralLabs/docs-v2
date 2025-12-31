@@ -36,7 +36,7 @@ export default function HomePage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <Link href="/docs/1-introduction">
+          <Link href="/docs/introduction">
             <Button variant="default" size="lg" className="rounded-full">
               Open Documentation
             </Button>

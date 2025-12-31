@@ -1,8 +1,0 @@
-{
-    "title": "OPX",
-    "description": "Trade DeFi Options on Solana.",
-    "children": [
-        "opx-main",
-        "1-option-basics"
-    ]
-}

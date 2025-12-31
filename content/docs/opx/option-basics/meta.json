@@ -1,0 +1,8 @@
+{
+    "title": "Learn Option: Basics",
+    "description": "A quick overview of what options are and how to trade them.",
+    "children": [
+        "calls-and-puts",
+        "spreads-intro"
+    ]
+}

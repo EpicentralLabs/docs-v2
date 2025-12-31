@@ -1,9 +1,0 @@
-{
-    "title": "For Developers",
-    "description": "A technical overview of the Staking Program used for the Staking Lab and how it works.",
-    "children": [
-        "1-instruction-flow",
-        "2-reward-calculation-system",
-        "3-error-handling"
-    ]
-}
