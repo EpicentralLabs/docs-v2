@@ -17,9 +17,9 @@ import { buttonVariants } from '@/components/ui/button';
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
   
-  // Redirect root /docs to /docs/getting-started
+  // Redirect root /docs to /docs/introduction
   if (!params.slug || params.slug.length === 0) {
-    redirect('/docs/1-getting-started');
+    redirect('/docs/introduction');
   }
   
   const page = source.getPage(params.slug);
@@ -28,8 +28,8 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const MDX = page.data.body;
   
   // Construct file path from slugs
-  // For single slug: '1-getting-started' -> '1-getting-started/index.mdx'
-  // For multiple slugs: ['2-epicentral-dao', '1-governance-process'] -> '2-epicentral-dao/1-governance-process.mdx'
+  // For single slug: 'introduction' -> 'introduction/index.mdx'
+  // For multiple slugs: ['epicentral-dao', 'governance-process'] -> 'epicentral-dao/governance-process.mdx'
   const filePath = page.slugs.length === 1
     ? `${page.slugs[0]}/index.mdx`
     : `${page.slugs.slice(0, -1).join('/')}/${page.slugs[page.slugs.length - 1]}.mdx`;

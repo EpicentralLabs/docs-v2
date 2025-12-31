@@ -1,0 +1,106 @@
+---
+title: Spreads Introduction
+description: Understanding advanced options strategies and spread positions.
+---
+
+# Advanced Techniques and Positions for Options Trading
+
+As stated on [Learning the Foundation](/docs/opx/option-basics), fractionalization is key to implementing advanced strategies in options and derivative trading. By maximizing [capital efficiency](/docs/opx/option-basics/index#quantity-tradfi-vs-defi), traders distribute their funds across multiple contracts and positions to increase the odds of profit in their favor—also known as [hedging](/docs/opx/option-basics/index#prerequisites).
+
+Traders create win-win scenarios by utilizing various "**Spread** Strategies."
+
+---
+
+## Spreads
+
+[Spreads](https://www.schwab.com/learn/story/what-is-options-spread-trade) are used in both TradFi and DeFi options trading. They require combining multiple options (buying and selling different [strike prices](/docs/opx/option-basics#terminology) or [expiration dates](/docs/opx/option-basics#terminology)) to manage cost, risk, or directional bias.
+
+<Callout title="Spreads in Options Trading">
+    Traders combine multiple [call options](/docs/opx/option-basics/calls-and-puts#long-call-option-bullish) and [put options](/docs/opx/option-basics/calls-and-puts#long-put-option-bearish) to create spread positions that help manage portfolio risks and optimize capital allocation.
+</Callout>
+
+### Bullish Spreads
+
+<Accordions type="single" className="my-4">
+  <Accordion title="Bull Spreads" value="bull-spread">
+    Bull spreads are constructed to benefit from a moderate rise in the price of the underlying asset by combining option positions with different strikes.  
+    <a href="https://www.investopedia.com/terms/b/bullspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Vertical Bull Spread" value="vertical-spread-bull">
+    A vertical bull spread involves buying and selling options of the same type (typically calls), same expiration, but different strikes, aiming to profit from upward movement in the asset with defined risk.  
+    <a href="https://www.investopedia.com/terms/v/verticalspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Debit Spreads" value="debit-spread">
+    Debit spreads require a net upfront payment and seek to profit from movements in the underlying asset by buying and selling options at different strikes, often utilized for upward moves.  
+    <a href="https://www.investopedia.com/terms/d/debitspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Ratio Spreads (Bullish)" value="ratio-spread-bull">
+    Some ratio spreads are constructed with a bullish bias, generally by selling more puts than are bought to profit from a rise or modest decrease in the underlying asset price.
+    <a href="https://www.investopedia.com/terms/p/putratiobackspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+</Accordions>
+
+### Bearish Spreads
+
+<Accordions type="single" className="my-4">
+  <Accordion title="Bear Spreads" value="bear-spread">
+    Bear spreads allow traders to profit from a moderate decline in the price of the underlying asset by buying and selling options at different strike prices.  
+    <a href="https://www.investopedia.com/terms/b/bearspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Vertical Bear Spread" value="vertical-spread-bear">
+    A vertical bear spread is constructed by buying and selling options of the same type (typically puts), same expiry, but different strike prices, seeking to profit from downward movement in the asset.  
+    <a href="https://www.investopedia.com/terms/v/verticalspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Credit Spreads (Bearish)" value="credit-spread-bear">
+    Credit spreads can be structured with a bearish bias, such as the bear call spread, where a higher-strike call is sold and a lower-strike call is bought. The goal is to profit from time decay and limited downside.  
+    <a href="https://www.investopedia.com/terms/c/creditspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Ratio Spreads (Bearish)" value="ratio-spread-bear">
+    Certain ratio spreads may employ a bearish philosophy, often selling more calls than are bought to benefit from falling prices.  
+    <a href="https://www.investopedia.com/terms/p/putratiobackspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+</Accordions>
+
+### Delta-Neutral & Volatility Spreads
+
+<Accordions type="single" className="my-4">
+  <Accordion title="Butterfly Spreads" value="butterfly-spread">
+    Butterfly spreads create a delta-neutral position by combining bull and bear spreads with three strike prices, typically limiting both risk and reward and profiting from little net movement.  
+    <a href="https://www.investopedia.com/terms/b/butterflyspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Iron Condor Spreads" value="iron-condor">
+    Iron condor spreads utilize both put and call credit spreads—benefiting from periods of low volatility—offering limited risk and reward within a set price range.  
+    <a href="https://www.investopedia.com/terms/i/ironcondor.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Straddle Spreads" value="straddle-spread">
+    Straddle spreads are delta-neutral positions involving both a call and a put with the same strike and expiry, profiting from significant volatility in either direction.  
+    <a href="https://www.investopedia.com/terms/s/straddle.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Strangle Spreads" value="strangle-spread">
+    Strangle spreads purchase or sell both a call and a put, with different strikes but the same expiration date, allowing for a delta-neutral setup that profits from larger price swings.  
+    <a href="https://www.investopedia.com/terms/s/strangle.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Calendar Spreads" value="calendar-spread">
+    Calendar spreads use options with the same strike price but different expiration dates, seeking to profit from time decay and changes in volatility, often without strong directional bias.  
+    <a href="https://www.investopedia.com/terms/c/calendarspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+  <Accordion title="Diagonal Spreads" value="diagonal-spread">
+    Diagonal spreads combine different strike prices and expiration dates, enabling management of both time decay and directional movement; they can be constructed for neutral or directional strategies.  
+    <a href="https://www.investopedia.com/terms/d/diagonalspread.asp" target="_blank" rel="noopener">Learn more</a>
+  </Accordion>
+</Accordions>
+
+---
+
+<Callout title="Financial Liability Warning" type="warning">
+  The information provided on this website is for general informational and educational purposes only. It is not a substitute for professional financial advice and does not constitute an offer for investment advisory or other financial services.
+
+  Traders are responsible for consulting with qualified financial professionals to determine whether any information or services discussed on this website are suitable for their specific financial situation, objectives, and risk tolerance.
+
+  Epicentral Labs strives to ensure that all information on this website is accurate and up-to-date, but makes no express or implied representations or warranties regarding accuracy, completeness, reliability, or validity. Epicentral Labs is not responsible for any errors, omissions, or results from using this information.
+</Callout>
+
+<Callout title="Disclaimer" type="warning">
+    Epicentral Labs does not, and will not, provide any information in the form of financial advice. Traders must conduct their own research (DYOR). All actions and liabilities are incurred by the trader.
+</Callout>
+

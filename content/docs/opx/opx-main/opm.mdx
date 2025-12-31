@@ -1,0 +1,269 @@
+---
+title: Option Pricing Model (OPM)
+description: Understanding the Option Pricing Model for DeFi Options on Solana!
+---
+
+# Option Pricing Model (OPM)
+
+The **Option Pricing Model (OPM)** serves as the core pricing calculator integrated within the `option_program`. OPM validates option pricing on-chain and forms the foundation for how DeFi options are calculated on Solana.
+
+OPM derives from the widely accepted derivatives formula used in traditional finance—the [Black-Scholes Model](https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model#Notation). Both American-style and European-style options stem from this model, making it the optimal candidate for Solana's DeFi options.
+
+---
+
+## Black-Scholes Model
+
+The [Black-Scholes Model](https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model) is a proven and reliable formula that traditional finance uses globally on a daily basis for derivatives pricing. However, using the Black-Scholes model within the DeFi environment presents unique challenges that require adaptation.
+
+---
+
+## Adapting Black-Scholes for DeFi
+
+Epicentral Labs refactored the original Black-Scholes formula to conform to the Solana DeFi ecosystem. The adaptations include:
+
+### No Naked Positions
+
+All sellers must be ["cash-covered"](/docs/opx/option-basics#naked-vs-covered-options), also known as *"collateralized"*. DeFi protocols restrict ["naked"](/docs/opx/option-basics#naked-vs-covered-options) options as a preventative measure against systemic risk, ensuring all written positions are fully collateralized.
+
+<Callout>
+    DeFi protocols require all option positions to be cash-covered (collateralized), limiting the seller's maximum loss to the supplied collateral. This differs from TradFi, where sellers may write naked contracts.
+</Callout>
+
+### Fractionalized Options
+
+Traders are no longer obligated to trade 100x of the underlying share per trade. The financial barrier of entry for any given contract is lowered through [fractionalization](/docs/opx/option-basics#quantity-tradfi-vs-defi).
+
+<Callout title="Lowered Financial Barriers">
+    Traders maximize their [capital efficiency](/docs/opx/option-basics#quantity-tradfi-vs-defi) by distributing funds across multiple contracts instead of committing to a single position.
+</Callout>
+
+Traders mitigate risk by encouraging capital efficiency through the use of [spread strategies](/docs/opx/option-basics/spreads-intro) to create possible win-win scenarios.
+
+---
+
+## Black-Scholes Pricing Formulas
+
+The Black-Scholes model provides mathematical formulas for calculating call and put option prices.
+
+### Call Option Price
+
+```math
+C(S,t) = N(d_+)S_t - N(d_-)Ke^{-r(T-t)}
+```
+
+### Put Option Price
+
+```math
+P(S,t) = N(-d_+)Ke^{-r(T-t)} - N(-d_-)S_t
+```
+
+### Standardized Normal Variables
+
+The formulas use two standardized normal variables:
+
+```math
+d_1 = \frac{1}{\sigma\sqrt{T-t}}\left[\ln\left(\frac{S_t}{K}\right) + \left(r + \frac{\sigma^2}{2}\right)(T-t)\right]
+```
+
+```math
+d_2 = d_1 - \sigma\sqrt{T-t}
+```
+
+<Callout>
+    The `d1` and `d2` parameters are crucial for the Black-Scholes model, as they determine the option's price and its sensitivity to various factors.
+</Callout>
+
+<Accordions type="single" className="my-4">
+  <Accordion title="Understanding d1 and d2 Calculations" value="d1-d2">
+    The `d1` and `d2` parameters are integral components of the Black-Scholes option pricing model. These parameters determine the theoretical price of options and their sensitivities to various market factors.
+
+    #### d1 Calculation
+
+    The `d1` parameter uses the following formula:
+
+    ```math
+    d_1 = \frac{1}{\sigma\sqrt{T-t}}\left[\ln\left(\frac{S_t}{K}\right) + \left(r + \frac{\sigma^2}{2}\right)(T-t)\right]
+    ```
+
+    **Parameters:**
+    - `spot_price` ($S_t$): The current market price of the underlying asset
+    - `strike_price` ($K$): The price at which the option can be exercised
+    - `risk_free_rate` ($r$): The annualized risk-free interest rate
+    - `volatility` ($\sigma$): The volatility of the underlying asset
+    - `time_to_expiry` ($T-t$): The time remaining until expiration, expressed in years
+
+    **Purpose:** The `d1` parameter is a standardized measure that helps determine the probability of option exercise, adjusted for the time value of money and volatility risk premium.
+
+    #### d2 Calculation
+
+    The `d2` parameter uses the formula:
+
+    ```math
+    d_2 = d_1 - \sigma\sqrt{T-t}
+    ```
+
+    **Parameters:**
+    - `d1`: The previously calculated `d1` parameter
+    - `volatility` ($\sigma$): The volatility of the underlying asset
+    - `time_to_expiry` ($T-t$): The time remaining until expiration, expressed in years
+
+    **Purpose:** The `d2` parameter is used alongside `d1` in the Black-Scholes formula to calculate the option's price. It represents the adjusted probability of the option expiring in-the-money.
+
+  <Callout type="note" title="Note">
+    The Solana Options Pricing Model (OPM) for OPX uses historical volatility, not implied volatility, when calculating option prices. Participants should consider this difference when comparing model results to those produced by traditional options markets, where implied volatility is commonly used.
+  </Callout>
+  </Accordion>
+</Accordions>
+
+---
+
+## Notation Reference
+
+Understanding the mathematical notation used in the Black-Scholes formulas helps traders interpret pricing calculations.
+
+<Accordions type="single" className="my-4" defaultValue="market-related">
+  <Accordion title="Market-Related Variables" value="market-related">
+    Variables that describe the current market state and underlying asset characteristics.
+
+    | Symbol | Description |
+    |--------|-------------|
+    | $S$ or $S_t$ | Current price of the underlying token/asset |
+    | $\sigma$ | Volatility of the underlying token/asset |
+    | $t$ | Current time in years; $t = 0$ represents the present |
+    | $r$ | Annualized "risk-free" interest rate, continuously compounded (APY) |
+  </Accordion>
+
+  <Accordion title="Option-Related Variables" value="option-related">
+    Variables specific to the option contract and its pricing.
+
+    | Symbol | Description |
+    |--------|-------------|
+    | $V(S,t)$ | Current option price based on asset price and time |
+    | $C(S,t)$ | Call option price |
+    | $P(S,t)$ | Put option price |
+    | $T$ | Time when the option expires |
+    | $\tau$ | Time left until expiry ($\tau = T - t$) |
+    | $K$ | Strike price (agreed price to buy/sell) |
+    | $e$ | [Euler's number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) (≈ 2.718281823), the base of the natural logarithm |
+    | $\ln$ | Natural logarithm |
+    | $N(x)$ | [Standard normal cumulative distribution function (CDF)](https://en.wikipedia.org/wiki/Cumulative_distribution_function) |
+    
+    The CDF formula:
+
+    ```math
+    N(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-z^2/2} dz
+    ```
+  </Accordion>
+</Accordions>
+
+---
+
+## Option Greeks
+
+The Greeks serve as essential metrics for managing risk in options trading. They help traders understand how their portfolio value changes when specific market factors fluctuate. By analyzing each Greek independently, traders assess individual risk components and adjust their positions to maintain their target risk profile.
+
+An option's price changes based on how traders interact with it and on market conditions. The composition or structure of an option relies heavily on Greeks. Traders use Greeks to understand how various factors affect [option pricing](/docs/opx/option-basics) and to make informed trading decisions.
+
+[*Reference: Wikipedia - Option Greeks*](https://en.wikipedia.org/wiki/en:Greeks_(finance)?variant=zh-tw)
+
+<Accordions type="single" className="my-4">
+  <Accordion title="Δ - Delta" value="delta">
+    Delta measures how much the option's price changes with every $1 change in the underlying token's price. Delta represents the number of tokens needed to hedge the option and helps traders understand how [call options](/docs/opx/option-basics/calls-and-puts#long-call-option-bullish) and [put options](/docs/opx/option-basics/calls-and-puts#long-put-option-bearish) respond to price movements in the underlying asset.
+
+    ```math
+    \Delta = \frac{\partial V}{\partial S}
+    ```
+
+    | Aspect | Description |
+    |--------|-------------|
+    | **Definition** | Measures price sensitivity to underlying token price movements |
+    | **Calculation** | Change in option price per $1 change in underlying token price |
+    | **Range** | Typically between 0 and 1 for calls, -1 and 0 for puts |
+    | **Interpretation** | Higher deltas indicate the option's price closely follows the token's price movements |
+
+    <Callout>
+        Delta helps traders understand how [call options](/docs/opx/option-basics/calls-and-puts#long-call-option-bullish) and [put options](/docs/opx/option-basics/calls-and-puts#long-put-option-bearish) respond to price movements in the underlying asset.
+    </Callout>
+  </Accordion>
+
+  <Accordion title="Γ - Gamma" value="gamma">
+    Gamma tracks how much delta changes when the underlying token's price changes by $1, reflecting the sensitivity of delta. Gamma measures how fast delta changes when the asset price moves and helps measure how stable an option position is.
+
+    ```math
+    \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 V}{\partial S^2}
+    ```
+
+    | Aspect | Description |
+    |--------|-------------|
+    | **Definition** | Measures the rate of change of delta |
+    | **Calculation** | Change in delta per $1 change in underlying token price |
+    | **Range** | Always positive (for both calls and puts) |
+    | **Interpretation** | Higher gamma means delta will adjust quickly with token price movements |
+
+    <Callout>
+        Gamma tracks how much delta changes when the underlying token's price changes by $1, reflecting the sensitivity of delta.
+    </Callout>
+  </Accordion>
+
+  <Accordion title="Θ - Theta" value="theta">
+    Theta represents the option's time decay, showing how much value the option loses each day as the [expiration date](/docs/opx/option-basics#terminology) approaches. Theta quantifies the time value component of an option's [premium](/docs/opx/option-basics#terminology) and measures how much value an option loses as time passes.
+
+    ```math
+    \Theta = -\frac{\partial V}{\partial \tau}
+    ```
+
+    | Aspect | Description |
+    |--------|-------------|
+    | **Definition** | Measures time decay—the rate at which option value decreases over time |
+    | **Calculation** | Change in option price per day as expiration approaches |
+    | **Range** | Typically negative (options lose value over time) |
+    | **Interpretation** | A high theta means the option's value decreases faster with time |
+
+    <Callout>
+        Sellers prefer high thetas because they earn more from the buyer as time passes.
+    </Callout>
+  </Accordion>
+
+  <Accordion title="ν - Vega" value="vega">
+    Vega measures the sensitivity of the option's price relative to changes in the underlying token's [volatility](/docs/opx/option-basics#terminology). Vega quantifies the impact of a 1% change in volatility and helps traders understand how market uncertainty affects option pricing.
+
+    ```math
+    \nu = \frac{\partial V}{\partial \sigma}
+    ```
+
+    | Aspect | Description |
+    |--------|-------------|
+    | **Definition** | Measures sensitivity to volatility changes |
+    | **Calculation** | Change in option price per 1% change in implied volatility |
+    | **Range** | Always positive (for both calls and puts) |
+    | **Interpretation** | Higher vega means the option's price is more affected by volatility shifts |
+
+    <Callout>
+        Vega helps traders understand how market uncertainty affects option pricing.
+    </Callout>
+  </Accordion>
+
+  <Accordion title="ρ - Rho" value="rho">
+    Rho indicates how much the option's price changes in response to a 1% change in interest rates. Rho reflects sensitivity to changes in the [risk-free rate](/docs/opx/option-basics#terminology), which affects the cost of carrying positions.
+
+    ```math
+    \rho = \frac{\partial V}{\partial r}
+    ```
+
+    | Aspect | Description |
+    |--------|-------------|
+    | **Definition** | Measures sensitivity to interest rate changes |
+    | **Calculation** | Change in option price per 1% change in risk-free interest rate |
+    | **Range** | Positive for calls, negative for puts |
+    | **Interpretation** | Higher rho indicates that the option's value is more sensitive to interest rate changes |
+
+    <Callout>
+        Rho reflects sensitivity to changes in the [risk-free rate](/docs/opx/option-basics#terminology), which affects the cost of carrying positions.
+    </Callout>
+  </Accordion>
+</Accordions>
+
+<Callout title="Disclaimer" type="warning">
+    The Option Pricing Model (OPM) used by Epicentral Labs is derived from the Black-Scholes framework but modified for decentralized execution on Solana. As a result, outputs may differ from traditional Black-Scholes calculations. All valuations are provided for protocol functionality only and should not be relied upon as financial, investment, legal, or tax advice. Users must exercise independent judgment, verify any calculations as needed, and bear full responsibility for their decisions and transactions when interacting with the protocol.
+</Callout>
+
