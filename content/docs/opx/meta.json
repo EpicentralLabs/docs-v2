@@ -1,8 +1,9 @@
 {
-    "title": "OPX",
-    "description": "Trade DeFi Options on Solana.",
-    "children": [
-        "opx-main",
-        "option-basics"
-    ]
+  "title": "OPX",
+  "description": "Trade DeFi Options on Solana.",
+  "icon": "TrendingUp",
+  "pages": [
+    "opx-main",
+    "option-basics"
+  ]
 }

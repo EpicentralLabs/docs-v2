@@ -1,10 +1,10 @@
 {
   "title": "Epicentral DAO",
   "description": "Everything you need to know about the Epicentral DAO",
-  "children": [
+  "icon": "Users",
+  "pages": [
     "governance-process",
     "core-team",
     "open-market-token-distribution-event"
   ]
 }
-

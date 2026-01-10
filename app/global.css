@@ -1,12 +1,210 @@
 @import 'tailwindcss';
-@import 'fumadocs-ui/css/black.css';
 @import 'fumadocs-ui/css/preset.css';
 
-/* Custom accent color for selected items */
+/* ============================================
+   Epicentral Labs Custom Theme
+   Modern minimalistic dark theme with blue accents
+   Primary Color: #4a85ff (preserved)
+   ============================================ */
+
+/* Theme color variables for Tailwind CSS v4 */
+@theme {
+  /* Light mode colors (rarely used, but defined for completeness) */
+  --color-fd-background: hsl(0, 0%, 98%);
+  --color-fd-foreground: hsl(220, 15%, 10%);
+  --color-fd-muted: hsl(220, 10%, 94%);
+  --color-fd-muted-foreground: hsl(220, 10%, 40%);
+  --color-fd-popover: hsl(0, 0%, 100%);
+  --color-fd-popover-foreground: hsl(220, 15%, 15%);
+  --color-fd-card: hsl(220, 10%, 96%);
+  --color-fd-card-foreground: hsl(220, 15%, 10%);
+  --color-fd-border: hsla(220, 15%, 80%, 0.5);
+  --color-fd-primary: hsl(220, 100%, 64%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-secondary: hsl(220, 10%, 92%);
+  --color-fd-secondary-foreground: hsl(220, 15%, 10%);
+  --color-fd-accent: hsla(220, 60%, 90%, 0.5);
+  --color-fd-accent-foreground: hsl(220, 15%, 10%);
+  --color-fd-ring: hsl(220, 100%, 64%);
+  
+  /* Diff colors for code blocks */
+  --color-fd-diff-remove: hsla(0, 80%, 55%, 0.16);
+  --color-fd-diff-add: hsla(140, 80%, 45%, 0.16);
+  --color-fd-diff-remove-symbol: hsl(0, 65%, 55%);
+  --color-fd-diff-add-symbol: hsl(140, 65%, 45%);
+}
+
+/* Dark mode - Primary theme */
+.dark {
+  --color-fd-background: hsl(0, 0%, 4%);
+  --color-fd-foreground: hsl(0, 0%, 95%);
+  --color-fd-muted: hsl(220, 8%, 10%);
+  --color-fd-muted-foreground: hsla(0, 0%, 75%, 0.85);
+  --color-fd-popover: hsl(220, 8%, 7%);
+  --color-fd-popover-foreground: hsl(0, 0%, 90%);
+  --color-fd-card: hsl(220, 8%, 6%);
+  --color-fd-card-foreground: hsl(0, 0%, 95%);
+  --color-fd-border: hsla(220, 30%, 25%, 0.25);
+  --color-fd-primary: hsl(220, 100%, 64%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-secondary: hsl(220, 8%, 12%);
+  --color-fd-secondary-foreground: hsl(0, 0%, 92%);
+  --color-fd-accent: hsla(220, 80%, 55%, 0.12);
+  --color-fd-accent-foreground: hsl(0, 0%, 92%);
+  --color-fd-ring: hsl(220, 100%, 64%);
+}
+
+/* Layout customization */
 :root {
+  /* Preserve primary color */
   --fd-primary: #4a85ff;
   --fd-primary-foreground: #ffffff;
+  
+  /* Adaptive layout width */
+  --fd-layout-width: clamp(800px, calc(100vw - 320px), 1400px);
+  
+  /* Sidebar width optimization */
+  --fd-sidebar-width: 260px;
 }
+
+/* Typography improvements */
+body {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improved prose typography for content */
+.prose {
+  --tw-prose-body: hsl(0, 0%, 85%);
+  --tw-prose-headings: hsl(0, 0%, 98%);
+  --tw-prose-lead: hsl(0, 0%, 75%);
+  --tw-prose-links: #4a85ff;
+  --tw-prose-bold: hsl(0, 0%, 95%);
+  --tw-prose-counters: hsl(0, 0%, 65%);
+  --tw-prose-bullets: hsl(0, 0%, 50%);
+  --tw-prose-hr: hsla(220, 30%, 25%, 0.3);
+  --tw-prose-quotes: hsl(0, 0%, 90%);
+  --tw-prose-quote-borders: #4a85ff;
+  --tw-prose-captions: hsl(0, 0%, 65%);
+  --tw-prose-code: hsl(0, 0%, 95%);
+  --tw-prose-pre-code: hsl(0, 0%, 90%);
+  --tw-prose-pre-bg: hsl(220, 8%, 8%);
+  --tw-prose-th-borders: hsla(220, 30%, 25%, 0.4);
+  --tw-prose-td-borders: hsla(220, 30%, 25%, 0.25);
+  
+  line-height: 1.7;
+  letter-spacing: -0.003em;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.prose h1 { font-size: 2rem; margin-top: 0; }
+.prose h2 { font-size: 1.5rem; margin-top: 2em; }
+.prose h3 { font-size: 1.25rem; margin-top: 1.75em; }
+.prose h4 { font-size: 1.125rem; margin-top: 1.5em; }
+
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-top: 0.375em;
+  margin-bottom: 0.375em;
+}
+
+/* Code blocks */
+.prose pre {
+  border: 1px solid hsla(220, 30%, 25%, 0.25);
+  border-radius: 0.5rem;
+}
+
+.prose code {
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+.prose :not(pre) > code {
+  background: hsla(220, 80%, 55%, 0.1);
+  border: 1px solid hsla(220, 30%, 25%, 0.25);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  color: #7eb0ff;
+}
+
+/* Sidebar styling improvements */
+#nd-sidebar {
+  background: hsl(220, 8%, 5%);
+  border-color: hsla(220, 30%, 25%, 0.2);
+}
+
+#nd-sidebar-mobile {
+  background: hsl(220, 8%, 5%);
+}
+
+/* Subtle scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(220, 30%, 40%, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(220, 30%, 50%, 0.4);
+}
+
+/* Navbar styling */
+header[id="nd-nav"] {
+  background: hsla(0, 0%, 4%, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid hsla(220, 30%, 25%, 0.15);
+}
+
+/* Search styling */
+[data-search-dialog] {
+  background: hsl(220, 8%, 6%);
+  border: 1px solid hsla(220, 30%, 25%, 0.3);
+}
+
+/* Card styling improvements */
+[data-card] {
+  background: hsl(220, 8%, 6%);
+  border-color: hsla(220, 30%, 25%, 0.2);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+[data-card]:hover {
+  border-color: hsla(220, 100%, 64%, 0.3);
+  background: hsl(220, 8%, 7%);
+}
+
+/* Focus states with blue accent */
+*:focus-visible {
+  outline: 2px solid #4a85ff;
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Preserved Animations
+   ============================================ */
 
 @keyframes shine {
   0% {
@@ -49,5 +247,31 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+/* ============================================
+   Responsive adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --fd-layout-width: 100%;
+  }
+  
+  .prose h1 { font-size: 1.75rem; }
+  .prose h2 { font-size: 1.375rem; }
+  .prose h3 { font-size: 1.125rem; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --fd-layout-width: min(800px, calc(100vw - 280px));
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --fd-layout-width: clamp(900px, calc(100vw - 340px), 1300px);
   }
 }

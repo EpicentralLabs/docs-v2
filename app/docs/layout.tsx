@@ -7,7 +7,11 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
   return (
     <DocsLayout
       tree={source.pageTree}
-      sidebar={{ tabs: false }}
+      sidebar={{
+        tabs: false,
+        defaultOpenLevel: 1,
+        collapsible: true,
+      }}
       {...baseOptions()}
     >
       <OpenPanelComponent

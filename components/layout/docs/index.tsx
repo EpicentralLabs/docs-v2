@@ -127,7 +127,7 @@ export function DocsLayout({
       (item.on === 'nav' || item.on === 'all' || !item.on),
   );
   const sidebarVariables = cn(
-    'md:[--fd-sidebar-width:268px] lg:[--fd-sidebar-width:286px]',
+    'md:[--fd-sidebar-width:240px] lg:[--fd-sidebar-width:260px]',
   );
 
   function sidebar() {
@@ -354,7 +354,7 @@ export function DocsLayout({
         <LayoutBody
           {...props.containerProps}
           className={cn(
-            'md:[&_#nd-page_article]:pt-12 xl:[&_#nd-page_article]:px-8',
+            'md:[&_#nd-page_article]:pt-8 xl:[&_#nd-page_article]:px-6',
             sidebarEnabled && sidebarVariables,
             props.containerProps?.className,
           )}
