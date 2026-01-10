@@ -328,12 +328,51 @@ header[id="nd-nav"] {
   box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
 }
 
+/* Compact spacing between header and body text in callouts */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3,
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 {
+  margin-bottom: 0.5em !important;
+  margin-top: 0 !important;
+}
+
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0 !important;
+}
+
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3 + p,
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4 + p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3 + p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 + p {
+  margin-top: 0.5em !important;
+}
+
 /* Modern browsers: Target callouts by structure with colored indicator bar (most reliable) */
 @supports selector(:has(*)) {
   .prose > div:has(> div[role="none"][class*="w-0.5"]) {
     background: hsl(0, 0%, 100%) !important;
     border-color: hsla(220, 100%, 64%, 0.25) !important;
     box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
+  }
+  
+  /* Compact spacing for modern browser selector */
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h3,
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 {
+    margin-bottom: 0.5em !important;
+    margin-top: 0 !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
+    margin-top: 0.5em !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h3 + p,
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 + p {
+    margin-top: 0.5em !important;
   }
 }
 
@@ -386,11 +425,50 @@ header[id="nd-nav"] {
   box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
 }
 
+/* Compact spacing between header and body text in dark mode callouts */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3,
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 {
+  margin-bottom: 0.5em !important;
+  margin-top: 0 !important;
+}
+
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0 !important;
+}
+
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3 + p,
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4 + p,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3 + p,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 + p {
+  margin-top: 0.5em !important;
+}
+
 @supports selector(:has(*)) {
   .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) {
     background: hsl(220, 8%, 10%) !important;
     border-color: hsla(220, 100%, 64%, 0.3) !important;
     box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
+  }
+  
+  /* Compact spacing for dark mode modern browser selector */
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h3,
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 {
+    margin-bottom: 0.5em !important;
+    margin-top: 0 !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
+    margin-top: 0.5em !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h3 + p,
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 + p {
+    margin-top: 0.5em !important;
   }
 }
 
