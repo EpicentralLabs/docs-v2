@@ -9,7 +9,7 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
       tree={source.pageTree}
       sidebar={{
         tabs: false,
-        defaultOpenLevel: 1,
+        defaultOpenLevel: 0,
         collapsible: true,
       }}
       {...baseOptions()}

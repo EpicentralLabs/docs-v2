@@ -276,6 +276,15 @@ header[id="nd-nav"] {
   background: hsl(220, 20%, 98%);
 }
 
+/* Reduce spacing between icon and title in cards */
+[data-card] > div:first-child {
+  margin-bottom: 0.25rem !important;
+}
+
+[data-card] h3 {
+  margin-top: 0 !important;
+}
+
 /* Dark mode Cards */
 .dark [data-card] {
   background: hsl(220, 8%, 6%);
@@ -288,11 +297,60 @@ header[id="nd-nav"] {
 }
 
 /* ============================================
+   Light Mode Callouts (Popout Cards)
+   ============================================ */
+/* Target callout containers - callouts have a specific structure with flex layout, gap, rounded corners, border, and padding */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
+  background: hsl(0, 0%, 100%) !important;
+  border-color: hsla(220, 100%, 64%, 0.25) !important;
+  box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
+}
+
+/* Modern browsers: Target callouts by structure with colored indicator bar (most reliable) */
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) {
+    background: hsl(0, 0%, 100%) !important;
+    border-color: hsla(220, 100%, 64%, 0.25) !important;
+    box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
+  }
+}
+
+/* Dark mode Callouts (Popout Cards) */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
+  background: hsl(220, 8%, 10%) !important;
+  border-color: hsla(220, 100%, 64%, 0.3) !important;
+  box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
+}
+
+@supports selector(:has(*)) {
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) {
+    background: hsl(220, 8%, 10%) !important;
+    border-color: hsla(220, 100%, 64%, 0.3) !important;
+    box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
+  }
+}
+
+/* ============================================
    Focus States
    ============================================ */
 *:focus-visible {
   outline: 2px solid #4a85ff;
   outline-offset: 2px;
+}
+
+/* Search dialog input focus with rounded corners */
+[data-search-dialog] input:focus-visible,
+[data-search-dialog] textarea:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #4a85ff;
+}
+
+/* Ensure search input has rounded corners to match the focus border */
+[data-search-dialog] input,
+[data-search-dialog] textarea {
+  border-radius: 0.5rem;
 }
 
 /* ============================================
