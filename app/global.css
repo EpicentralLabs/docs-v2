@@ -3,13 +3,14 @@
 
 /* ============================================
    Epicentral Labs Custom Theme
-   Modern minimalistic dark theme with blue accents
+   Modern minimalistic theme with blue accents
    Primary Color: #4a85ff (preserved)
+   Supports both Light and Dark modes
    ============================================ */
 
 /* Theme color variables for Tailwind CSS v4 */
 @theme {
-  /* Light mode colors (rarely used, but defined for completeness) */
+  /* Light mode colors */
   --color-fd-background: hsl(0, 0%, 98%);
   --color-fd-foreground: hsl(220, 15%, 10%);
   --color-fd-muted: hsl(220, 10%, 94%);
@@ -60,11 +61,13 @@
   --fd-primary: #4a85ff;
   --fd-primary-foreground: #ffffff;
   
-  /* Adaptive layout width */
-  --fd-layout-width: clamp(800px, calc(100vw - 320px), 1400px);
-  
-  /* Sidebar width optimization */
+  /* Full-width layout: content spans between sidebar and TOC */
+  --fd-toc-width: 286px;
   --fd-sidebar-width: 260px;
+  --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
+  
+  /* Adaptive layout width */
+  --fd-layout-width: calc(100vw - 2rem);
 }
 
 /* Typography improvements */
@@ -74,8 +77,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Improved prose typography for content */
+/* ============================================
+   Light Mode Prose Typography
+   ============================================ */
 .prose {
+  --tw-prose-body: hsl(220, 15%, 25%);
+  --tw-prose-headings: hsl(220, 20%, 10%);
+  --tw-prose-lead: hsl(220, 10%, 35%);
+  --tw-prose-links: #4a85ff;
+  --tw-prose-bold: hsl(220, 20%, 15%);
+  --tw-prose-counters: hsl(220, 10%, 40%);
+  --tw-prose-bullets: hsl(220, 10%, 50%);
+  --tw-prose-hr: hsla(220, 15%, 80%, 0.5);
+  --tw-prose-quotes: hsl(220, 15%, 20%);
+  --tw-prose-quote-borders: #4a85ff;
+  --tw-prose-captions: hsl(220, 10%, 45%);
+  --tw-prose-code: hsl(220, 20%, 15%);
+  --tw-prose-pre-code: hsl(220, 15%, 25%);
+  --tw-prose-pre-bg: hsl(220, 10%, 96%);
+  --tw-prose-th-borders: hsla(220, 15%, 80%, 0.6);
+  --tw-prose-td-borders: hsla(220, 15%, 80%, 0.4);
+  
+  line-height: 1.7;
+  letter-spacing: -0.003em;
+}
+
+/* Dark Mode Prose Typography */
+.dark .prose {
   --tw-prose-body: hsl(0, 0%, 85%);
   --tw-prose-headings: hsl(0, 0%, 98%);
   --tw-prose-lead: hsl(0, 0%, 75%);
@@ -92,9 +120,6 @@ body {
   --tw-prose-pre-bg: hsl(220, 8%, 8%);
   --tw-prose-th-borders: hsla(220, 30%, 25%, 0.4);
   --tw-prose-td-borders: hsla(220, 30%, 25%, 0.25);
-  
-  line-height: 1.7;
-  letter-spacing: -0.003em;
 }
 
 .prose h1,
@@ -123,10 +148,16 @@ body {
   margin-bottom: 0.375em;
 }
 
-/* Code blocks */
+/* ============================================
+   Light Mode Code Blocks
+   ============================================ */
 .prose pre {
-  border: 1px solid hsla(220, 30%, 25%, 0.25);
+  border: 1px solid hsla(220, 15%, 80%, 0.5);
   border-radius: 0.5rem;
+}
+
+.dark .prose pre {
+  border: 1px solid hsla(220, 30%, 25%, 0.25);
 }
 
 .prose code {
@@ -134,25 +165,47 @@ body {
   font-weight: 500;
 }
 
+/* Light mode inline code */
 .prose :not(pre) > code {
-  background: hsla(220, 80%, 55%, 0.1);
-  border: 1px solid hsla(220, 30%, 25%, 0.25);
+  background: hsla(220, 60%, 90%, 0.5);
+  border: 1px solid hsla(220, 15%, 80%, 0.5);
   border-radius: 0.25rem;
   padding: 0.125rem 0.375rem;
+  color: hsl(220, 80%, 45%);
+}
+
+/* Dark mode inline code */
+.dark .prose :not(pre) > code {
+  background: hsla(220, 80%, 55%, 0.1);
+  border: 1px solid hsla(220, 30%, 25%, 0.25);
   color: #7eb0ff;
 }
 
-/* Sidebar styling improvements */
+/* ============================================
+   Light Mode Sidebar
+   ============================================ */
 #nd-sidebar {
+  background: hsl(0, 0%, 99%);
+  border-color: hsla(220, 15%, 80%, 0.4);
+}
+
+#nd-sidebar-mobile {
+  background: hsl(0, 0%, 99%);
+}
+
+/* Dark mode Sidebar */
+.dark #nd-sidebar {
   background: hsl(220, 8%, 5%);
   border-color: hsla(220, 30%, 25%, 0.2);
 }
 
-#nd-sidebar-mobile {
+.dark #nd-sidebar-mobile {
   background: hsl(220, 8%, 5%);
 }
 
-/* Subtle scrollbar styling */
+/* ============================================
+   Light Mode Scrollbar
+   ============================================ */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -163,40 +216,80 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsla(220, 30%, 40%, 0.3);
+  background: hsla(220, 15%, 70%, 0.4);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: hsla(220, 15%, 60%, 0.5);
+}
+
+/* Dark mode Scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: hsla(220, 30%, 40%, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: hsla(220, 30%, 50%, 0.4);
 }
 
-/* Navbar styling */
+/* ============================================
+   Light Mode Navbar
+   ============================================ */
 header[id="nd-nav"] {
-  background: hsla(0, 0%, 4%, 0.85);
+  background: hsla(0, 0%, 100%, 0.85);
   backdrop-filter: blur(12px);
+  border-bottom: 1px solid hsla(220, 15%, 80%, 0.3);
+}
+
+/* Dark mode Navbar */
+.dark header[id="nd-nav"] {
+  background: hsla(0, 0%, 4%, 0.85);
   border-bottom: 1px solid hsla(220, 30%, 25%, 0.15);
 }
 
-/* Search styling */
+/* ============================================
+   Light Mode Search Dialog
+   ============================================ */
 [data-search-dialog] {
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsla(220, 15%, 80%, 0.5);
+}
+
+/* Dark mode Search Dialog */
+.dark [data-search-dialog] {
   background: hsl(220, 8%, 6%);
   border: 1px solid hsla(220, 30%, 25%, 0.3);
 }
 
-/* Card styling improvements */
+/* ============================================
+   Light Mode Cards
+   ============================================ */
 [data-card] {
-  background: hsl(220, 8%, 6%);
-  border-color: hsla(220, 30%, 25%, 0.2);
+  background: hsl(0, 0%, 100%);
+  border-color: hsla(220, 15%, 80%, 0.4);
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 [data-card]:hover {
+  border-color: hsla(220, 100%, 64%, 0.4);
+  background: hsl(220, 20%, 98%);
+}
+
+/* Dark mode Cards */
+.dark [data-card] {
+  background: hsl(220, 8%, 6%);
+  border-color: hsla(220, 30%, 25%, 0.2);
+}
+
+.dark [data-card]:hover {
   border-color: hsla(220, 100%, 64%, 0.3);
   background: hsl(220, 8%, 7%);
 }
 
-/* Focus states with blue accent */
+/* ============================================
+   Focus States
+   ============================================ */
 *:focus-visible {
   outline: 2px solid #4a85ff;
   outline-offset: 2px;
@@ -251,12 +344,13 @@ header[id="nd-nav"] {
 }
 
 /* ============================================
-   Responsive adjustments
+   Responsive Adjustments
    ============================================ */
 
 @media (max-width: 768px) {
   :root {
     --fd-layout-width: 100%;
+    --fd-page-width: 100%;
   }
   
   .prose h1 { font-size: 1.75rem; }
@@ -266,12 +360,21 @@ header[id="nd-nav"] {
 
 @media (min-width: 769px) and (max-width: 1024px) {
   :root {
-    --fd-layout-width: min(800px, calc(100vw - 280px));
+    --fd-layout-width: calc(100vw - 2rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 3rem);
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (max-width: 1279px) {
   :root {
-    --fd-layout-width: clamp(900px, calc(100vw - 340px), 1300px);
+    --fd-layout-width: calc(100vw - 2rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 3rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --fd-layout-width: calc(100vw - 2rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
   }
 }
