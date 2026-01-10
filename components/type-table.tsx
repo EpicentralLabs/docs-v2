@@ -114,7 +114,7 @@ function Item({
           {!required && '?'}
         </code>
         {typeDescriptionLink ? (
-          <Link href={typeDescriptionLink} className="underline @max-xl:hidden">
+          <Link href={typeDescriptionLink} className="@max-xl:hidden">
             {type}
           </Link>
         ) : (

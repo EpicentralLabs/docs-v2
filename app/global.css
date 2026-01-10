@@ -182,6 +182,27 @@ body {
 }
 
 /* ============================================
+   Remove underlines from all hyperlinks
+   ============================================ */
+.prose a,
+.prose a:hover,
+.prose a:visited,
+.prose a:focus {
+  text-decoration: none !important;
+}
+
+/* Remove underlines from links site-wide */
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none;
+}
+
+/* ============================================
    Light Mode Sidebar
    ============================================ */
 #nd-sidebar {
@@ -316,6 +337,47 @@ header[id="nd-nav"] {
   }
 }
 
+/* Callout icons color - Light mode */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
+  color: #4a85ff !important;
+}
+
+/* Text/path inside (the "i") blue - fill with blue */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg text,
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg path,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg text,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg path {
+  fill: #4a85ff !important;
+  stroke: none !important;
+  color: #4a85ff !important;
+}
+
+/* Circle stroke blue, fill transparent (no fill) */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg circle,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg circle {
+  fill: none !important;
+  stroke: #4a85ff !important;
+}
+
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
+    color: #4a85ff !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg text,
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg path {
+    fill: #4a85ff !important;
+    stroke: none !important;
+    color: #4a85ff !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg circle {
+    fill: none !important;
+    stroke: #4a85ff !important;
+  }
+}
+
 /* Dark mode Callouts (Popout Cards) */
 .dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
 .dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
@@ -329,6 +391,47 @@ header[id="nd-nav"] {
     background: hsl(220, 8%, 10%) !important;
     border-color: hsla(220, 100%, 64%, 0.3) !important;
     box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
+  }
+}
+
+/* Dark mode callout icons color */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
+  color: #4a85ff !important;
+}
+
+/* Text/path inside (the "i") blue - fill with blue */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg text,
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg path,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg text,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg path {
+  fill: #4a85ff !important;
+  stroke: none !important;
+  color: #4a85ff !important;
+}
+
+/* Circle stroke blue, fill transparent (no fill) */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg circle,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg circle {
+  fill: none !important;
+  stroke: #4a85ff !important;
+}
+
+@supports selector(:has(*)) {
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
+    color: #4a85ff !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg text,
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg path {
+    fill: #4a85ff !important;
+    stroke: none !important;
+    color: #4a85ff !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg circle {
+    fill: none !important;
+    stroke: #4a85ff !important;
   }
 }
 
