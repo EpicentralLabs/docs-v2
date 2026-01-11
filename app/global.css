@@ -1,12 +1,542 @@
 @import 'tailwindcss';
-@import 'fumadocs-ui/css/solar.css';
 @import 'fumadocs-ui/css/preset.css';
 
-/* Custom accent color for selected items */
+/* ============================================
+   Epicentral Labs Custom Theme
+   Modern minimalistic theme with blue accents
+   Primary Color: #4a85ff (preserved)
+   Supports both Light and Dark modes
+   ============================================ */
+
+/* Theme color variables for Tailwind CSS v4 */
+@theme {
+  /* Light mode colors */
+  --color-fd-background: hsl(0, 0%, 98%);
+  --color-fd-foreground: hsl(220, 15%, 10%);
+  --color-fd-muted: hsl(220, 10%, 94%);
+  --color-fd-muted-foreground: hsl(220, 10%, 40%);
+  --color-fd-popover: hsl(0, 0%, 100%);
+  --color-fd-popover-foreground: hsl(220, 15%, 15%);
+  --color-fd-card: hsl(220, 10%, 96%);
+  --color-fd-card-foreground: hsl(220, 15%, 10%);
+  --color-fd-border: hsla(220, 15%, 80%, 0.5);
+  --color-fd-primary: hsl(220, 100%, 64%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-secondary: hsl(220, 10%, 92%);
+  --color-fd-secondary-foreground: hsl(220, 15%, 10%);
+  --color-fd-accent: hsla(220, 60%, 90%, 0.5);
+  --color-fd-accent-foreground: hsl(220, 15%, 10%);
+  --color-fd-ring: hsl(220, 100%, 64%);
+  
+  /* Diff colors for code blocks */
+  --color-fd-diff-remove: hsla(0, 80%, 55%, 0.16);
+  --color-fd-diff-add: hsla(140, 80%, 45%, 0.16);
+  --color-fd-diff-remove-symbol: hsl(0, 65%, 55%);
+  --color-fd-diff-add-symbol: hsl(140, 65%, 45%);
+}
+
+/* Dark mode - Primary theme */
+.dark {
+  --color-fd-background: hsl(0, 0%, 4%);
+  --color-fd-foreground: hsl(0, 0%, 95%);
+  --color-fd-muted: hsl(220, 8%, 10%);
+  --color-fd-muted-foreground: hsla(0, 0%, 75%, 0.85);
+  --color-fd-popover: hsl(220, 8%, 7%);
+  --color-fd-popover-foreground: hsl(0, 0%, 90%);
+  --color-fd-card: hsl(220, 8%, 6%);
+  --color-fd-card-foreground: hsl(0, 0%, 95%);
+  --color-fd-border: hsla(220, 30%, 25%, 0.25);
+  --color-fd-primary: hsl(220, 100%, 64%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-secondary: hsl(220, 8%, 12%);
+  --color-fd-secondary-foreground: hsl(0, 0%, 92%);
+  --color-fd-accent: hsla(220, 80%, 55%, 0.12);
+  --color-fd-accent-foreground: hsl(0, 0%, 92%);
+  --color-fd-ring: hsl(220, 100%, 64%);
+}
+
+/* Layout customization */
 :root {
+  /* Preserve primary color */
   --fd-primary: #4a85ff;
   --fd-primary-foreground: #ffffff;
+  
+  /* Full-width layout: content spans between sidebar and TOC */
+  --fd-toc-width: 286px;
+  --fd-sidebar-width: 260px;
+  --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
+  
+  /* Adaptive layout width */
+  --fd-layout-width: calc(100vw - 2rem);
 }
+
+/* Typography improvements */
+body {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Light Mode Prose Typography
+   ============================================ */
+.prose {
+  --tw-prose-body: hsl(220, 15%, 25%);
+  --tw-prose-headings: hsl(220, 20%, 10%);
+  --tw-prose-lead: hsl(220, 10%, 35%);
+  --tw-prose-links: #4a85ff;
+  --tw-prose-bold: hsl(220, 20%, 15%);
+  --tw-prose-counters: hsl(220, 10%, 40%);
+  --tw-prose-bullets: hsl(220, 10%, 50%);
+  --tw-prose-hr: hsla(220, 15%, 80%, 0.5);
+  --tw-prose-quotes: hsl(220, 15%, 20%);
+  --tw-prose-quote-borders: #4a85ff;
+  --tw-prose-captions: hsl(220, 10%, 45%);
+  --tw-prose-code: hsl(220, 20%, 15%);
+  --tw-prose-pre-code: hsl(220, 15%, 25%);
+  --tw-prose-pre-bg: hsl(220, 10%, 96%);
+  --tw-prose-th-borders: hsla(220, 15%, 80%, 0.6);
+  --tw-prose-td-borders: hsla(220, 15%, 80%, 0.4);
+  
+  line-height: 1.7;
+  letter-spacing: -0.003em;
+}
+
+/* Dark Mode Prose Typography */
+.dark .prose {
+  --tw-prose-body: hsl(0, 0%, 85%);
+  --tw-prose-headings: hsl(0, 0%, 98%);
+  --tw-prose-lead: hsl(0, 0%, 75%);
+  --tw-prose-links: #4a85ff;
+  --tw-prose-bold: hsl(0, 0%, 95%);
+  --tw-prose-counters: hsl(0, 0%, 65%);
+  --tw-prose-bullets: hsl(0, 0%, 50%);
+  --tw-prose-hr: hsla(220, 30%, 25%, 0.3);
+  --tw-prose-quotes: hsl(0, 0%, 90%);
+  --tw-prose-quote-borders: #4a85ff;
+  --tw-prose-captions: hsl(0, 0%, 65%);
+  --tw-prose-code: hsl(0, 0%, 95%);
+  --tw-prose-pre-code: hsl(0, 0%, 90%);
+  --tw-prose-pre-bg: hsl(220, 8%, 8%);
+  --tw-prose-th-borders: hsla(220, 30%, 25%, 0.4);
+  --tw-prose-td-borders: hsla(220, 30%, 25%, 0.25);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.prose h1 { font-size: 2rem; margin-top: 0; }
+.prose h2 { font-size: 1.5rem; margin-top: 2em; }
+.prose h3 { font-size: 1.25rem; margin-top: 1.75em; }
+.prose h4 { font-size: 1.125rem; margin-top: 1.5em; }
+
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-top: 0.375em;
+  margin-bottom: 0.375em;
+}
+
+/* ============================================
+   Light Mode Code Blocks
+   ============================================ */
+.prose pre {
+  border: 1px solid hsla(220, 15%, 80%, 0.5);
+  border-radius: 0.5rem;
+}
+
+.dark .prose pre {
+  border: 1px solid hsla(220, 30%, 25%, 0.25);
+}
+
+.prose code {
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+/* Light mode inline code */
+.prose :not(pre) > code {
+  background: hsla(220, 60%, 90%, 0.5);
+  border: 1px solid hsla(220, 15%, 80%, 0.5);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  color: hsl(220, 80%, 45%);
+}
+
+/* Dark mode inline code */
+.dark .prose :not(pre) > code {
+  background: hsla(220, 80%, 55%, 0.1);
+  border: 1px solid hsla(220, 30%, 25%, 0.25);
+  color: #7eb0ff;
+}
+
+/* ============================================
+   Remove underlines from all hyperlinks
+   ============================================ */
+.prose a,
+.prose a:hover,
+.prose a:visited,
+.prose a:focus {
+  text-decoration: none !important;
+}
+
+/* Remove underlines from links site-wide */
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none;
+}
+
+/* ============================================
+   Light Mode Sidebar
+   ============================================ */
+#nd-sidebar {
+  background: hsl(0, 0%, 99%);
+  border-color: hsla(220, 15%, 80%, 0.4);
+}
+
+#nd-sidebar-mobile {
+  background: hsl(0, 0%, 99%);
+}
+
+/* Dark mode Sidebar */
+.dark #nd-sidebar {
+  background: hsl(220, 8%, 5%);
+  border-color: hsla(220, 30%, 25%, 0.2);
+}
+
+.dark #nd-sidebar-mobile {
+  background: hsl(220, 8%, 5%);
+}
+
+/* ============================================
+   Light Mode Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(220, 15%, 70%, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(220, 15%, 60%, 0.5);
+}
+
+/* Dark mode Scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: hsla(220, 30%, 40%, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsla(220, 30%, 50%, 0.4);
+}
+
+/* ============================================
+   Light Mode Navbar
+   ============================================ */
+header[id="nd-nav"] {
+  background: hsla(0, 0%, 100%, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid hsla(220, 15%, 80%, 0.3);
+}
+
+/* Dark mode Navbar */
+.dark header[id="nd-nav"] {
+  background: hsla(0, 0%, 4%, 0.85);
+  border-bottom: 1px solid hsla(220, 30%, 25%, 0.15);
+}
+
+/* ============================================
+   Light Mode Search Dialog
+   ============================================ */
+[data-search-dialog] {
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsla(220, 15%, 80%, 0.5);
+}
+
+/* Dark mode Search Dialog */
+.dark [data-search-dialog] {
+  background: hsl(220, 8%, 6%);
+  border: 1px solid hsla(220, 30%, 25%, 0.3);
+}
+
+/* ============================================
+   Light Mode Cards
+   ============================================ */
+[data-card] {
+  background: hsl(0, 0%, 100%);
+  border-color: hsla(220, 15%, 80%, 0.4);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+[data-card]:hover {
+  border-color: hsla(220, 100%, 64%, 0.4);
+  background: hsl(220, 20%, 98%);
+}
+
+/* Reduce spacing between icon and title in cards */
+[data-card] > div:first-child {
+  margin-bottom: 0.25rem !important;
+}
+
+[data-card] h3 {
+  margin-top: 0 !important;
+}
+
+/* Dark mode Cards */
+.dark [data-card] {
+  background: hsl(220, 8%, 6%);
+  border-color: hsla(220, 30%, 25%, 0.2);
+}
+
+.dark [data-card]:hover {
+  border-color: hsla(220, 100%, 64%, 0.3);
+  background: hsl(220, 8%, 7%);
+}
+
+/* ============================================
+   Light Mode Callouts (Popout Cards)
+   ============================================ */
+/* Target callout containers - callouts have a specific structure with flex layout, gap, rounded corners, border, and padding */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
+  background: hsl(0, 0%, 100%) !important;
+  border-color: hsla(220, 100%, 64%, 0.25) !important;
+  box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
+}
+
+/* Compact spacing between header and body text in callouts */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3,
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 {
+  margin-bottom: 0.5em !important;
+  margin-top: 0 !important;
+}
+
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0 !important;
+}
+
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3 + p,
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4 + p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3 + p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 + p {
+  margin-top: 0.5em !important;
+}
+
+/* Modern browsers: Target callouts by structure with colored indicator bar (most reliable) */
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) {
+    background: hsl(0, 0%, 100%) !important;
+    border-color: hsla(220, 100%, 64%, 0.25) !important;
+    box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
+  }
+  
+  /* Compact spacing for modern browser selector */
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h3,
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 {
+    margin-bottom: 0.5em !important;
+    margin-top: 0 !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
+    margin-top: 0.5em !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h3 + p,
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 + p {
+    margin-top: 0.5em !important;
+  }
+}
+
+/* Callout icons color - Light mode */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
+  color: #4a85ff !important;
+}
+
+/* Text/path inside (the "i") blue - fill with blue */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg text,
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg path,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg text,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg path {
+  fill: #4a85ff !important;
+  stroke: none !important;
+  color: #4a85ff !important;
+}
+
+/* Circle stroke blue, fill transparent (no fill) */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg circle,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg circle {
+  fill: none !important;
+  stroke: #4a85ff !important;
+}
+
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
+    color: #4a85ff !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg text,
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg path {
+    fill: #4a85ff !important;
+    stroke: none !important;
+    color: #4a85ff !important;
+  }
+  
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg circle {
+    fill: none !important;
+    stroke: #4a85ff !important;
+  }
+}
+
+/* Dark mode Callouts (Popout Cards) */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
+  background: hsl(220, 8%, 10%) !important;
+  border-color: hsla(220, 100%, 64%, 0.3) !important;
+  box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
+}
+
+/* Compact spacing between header and body text in dark mode callouts */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3,
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 {
+  margin-bottom: 0.5em !important;
+  margin-top: 0 !important;
+}
+
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0 !important;
+}
+
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3 + p,
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4 + p,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3 + p,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 + p {
+  margin-top: 0.5em !important;
+}
+
+@supports selector(:has(*)) {
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) {
+    background: hsl(220, 8%, 10%) !important;
+    border-color: hsla(220, 100%, 64%, 0.3) !important;
+    box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
+  }
+  
+  /* Compact spacing for dark mode modern browser selector */
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h3,
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 {
+    margin-bottom: 0.5em !important;
+    margin-top: 0 !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
+    margin-top: 0.5em !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h3 + p,
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 + p {
+    margin-top: 0.5em !important;
+  }
+}
+
+/* Dark mode callout icons color */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
+  color: #4a85ff !important;
+}
+
+/* Text/path inside (the "i") blue - fill with blue */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg text,
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg path,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg text,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg path {
+  fill: #4a85ff !important;
+  stroke: none !important;
+  color: #4a85ff !important;
+}
+
+/* Circle stroke blue, fill transparent (no fill) */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg circle,
+.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg circle {
+  fill: none !important;
+  stroke: #4a85ff !important;
+}
+
+@supports selector(:has(*)) {
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
+    color: #4a85ff !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg text,
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg path {
+    fill: #4a85ff !important;
+    stroke: none !important;
+    color: #4a85ff !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg circle {
+    fill: none !important;
+    stroke: #4a85ff !important;
+  }
+}
+
+/* ============================================
+   Focus States
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid #4a85ff;
+  outline-offset: 2px;
+}
+
+/* Search dialog input focus with rounded corners */
+[data-search-dialog] input:focus-visible,
+[data-search-dialog] textarea:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #4a85ff;
+}
+
+/* Ensure search input has rounded corners to match the focus border */
+[data-search-dialog] input,
+[data-search-dialog] textarea {
+  border-radius: 0.5rem;
+}
+
+/* ============================================
+   Preserved Animations
+   ============================================ */
 
 @keyframes shine {
   0% {
@@ -49,5 +579,163 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+/* Mobile styles (< 640px) */
+@media (max-width: 639px) {
+  :root {
+    --fd-layout-width: 100%;
+    --fd-page-width: 100%;
+    --fd-toc-width: 0px;
+    --fd-sidebar-width: 0px;
+  }
+  
+  .prose {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+  
+  .prose h1 { font-size: 1.5rem; margin-top: 0; }
+  .prose h2 { font-size: 1.25rem; margin-top: 1.75em; }
+  .prose h3 { font-size: 1.125rem; margin-top: 1.5em; }
+  .prose h4 { font-size: 1rem; margin-top: 1.25em; }
+  
+  .prose p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .prose li {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+  
+  /* Ensure images don't overflow */
+  .prose img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Better spacing for mobile code blocks */
+  .prose pre {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    padding: 1rem;
+  }
+  
+  /* Mobile callout adjustments */
+  .prose > div.flex[class*="rounded-xl"],
+  .prose > div[class*="rounded-xl"] {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/* Small mobile to tablet transition (640px - 768px) */
+@media (min-width: 640px) and (max-width: 768px) {
+  :root {
+    --fd-layout-width: 100%;
+    --fd-page-width: 100%;
+    --fd-toc-width: 0px;
+  }
+  
+  .prose h1 { font-size: 1.75rem; }
+  .prose h2 { font-size: 1.375rem; }
+  .prose h3 { font-size: 1.125rem; }
+}
+
+/* Tablet styles (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --fd-layout-width: calc(100vw - 2rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 3rem);
+  }
+}
+
+/* Small desktop (1025px - 1279px) */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  :root {
+    --fd-layout-width: calc(100vw - 2rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 3rem);
+  }
+}
+
+/* Large desktop (1280px+) */
+@media (min-width: 1280px) {
+  :root {
+    --fd-layout-width: calc(100vw - 2rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
+  }
+}
+
+/* ============================================
+   Desktop table styling
+   ============================================ */
+
+/* Ensure tables display properly on desktop */
+@media (min-width: 769px) {
+  .prose table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Handle long addresses and text in table cells */
+  .prose table td,
+  .prose table th {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Allow horizontal scrolling only if table is wider than container */
+  .prose table {
+    table-layout: auto;
+  }
+  
+  /* Wrap table in scrollable container if needed */
+  .prose > :is(div, figure):has(table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ============================================
+   Mobile-specific utilities
+   ============================================ */
+
+/* Smooth scrolling for mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Ensure tables are scrollable on mobile */
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  
+  /* Better touch targets for links */
+  .prose a {
+    padding: 0.125rem 0;
+  }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  #nd-page {
+    overflow-x: hidden;
   }
 }

@@ -60,7 +60,7 @@ export function PageArticle(props: ComponentProps<'article'>) {
     <article
       {...props}
       className={cn(
-        'flex min-w-0 w-full flex-col gap-4 pt-8 px-4 md:px-6 md:mx-auto',
+        'flex min-w-0 w-full flex-col gap-3 sm:gap-4 pt-6 sm:pt-8 px-4 sm:px-5 md:px-6 md:mx-auto pb-8',
         props.className,
       )}
     >
@@ -79,7 +79,7 @@ export function PageRoot({ toc = false, children, ...props }: RootProps) {
       id="nd-page"
       {...props}
       className={cn(
-        'flex flex-1 w-full mx-auto max-w-(--fd-page-width) pt-(--fd-tocnav-height) pe-(--fd-toc-width)',
+        'flex flex-1 w-full mx-auto max-w-(--fd-page-width) pt-(--fd-tocnav-height) md:pe-(--fd-toc-width)',
         props.className,
       )}
     >

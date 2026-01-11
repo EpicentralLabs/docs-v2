@@ -1,12 +1,14 @@
 {
   "title": "Documentation",
-  "children": [
+  "pages": [
     "introduction",
+    "---Ecosystem---",
     "epicentral-dao",
     "tokens",
+    "---Products---",
     "staking-lab",
     "opx",
+    "---Reference---",
     "legal"
   ]
 }
-

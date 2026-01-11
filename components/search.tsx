@@ -380,13 +380,13 @@ export function AISearchTrigger() {
       </Presence>
       <button
         className={cn(
-          'fixed flex items-center bottom-4 bg-fd-secondary px-2 gap-3 w-24 h-10 text-sm font-medium text-fd-muted-foreground rounded-2xl border shadow-lg z-20 transition-[translate,opacity]',
-          'end-[calc(var(--removed-body-scroll-bar-size,0px)+var(--fd-layout-offset)+1rem)]',
+          'fixed flex items-center bottom-4 bg-fd-secondary px-3 gap-2.5 min-w-[100px] h-11 sm:h-10 text-sm font-medium text-fd-muted-foreground rounded-2xl border shadow-lg z-20 transition-[translate,opacity]',
+          'end-[calc(var(--removed-body-scroll-bar-size,0px)+var(--fd-layout-offset)+1rem)] max-sm:end-4',
           open && 'translate-y-10 opacity-0',
         )}
         onClick={() => setOpen(true)}
       >
-        <MessageCircleIcon className="size-4.5" />
+        <MessageCircleIcon className="size-5 sm:size-4.5" />
         Ask AI
       </button>
     </Context>

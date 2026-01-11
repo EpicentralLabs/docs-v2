@@ -1,8 +1,9 @@
 {
-    "title": "Staking Lab",
-    "description": "Stake LABS. Mint xLABS.",
-    "children": [
-        "user-guide",
-        "staking-program"
-    ]
+  "title": "Staking Lab",
+  "description": "Stake LABS. Mint xLABS.",
+  "icon": "Layers",
+  "pages": [
+    "user-guide",
+    "staking-program"
+  ]
 }

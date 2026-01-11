@@ -59,9 +59,9 @@ const fieldVariants = cva('text-fd-muted-foreground not-prose pe-2');
 
 export function TypeTable({ type }: { type: Record<string, TypeNode> }) {
   return (
-    <div className="@container flex flex-col p-1 bg-fd-card text-fd-card-foreground rounded-2xl border my-6 text-sm overflow-hidden">
+    <div className="@container flex flex-col p-1 bg-fd-card text-fd-card-foreground rounded-2xl border my-6 text-sm overflow-hidden -mx-1 sm:mx-0">
       <div className="flex font-medium items-center px-3 py-1 not-prose text-fd-muted-foreground">
-        <p className="w-[25%]">Prop</p>
+        <p className="w-[40%] sm:w-[25%]">Prop</p>
         <p className="@max-xl:hidden">Type</p>
       </div>
       {Object.entries(type).map(([key, value]) => (
@@ -101,12 +101,12 @@ function Item({
           : 'border-transparent',
       )}
     >
-      <CollapsibleTrigger className="relative flex flex-row items-center w-full group text-start px-3 py-2 not-prose hover:bg-fd-accent">
+      <CollapsibleTrigger className="relative flex flex-row items-center w-full group text-start px-3 py-3 sm:py-2 not-prose hover:bg-fd-accent min-h-[44px]">
         <code
           className={cn(
             keyVariants({
               deprecated,
-              className: 'min-w-fit w-[25%] font-medium pe-2',
+              className: 'min-w-fit w-[40%] sm:w-[25%] font-medium pe-2 text-xs sm:text-sm break-all',
             }),
           )}
         >
@@ -114,7 +114,7 @@ function Item({
           {!required && '?'}
         </code>
         {typeDescriptionLink ? (
-          <Link href={typeDescriptionLink} className="underline @max-xl:hidden">
+          <Link href={typeDescriptionLink} className="@max-xl:hidden">
             {type}
           </Link>
         ) : (
@@ -123,7 +123,7 @@ function Item({
         <ChevronDown className="absolute end-2 size-4 text-fd-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="grid grid-cols-[1fr_3fr] gap-y-4 text-sm p-3 overflow-auto fd-scroll-container border-t">
+        <div className="grid grid-cols-1 sm:grid-cols-[1fr_3fr] gap-y-2 sm:gap-y-4 text-sm p-3 overflow-auto fd-scroll-container border-t">
           <div className="text-sm prose col-span-full prose-no-margin empty:hidden">
             {description}
           </div>

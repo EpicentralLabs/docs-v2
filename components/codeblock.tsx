@@ -137,7 +137,7 @@ export function CodeBlock({
         role="region"
         tabIndex={0}
         className={cn(
-          'text-[13px] py-3.5 overflow-auto max-h-[600px] fd-scroll-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fd-ring',
+          'text-[12px] sm:text-[13px] py-3 sm:py-3.5 overflow-auto max-h-[400px] sm:max-h-[600px] fd-scroll-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fd-ring -webkit-overflow-scrolling-touch',
           viewportProps.className,
         )}
         style={
@@ -183,7 +183,7 @@ function CopyButton({
       className={cn(
         buttonVariants({
           className:
-            'hover:text-fd-accent-foreground data-checked:text-fd-accent-foreground',
+            'hover:text-fd-accent-foreground data-checked:text-fd-accent-foreground min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0',
           size: 'icon-xs',
         }),
         className,

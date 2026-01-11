@@ -219,7 +219,18 @@ export function EditOnGitHub(props: ComponentProps<'a'>) {
  */
 export const DocsBody = forwardRef<HTMLDivElement, ComponentProps<'div'>>(
   (props, ref) => (
-    <div ref={ref} {...props} className={cn('prose flex-1', props.className)}>
+    <div 
+      ref={ref} 
+      {...props} 
+      className={cn(
+        'prose flex-1 max-w-none',
+        'prose-headings:scroll-mt-20',
+        'prose-p:leading-relaxed',
+        'prose-li:leading-relaxed',
+        'prose-code:before:content-none prose-code:after:content-none',
+        props.className
+      )}
+    >
       {props.children}
     </div>
   ),
@@ -238,7 +249,10 @@ export const DocsDescription = forwardRef<
     <p
       ref={ref}
       {...props}
-      className={cn('mb-8 text-lg text-fd-muted-foreground', props.className)}
+      className={cn(
+        'mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed text-fd-muted-foreground',
+        props.className
+      )}
     >
       {props.children}
     </p>
@@ -253,7 +267,10 @@ export const DocsTitle = forwardRef<HTMLHeadingElement, ComponentProps<'h1'>>(
       <h1
         ref={ref}
         {...props}
-        className={cn('text-[1.75em] font-semibold', props.className)}
+        className={cn(
+          'text-[1.5rem] sm:text-[1.625rem] md:text-[1.875rem] font-semibold tracking-tight leading-tight',
+          props.className
+        )}
       >
         {props.children}
       </h1>

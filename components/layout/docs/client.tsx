@@ -39,7 +39,7 @@ export function LayoutBody(props: ComponentProps<'main'>) {
       id="nd-docs-layout"
       {...props}
       className={cn(
-        'flex flex-1 flex-col pt-(--fd-nav-height) transition-[padding] fd-default-layout',
+        'flex flex-1 flex-col pt-(--fd-nav-height) transition-[padding] duration-200 fd-default-layout',
         !collapsed && 'mx-(--fd-layout-offset)',
         props.className,
       )}
@@ -48,7 +48,9 @@ export function LayoutBody(props: ComponentProps<'main'>) {
         paddingInlineStart: collapsed
           ? 'min(calc(100vw - var(--fd-page-width)), var(--fd-sidebar-width))'
           : 'var(--fd-sidebar-width)',
-      }}
+        // Tighter content area
+        '--fd-layout-offset': 'max(0px, calc((100vw - var(--fd-layout-width) - var(--fd-sidebar-width)) / 2))',
+      } as React.CSSProperties}
     >
       {props.children}
     </main>
