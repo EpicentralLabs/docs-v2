@@ -64,10 +64,19 @@
   /* Full-width layout: content spans between sidebar and TOC */
   --fd-toc-width: 286px;
   --fd-sidebar-width: 260px;
-  --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
+  --fd-page-width: min(calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem), 1200px);
   
-  /* Adaptive layout width */
-  --fd-layout-width: calc(100vw - 2rem);
+  /* Adaptive layout width with max-width for 1920px standard monitors */
+  --fd-layout-width: min(calc(100vw - 2rem), 1920px);
+}
+
+/* Center content on large screens */
+@media (min-width: 1920px) {
+  body {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Typography improvements */
@@ -149,14 +158,56 @@ body {
 }
 
 /* ============================================
+   Ordered Lists and Numbered Steps
+   ============================================ */
+
+/* Ensure ordered list numbers are not cut off */
+.prose ol {
+  padding-left: 1.75em;
+  margin-left: 0;
+  list-style-position: outside;
+}
+
+.prose ol li {
+  padding-left: 0.5em;
+}
+
+/* Steps component styling */
+.fd-steps {
+  padding-left: 1.5em;
+  margin-left: 0;
+}
+
+.fd-step {
+  padding-left: 0.5em;
+}
+
+/* Ensure proper spacing for nested lists */
+.prose ol ol,
+.prose ul ol {
+  padding-left: 1.5em;
+}
+
+/* ============================================
    Light Mode Code Blocks
    ============================================ */
-.prose pre {
+
+/* Remove border from pre inside figure to avoid double border (box within box) */
+.prose figure.shiki pre,
+.prose figure[class*="shiki"] pre,
+.prose .not-prose pre,
+figure.shiki pre {
+  border: none;
+  border-radius: 0;
+}
+
+/* Keep border only on the outer figure element */
+.prose pre:not(figure pre):not(.shiki pre) {
   border: 1px solid hsla(220, 15%, 80%, 0.5);
   border-radius: 0.5rem;
 }
 
-.dark .prose pre {
+.dark .prose pre:not(figure pre):not(.shiki pre) {
   border: 1px solid hsla(220, 30%, 25%, 0.25);
 }
 
@@ -318,199 +369,117 @@ header[id="nd-nav"] {
 }
 
 /* ============================================
-   Light Mode Callouts (Popout Cards)
+   Callout Styling
    ============================================ */
-/* Target callout containers - callouts have a specific structure with flex layout, gap, rounded corners, border, and padding */
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
+
+/* Callout type colors */
+:root {
+  --callout-info: #4a85ff;
+  --callout-warning: hsl(38, 92%, 50%);
+  --callout-error: hsl(0, 84%, 60%);
+}
+
+/* Light Mode Callout Backgrounds */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"],
 .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
-  background: hsl(0, 0%, 100%) !important;
-  border-color: hsla(220, 100%, 64%, 0.25) !important;
-  box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
+  background: hsl(220, 10%, 96%);
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Compact spacing between header and body text in callouts */
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3,
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 {
-  margin-bottom: 0.5em !important;
-  margin-top: 0 !important;
-}
-
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
-  margin-top: 0.5em !important;
-  margin-bottom: 0 !important;
-}
-
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3 + p,
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4 + p,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3 + p,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 + p {
-  margin-top: 0.5em !important;
-}
-
-/* Modern browsers: Target callouts by structure with colored indicator bar (most reliable) */
 @supports selector(:has(*)) {
   .prose > div:has(> div[role="none"][class*="w-0.5"]) {
-    background: hsl(0, 0%, 100%) !important;
-    border-color: hsla(220, 100%, 64%, 0.25) !important;
-    box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.1), 0 1px 2px hsla(0, 0%, 0%, 0.06) !important;
-  }
-  
-  /* Compact spacing for modern browser selector */
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) h3,
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 {
-    margin-bottom: 0.5em !important;
-    margin-top: 0 !important;
-  }
-  
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
-    margin-top: 0.5em !important;
-    margin-bottom: 0 !important;
-  }
-  
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) h3 + p,
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 + p {
-    margin-top: 0.5em !important;
+    background: hsl(220, 10%, 96%);
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 }
 
-/* Callout icons color - Light mode */
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
-  color: #4a85ff !important;
-}
-
-/* Text/path inside (the "i") blue - fill with blue */
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg text,
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg path,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg text,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg path {
-  fill: #4a85ff !important;
-  stroke: none !important;
-  color: #4a85ff !important;
-}
-
-/* Circle stroke blue, fill transparent (no fill) */
-.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg circle,
-.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg circle {
-  fill: none !important;
-  stroke: #4a85ff !important;
-}
-
-@supports selector(:has(*)) {
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
-    color: #4a85ff !important;
-  }
-  
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg text,
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg path {
-    fill: #4a85ff !important;
-    stroke: none !important;
-    color: #4a85ff !important;
-  }
-  
-  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg circle {
-    fill: none !important;
-    stroke: #4a85ff !important;
-  }
-}
-
-/* Dark mode Callouts (Popout Cards) */
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"][class*="p-3"],
+/* Dark Mode Callout Backgrounds */
+.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"],
 .dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
-  background: hsl(220, 8%, 10%) !important;
-  border-color: hsla(220, 100%, 64%, 0.3) !important;
-  box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
-}
-
-/* Compact spacing between header and body text in dark mode callouts */
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3,
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 {
-  margin-bottom: 0.5em !important;
-  margin-top: 0 !important;
-}
-
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
-  margin-top: 0.5em !important;
-  margin-bottom: 0 !important;
-}
-
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h3 + p,
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] h4 + p,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h3 + p,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] h4 + p {
-  margin-top: 0.5em !important;
+  background: hsl(220, 8%, 10%);
 }
 
 @supports selector(:has(*)) {
   .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) {
-    background: hsl(220, 8%, 10%) !important;
-    border-color: hsla(220, 100%, 64%, 0.3) !important;
-    box-shadow: 0 1px 3px hsla(220, 100%, 64%, 0.15), 0 1px 2px hsla(0, 0%, 0%, 0.3) !important;
-  }
-  
-  /* Compact spacing for dark mode modern browser selector */
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h3,
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 {
-    margin-bottom: 0.5em !important;
-    margin-top: 0 !important;
-  }
-  
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
-    margin-top: 0.5em !important;
-    margin-bottom: 0 !important;
-  }
-  
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h3 + p,
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) h4 + p {
-    margin-top: 0.5em !important;
+    background: hsl(220, 8%, 10%);
   }
 }
 
-/* Dark mode callout icons color */
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
-  color: #4a85ff !important;
+/* Left border indicator - visible and colored */
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) > div[role="none"][class*="w-0.5"] {
+    background-color: var(--callout-info) !important;
+  }
+  
+  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) > div[role="none"][class*="w-0.5"] {
+    background-color: var(--callout-info) !important;
+  }
 }
 
-/* Text/path inside (the "i") blue - fill with blue */
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg text,
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg path,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg text,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg path {
-  fill: #4a85ff !important;
-  stroke: none !important;
-  color: #4a85ff !important;
-}
-
-/* Circle stroke blue, fill transparent (no fill) */
-.dark .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg circle,
-.dark .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg circle {
-  fill: none !important;
-  stroke: #4a85ff !important;
+/* Default callout icons (info type) - use primary blue */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] svg,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] svg {
+  color: var(--callout-info);
 }
 
 @supports selector(:has(*)) {
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
-    color: #4a85ff !important;
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) svg {
+    color: var(--callout-info);
+  }
+}
+
+/* Warning callout type styling */
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="bg-yellow"]) > div[role="none"],
+  .prose > div:has(> div[role="none"][class*="bg-orange"]) > div[role="none"] {
+    background-color: var(--callout-warning) !important;
   }
   
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg text,
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg path {
-    fill: #4a85ff !important;
-    stroke: none !important;
-    color: #4a85ff !important;
+  .prose > div:has(> div[role="none"][class*="bg-yellow"]) svg,
+  .prose > div:has(> div[role="none"][class*="bg-orange"]) svg {
+    color: var(--callout-warning);
+  }
+}
+
+/* Error/Critical callout type styling */
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="bg-red"]) > div[role="none"] {
+    background-color: var(--callout-error) !important;
   }
   
-  .dark .prose > div:has(> div[role="none"][class*="w-0.5"]) svg circle {
-    fill: none !important;
-    stroke: #4a85ff !important;
+  .prose > div:has(> div[role="none"][class*="bg-red"]) svg {
+    color: var(--callout-error);
   }
+}
+
+/* ============================================
+   Button and Dropdown Compact Spacing
+   ============================================ */
+
+/* Reduce button margins */
+button,
+[role="button"] {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Compact dropdown/select styling */
+select,
+[role="listbox"],
+[role="combobox"] {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Page action buttons (Edit on GitHub, Copy Markdown, Open) */
+.prose + div button,
+.prose + div [role="button"],
+article + div button,
+article + div [role="button"] {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
 }
 
 /* ============================================
@@ -628,14 +597,6 @@ header[id="nd-nav"] {
     border-radius: 0;
     padding: 1rem;
   }
-  
-  /* Mobile callout adjustments */
-  .prose > div.flex[class*="rounded-xl"],
-  .prose > div[class*="rounded-xl"] {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
-    border-radius: 0.5rem;
-  }
 }
 
 /* Small mobile to tablet transition (640px - 768px) */
@@ -670,8 +631,16 @@ header[id="nd-nav"] {
 /* Large desktop (1280px+) */
 @media (min-width: 1280px) {
   :root {
-    --fd-layout-width: calc(100vw - 2rem);
-    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
+    --fd-layout-width: min(calc(100vw - 2rem), 1920px);
+    --fd-page-width: min(calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem), 1200px);
+  }
+}
+
+/* Extra large desktop (1920px+) - ensure centered content */
+@media (min-width: 1920px) {
+  :root {
+    --fd-layout-width: 1920px;
+    --fd-page-width: 1200px;
   }
 }
 
