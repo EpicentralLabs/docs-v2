@@ -88,14 +88,14 @@ export const Accordion = forwardRef<
           data-accordion-value={value}
           className="not-prose flex flex-row items-center text-fd-card-foreground font-medium has-focus-visible:bg-fd-accent"
         >
-          <AccordionPrimitive.Trigger className="group flex flex-1 items-center gap-2 px-3 py-2.5 text-start focus-visible:outline-none">
+          <AccordionPrimitive.Trigger className="group flex flex-1 items-center gap-2 px-3 py-2 text-start focus-visible:outline-none">
             <ChevronRight className="size-4 shrink-0 text-fd-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-90" />
             {title}
           </AccordionPrimitive.Trigger>
           {id ? <CopyButton id={id} /> : null}
         </AccordionPrimitive.Header>
         <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-fd-accordion-up data-[state=open]:animate-fd-accordion-down">
-          <div className="px-4 pb-2 text-[15px] prose-no-margin">
+          <div className="px-3 pb-2 text-[15px] prose-no-margin">
             {children}
           </div>
         </AccordionPrimitive.Content>
