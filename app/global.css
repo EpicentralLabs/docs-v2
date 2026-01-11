@@ -454,6 +454,30 @@ header[id="nd-nav"] {
   }
 }
 
+/* Compact callout spacing - reduce margins between title and body */
+.prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
+.prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+@supports selector(:has(*)) {
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  /* Reduce spacing for first paragraph after title */
+  .prose > div:has(> div[role="none"][class*="w-0.5"]) p:first-of-type {
+    margin-top: 0.25em;
+  }
+  
+  .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p:first-of-type,
+  .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p:first-of-type {
+    margin-top: 0.25em;
+  }
+}
+
 /* ============================================
    Button and Dropdown Compact Spacing
    ============================================ */
