@@ -586,10 +586,64 @@ header[id="nd-nav"] {
    Responsive Adjustments
    ============================================ */
 
-@media (max-width: 768px) {
+/* Mobile styles (< 640px) */
+@media (max-width: 639px) {
   :root {
     --fd-layout-width: 100%;
     --fd-page-width: 100%;
+    --fd-toc-width: 0px;
+    --fd-sidebar-width: 0px;
+  }
+  
+  .prose {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+  
+  .prose h1 { font-size: 1.5rem; margin-top: 0; }
+  .prose h2 { font-size: 1.25rem; margin-top: 1.75em; }
+  .prose h3 { font-size: 1.125rem; margin-top: 1.5em; }
+  .prose h4 { font-size: 1rem; margin-top: 1.25em; }
+  
+  .prose p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .prose li {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+  
+  /* Ensure images don't overflow */
+  .prose img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Better spacing for mobile code blocks */
+  .prose pre {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    padding: 1rem;
+  }
+  
+  /* Mobile callout adjustments */
+  .prose > div.flex[class*="rounded-xl"],
+  .prose > div[class*="rounded-xl"] {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/* Small mobile to tablet transition (640px - 768px) */
+@media (min-width: 640px) and (max-width: 768px) {
+  :root {
+    --fd-layout-width: 100%;
+    --fd-page-width: 100%;
+    --fd-toc-width: 0px;
   }
   
   .prose h1 { font-size: 1.75rem; }
@@ -597,6 +651,7 @@ header[id="nd-nav"] {
   .prose h3 { font-size: 1.125rem; }
 }
 
+/* Tablet styles (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
   :root {
     --fd-layout-width: calc(100vw - 2rem);
@@ -604,6 +659,7 @@ header[id="nd-nav"] {
   }
 }
 
+/* Small desktop (1025px - 1279px) */
 @media (min-width: 1025px) and (max-width: 1279px) {
   :root {
     --fd-layout-width: calc(100vw - 2rem);
@@ -611,9 +667,75 @@ header[id="nd-nav"] {
   }
 }
 
+/* Large desktop (1280px+) */
 @media (min-width: 1280px) {
   :root {
     --fd-layout-width: calc(100vw - 2rem);
     --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem);
+  }
+}
+
+/* ============================================
+   Desktop table styling
+   ============================================ */
+
+/* Ensure tables display properly on desktop */
+@media (min-width: 769px) {
+  .prose table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Handle long addresses and text in table cells */
+  .prose table td,
+  .prose table th {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Allow horizontal scrolling only if table is wider than container */
+  .prose table {
+    table-layout: auto;
+  }
+  
+  /* Wrap table in scrollable container if needed */
+  .prose > :is(div, figure):has(table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ============================================
+   Mobile-specific utilities
+   ============================================ */
+
+/* Smooth scrolling for mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Ensure tables are scrollable on mobile */
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  
+  /* Better touch targets for links */
+  .prose a {
+    padding: 0.125rem 0;
+  }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  #nd-page {
+    overflow-x: hidden;
   }
 }

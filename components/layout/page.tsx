@@ -250,7 +250,7 @@ export const DocsDescription = forwardRef<
       ref={ref}
       {...props}
       className={cn(
-        'mb-6 text-base leading-relaxed text-fd-muted-foreground',
+        'mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed text-fd-muted-foreground',
         props.className
       )}
     >
@@ -268,7 +268,7 @@ export const DocsTitle = forwardRef<HTMLHeadingElement, ComponentProps<'h1'>>(
         ref={ref}
         {...props}
         className={cn(
-          'text-[1.875rem] font-semibold tracking-tight leading-tight',
+          'text-[1.5rem] sm:text-[1.625rem] md:text-[1.875rem] font-semibold tracking-tight leading-tight',
           props.className
         )}
       >

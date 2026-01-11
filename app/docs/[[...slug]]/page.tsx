@@ -46,7 +46,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6 mb-6">
+        <div className="flex flex-wrap gap-2 items-center border-b pt-2 pb-6 mb-6">
           <a
             href={`https://github.com/EpicentralLabs/docs-v2/blob/master/content/docs/${filePath}`}
             rel="noreferrer noopener"
@@ -55,13 +55,14 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
               buttonVariants({
                 color: 'secondary',
                 size: 'sm',
-                className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground',
+                className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground min-h-[44px] min-w-[44px]',
               }),
               'not-prose'
             )}
           >
             <Edit />
-            Edit on GitHub
+            <span className="hidden sm:inline">Edit on GitHub</span>
+            <span className="sm:hidden">Edit</span>
           </a>
           <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
           <ViewOptions
