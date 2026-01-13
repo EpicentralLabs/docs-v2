@@ -3,6 +3,7 @@ import type { MDXComponents } from 'mdx/types';
 import { CodeBlock, Pre } from '@/components/codeblock';
 import { Accordion, Accordions } from '@/components/accordion';
 import BlurText from '@/components/ui/blur-text';
+import { ChangelogBadge } from '@/components/ui/changelog-badge';
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -16,6 +17,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Accordion,
     Accordions,
     Blur: BlurText,
+    ChangelogBadge,
     ...components,
   };
 }
