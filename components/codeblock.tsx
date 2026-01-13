@@ -183,7 +183,7 @@ function CopyButton({
       className={cn(
         buttonVariants({
           className:
-            'hover:text-fd-accent-foreground data-checked:text-fd-accent-foreground min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0',
+            'hover:text-fd-accent-foreground data-checked:text-fd-accent-foreground min-h-[44px] min-w-[44px]',
           size: 'icon-xs',
         }),
         className,
