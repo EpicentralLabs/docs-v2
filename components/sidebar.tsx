@@ -68,7 +68,7 @@ interface InternalContext {
 }
 
 const itemVariants = cva(
-  'relative flex flex-row items-center gap-2 rounded-md py-2.5 md:py-1.5 px-2 ps-(--sidebar-item-offset) text-start text-fd-muted-foreground text-[14px] md:text-[13px] leading-snug font-normal [overflow-wrap:anywhere] [&_svg]:size-4 md:[&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:opacity-70 min-h-[44px] md:min-h-0',
+  'relative flex flex-row items-center gap-1.5 rounded-md py-2 md:py-1.5 px-2 ps-(--sidebar-item-offset) text-start text-fd-muted-foreground text-[0.8125rem] md:text-[0.75rem] leading-snug font-normal [overflow-wrap:anywhere] [&_svg]:size-3.5 md:[&_svg]:size-3 [&_svg]:shrink-0 [&_svg]:opacity-70 min-h-[2.5rem] md:min-h-0',
   {
     variants: {
       active: {
@@ -199,7 +199,7 @@ export function SidebarContentMobile({
             {...props}
             data-state={state}
             className={cn(
-              'fixed text-[15px] flex flex-col shadow-lg border-s end-0 inset-y-0 w-[85%] max-w-[380px] z-40 bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out',
+              'fixed text-[0.9375rem] flex flex-col shadow-lg border-s end-0 inset-y-0 w-[85%] max-w-[22rem] z-40 bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out',
               !present && 'invisible',
               className,
             )}
@@ -216,7 +216,7 @@ export function SidebarHeader(props: ComponentProps<'div'>) {
   return (
     <div
       {...props}
-      className={cn('flex flex-col gap-2 p-3 pb-1.5', props.className)}
+      className={cn('flex flex-col gap-1.5 p-2.5 pb-1', props.className)}
     >
       {props.children}
     </div>
@@ -227,7 +227,7 @@ export function SidebarFooter(props: ComponentProps<'div'>) {
   return (
     <div
       {...props}
-      className={cn('flex flex-col border-t border-fd-border/50 p-3 pt-2', props.className)}
+      className={cn('flex flex-col border-t border-fd-border/50 p-2.5 pt-1.5', props.className)}
     >
       {props.children}
     </div>
@@ -238,12 +238,12 @@ export function SidebarViewport(props: ScrollAreaProps) {
   return (
     <ScrollArea {...props} className={cn('h-full', props.className)}>
       <ScrollViewport
-        className="p-3 py-2 overscroll-contain"
+        className="p-2.5 py-1.5 overscroll-contain"
         style={
           {
-            '--sidebar-item-offset': 'calc(var(--spacing) * 2)',
+            '--sidebar-item-offset': 'calc(var(--spacing) * 1.75)',
             maskImage:
-              'linear-gradient(to bottom, transparent, white 8px, white calc(100% - 8px), transparent)',
+              'linear-gradient(to bottom, transparent, white 6px, white calc(100% - 6px), transparent)',
           } as object
         }
       >
@@ -258,7 +258,7 @@ export function SidebarSeparator(props: ComponentProps<'p'>) {
     <p
       {...props}
       className={cn(
-        'inline-flex items-center gap-2 mb-1 mt-4 first:mt-0 px-2 ps-(--sidebar-item-offset) text-[11px] font-semibold uppercase tracking-wider text-fd-muted-foreground/60 empty:mb-0 [&_svg]:size-3.5 [&_svg]:shrink-0',
+        'inline-flex items-center gap-1.5 mb-0.5 mt-3 first:mt-0 px-2 ps-(--sidebar-item-offset) text-[0.625rem] font-semibold uppercase tracking-wider text-fd-muted-foreground/60 empty:mb-0 [&_svg]:size-3 [&_svg]:shrink-0',
         props.className,
       )}
     >
@@ -378,14 +378,14 @@ export function SidebarFolderContent(props: CollapsibleContentProps) {
       className={cn(
         'relative mt-0.5',
         level === 1 && [
-          "before:content-[''] before:absolute before:w-px before:inset-y-0.5 before:bg-fd-border/40 before:start-2.5",
-          "**:data-[active=true]:before:content-[''] **:data-[active=true]:before:bg-fd-primary **:data-[active=true]:before:absolute **:data-[active=true]:before:w-px **:data-[active=true]:before:inset-y-2 **:data-[active=true]:before:start-2.5",
+          "before:content-[''] before:absolute before:w-px before:inset-y-0.5 before:bg-fd-border/40 before:start-2",
+          "**:data-[active=true]:before:content-[''] **:data-[active=true]:before:bg-fd-primary **:data-[active=true]:before:absolute **:data-[active=true]:before:w-px **:data-[active=true]:before:inset-y-1.5 **:data-[active=true]:before:start-2",
         ],
         props.className,
       )}
       style={
         {
-          '--sidebar-item-offset': `calc(var(--spacing) * ${(level + 1) * 2.5})`,
+          '--sidebar-item-offset': `calc(var(--spacing) * ${(level + 1) * 2})`,
           ...props.style,
         } as object
       }
@@ -479,7 +479,7 @@ export function SidebarPageTree(props: {
         if (item.type === 'separator') {
           if (Separator) return <Separator key={i} item={item} />;
           return (
-            <SidebarSeparator key={i} className={cn(i !== 0 && 'mt-5 pt-4 border-t border-fd-border/30')}>
+            <SidebarSeparator key={i} className={cn(i !== 0 && 'mt-4 pt-3 border-t border-fd-border/30')}>
               {item.icon}
               {item.name}
             </SidebarSeparator>

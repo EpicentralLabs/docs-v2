@@ -55,29 +55,37 @@
   --color-fd-ring: hsl(220, 100%, 64%);
 }
 
-/* Layout customization */
+/* ============================================
+   Layout Variables - Responsive & Zoom-friendly
+   Uses hybrid approach: rem for text, clamp for layout
+   ============================================ */
 :root {
   /* Preserve primary color */
   --fd-primary: #4a85ff;
   --fd-primary-foreground: #ffffff;
   
-  /* Full-width layout: content spans between sidebar and TOC */
-  --fd-toc-width: 286px;
-  --fd-sidebar-width: 260px;
-  --fd-page-width: min(calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem), 1200px);
+  /* Sidebar and TOC widths using clamp for responsive scaling */
+  --fd-sidebar-width: clamp(14rem, 15vw, 16.25rem); /* ~224px to 260px */
+  --fd-toc-width: clamp(14rem, 15vw, 17.875rem); /* ~224px to 286px */
   
-  /* Adaptive layout width with max-width for 1920px standard monitors */
-  --fd-layout-width: min(calc(100vw - 2rem), 1920px);
+  /* Adaptive page width - expands dynamically */
+  --fd-page-width: clamp(
+    37.5rem,
+    calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 3rem),
+    1100rem
+  ); /* ~600px to 1760px */
+  
+  /* Layout width - fully dynamic */
+  --fd-layout-width: calc(100vw - 1.5rem);
+  
+  /* Compact spacing scale */
+  --fd-spacing-xs: 0.25rem;
+  --fd-spacing-sm: 0.5rem;
+  --fd-spacing-md: 0.75rem;
+  --fd-spacing-lg: 1rem;
+  --fd-spacing-xl: 1.5rem;
 }
 
-/* Center content on large screens */
-@media (min-width: 1920px) {
-  body {
-    max-width: 1920px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 
 /* Typography improvements */
 body {
@@ -87,7 +95,8 @@ body {
 }
 
 /* ============================================
-   Light Mode Prose Typography
+   Light Mode Prose Typography - Compact Design
+   Reduced by ~12% for cleaner look
    ============================================ */
 .prose {
   --tw-prose-body: hsl(220, 15%, 25%);
@@ -107,7 +116,9 @@ body {
   --tw-prose-th-borders: hsla(220, 15%, 80%, 0.6);
   --tw-prose-td-borders: hsla(220, 15%, 80%, 0.4);
   
-  line-height: 1.7;
+  /* Compact base font size */
+  font-size: 0.9375rem; /* 15px - reduced from 16px */
+  line-height: 1.65;
   letter-spacing: -0.003em;
 }
 
@@ -131,30 +142,34 @@ body {
   --tw-prose-td-borders: hsla(220, 30%, 25%, 0.25);
 }
 
+/* Compact heading styles */
 .prose h1,
 .prose h2,
 .prose h3,
 .prose h4,
 .prose h5,
 .prose h6 {
-  line-height: 1.35;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   font-weight: 600;
 }
 
-.prose h1 { font-size: 2rem; margin-top: 0; }
-.prose h2 { font-size: 1.5rem; margin-top: 2em; }
-.prose h3 { font-size: 1.25rem; margin-top: 1.75em; }
-.prose h4 { font-size: 1.125rem; margin-top: 1.5em; }
+/* Reduced heading sizes (~12% smaller) */
+.prose h1 { font-size: 1.75rem; margin-top: 0; }
+.prose h2 { font-size: 1.3125rem; margin-top: 1.75em; }
+.prose h3 { font-size: 1.125rem; margin-top: 1.5em; }
+.prose h4 { font-size: 1rem; margin-top: 1.25em; }
 
+/* Compact paragraph spacing */
 .prose p {
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
+/* Compact list item spacing */
 .prose li {
-  margin-top: 0.375em;
-  margin-bottom: 0.375em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 /* ============================================
@@ -163,29 +178,29 @@ body {
 
 /* Ensure ordered list numbers are not cut off */
 .prose ol {
-  padding-left: 1.75em;
+  padding-left: 1.5em;
   margin-left: 0;
   list-style-position: outside;
 }
 
 .prose ol li {
-  padding-left: 0.5em;
+  padding-left: 0.375em;
 }
 
 /* Steps component styling */
 .fd-steps {
-  padding-left: 1.5em;
+  padding-left: 1.25em;
   margin-left: 0;
 }
 
 .fd-step {
-  padding-left: 0.5em;
+  padding-left: 0.375em;
 }
 
 /* Ensure proper spacing for nested lists */
 .prose ol ol,
 .prose ul ol {
-  padding-left: 1.5em;
+  padding-left: 1.25em;
 }
 
 /* ============================================
@@ -204,7 +219,7 @@ figure.shiki pre {
 /* Keep border only on the outer figure element */
 .prose pre:not(figure pre):not(.shiki pre) {
   border: 1px solid hsla(220, 15%, 80%, 0.5);
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
 }
 
 .dark .prose pre:not(figure pre):not(.shiki pre) {
@@ -212,7 +227,7 @@ figure.shiki pre {
 }
 
 .prose code {
-  font-size: 0.875em;
+  font-size: 0.8125em; /* Slightly smaller code */
   font-weight: 500;
 }
 
@@ -221,7 +236,7 @@ figure.shiki pre {
   background: hsla(220, 60%, 90%, 0.5);
   border: 1px solid hsla(220, 15%, 80%, 0.5);
   border-radius: 0.25rem;
-  padding: 0.125rem 0.375rem;
+  padding: 0.0625rem 0.3125rem;
   color: hsl(220, 80%, 45%);
 }
 
@@ -254,11 +269,12 @@ a:visited {
 }
 
 /* ============================================
-   Light Mode Sidebar
+   Sidebar Styling - Compact
    ============================================ */
 #nd-sidebar {
   background: hsl(0, 0%, 99%);
   border-color: hsla(220, 15%, 80%, 0.4);
+  font-size: 0.8125rem; /* Compact sidebar text */
 }
 
 #nd-sidebar-mobile {
@@ -279,8 +295,8 @@ a:visited {
    Light Mode Scrollbar
    ============================================ */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -289,7 +305,7 @@ a:visited {
 
 ::-webkit-scrollbar-thumb {
   background: hsla(220, 15%, 70%, 0.4);
-  border-radius: 3px;
+  border-radius: 2.5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -335,12 +351,13 @@ header[id="nd-nav"] {
 }
 
 /* ============================================
-   Light Mode Cards
+   Light Mode Cards - Compact
    ============================================ */
 [data-card] {
   background: hsl(0, 0%, 100%);
   border-color: hsla(220, 15%, 80%, 0.4);
   transition: border-color 0.2s ease, background-color 0.2s ease;
+  padding: 0.875rem; /* Reduced padding */
 }
 
 [data-card]:hover {
@@ -350,11 +367,12 @@ header[id="nd-nav"] {
 
 /* Reduce spacing between icon and title in cards */
 [data-card] > div:first-child {
-  margin-bottom: 0.25rem !important;
+  margin-bottom: 0.1875rem !important;
 }
 
 [data-card] h3 {
   margin-top: 0 !important;
+  font-size: 0.9375rem;
 }
 
 /* Dark mode Cards */
@@ -369,7 +387,7 @@ header[id="nd-nav"] {
 }
 
 /* ============================================
-   Callout Styling
+   Callout Styling - Compact
    ============================================ */
 
 /* Callout type colors */
@@ -383,15 +401,16 @@ header[id="nd-nav"] {
 .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"],
 .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] {
   background: hsl(220, 10%, 96%);
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  padding: 0.75rem;
 }
 
 @supports selector(:has(*)) {
   .prose > div:has(> div[role="none"][class*="w-0.5"]) {
     background: hsl(220, 10%, 96%);
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
   }
 }
 
@@ -457,24 +476,24 @@ header[id="nd-nav"] {
 /* Compact callout spacing - reduce margins between title and body */
 .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p,
 .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: 0.375em;
+  margin-bottom: 0.375em;
 }
 
 @supports selector(:has(*)) {
   .prose > div:has(> div[role="none"][class*="w-0.5"]) p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.375em;
+    margin-bottom: 0.375em;
   }
   
   /* Reduce spacing for first paragraph after title */
   .prose > div:has(> div[role="none"][class*="w-0.5"]) p:first-of-type {
-    margin-top: 0.25em;
+    margin-top: 0.1875em;
   }
   
   .prose > div.flex[class*="gap-2"][class*="rounded-xl"][class*="border"] p:first-of-type,
   .prose > div[class*="flex"][class*="gap-2"][class*="my-4"][class*="rounded-xl"][class*="border"] p:first-of-type {
-    margin-top: 0.25em;
+    margin-top: 0.1875em;
   }
 }
 
@@ -482,19 +501,19 @@ header[id="nd-nav"] {
    Button and Dropdown Compact Spacing
    ============================================ */
 
-/* Reduce button margins */
+/* Reduce button margins and padding */
 button,
 [role="button"] {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-top: 0.1875rem;
+  margin-bottom: 0.1875rem;
 }
 
 /* Compact dropdown/select styling */
 select,
 [role="listbox"],
 [role="combobox"] {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-top: 0.1875rem;
+  margin-bottom: 0.1875rem;
 }
 
 /* Page action buttons (Edit on GitHub, Copy Markdown, Open) */
@@ -502,8 +521,8 @@ select,
 .prose + div [role="button"],
 article + div button,
 article + div [role="button"] {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.8125rem;
+  padding: 0.3125rem 0.625rem;
+  font-size: 0.75rem;
 }
 
 /* ============================================
@@ -524,7 +543,7 @@ article + div [role="button"] {
 /* Ensure search input has rounded corners to match the focus border */
 [data-search-dialog] input,
 [data-search-dialog] textarea {
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
 }
 
 /* ============================================
@@ -576,7 +595,7 @@ article + div [role="button"] {
 }
 
 /* ============================================
-   Responsive Adjustments
+   Responsive Adjustments - Mobile First
    ============================================ */
 
 /* Mobile styles (< 640px) */
@@ -619,52 +638,112 @@ article + div [role="button"] {
     margin-left: -1rem;
     margin-right: -1rem;
     border-radius: 0;
-    padding: 1rem;
+    padding: 0.875rem;
   }
 }
 
-/* Small mobile to tablet transition (640px - 768px) */
-@media (min-width: 640px) and (max-width: 768px) {
+/* Small mobile to tablet transition (640px - 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
   :root {
     --fd-layout-width: 100%;
     --fd-page-width: 100%;
     --fd-toc-width: 0px;
   }
   
+  .prose h1 { font-size: 1.625rem; }
+  .prose h2 { font-size: 1.3125rem; }
+  .prose h3 { font-size: 1.0625rem; }
+}
+
+/* Tablet styles (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --fd-sidebar-width: 14rem; /* 224px */
+    --fd-toc-width: 0px;
+    --fd-layout-width: calc(100vw - 1.5rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 2rem);
+  }
+  
+  .prose {
+    font-size: 0.875rem;
+  }
+  
+  .prose h1 { font-size: 1.625rem; }
+  .prose h2 { font-size: 1.25rem; }
+  .prose h3 { font-size: 1.0625rem; }
+}
+
+/* Small desktop (1024px - 1279px) - Compact mode */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root {
+    --fd-sidebar-width: 14.5rem; /* 232px */
+    --fd-toc-width: 14rem; /* 224px */
+    --fd-layout-width: calc(100vw - 1.5rem);
+    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 2rem);
+  }
+  
+  .prose {
+    font-size: 0.875rem;
+  }
+  
+  .prose h1 { font-size: 1.625rem; }
+  .prose h2 { font-size: 1.25rem; }
+  .prose h3 { font-size: 1.0625rem; }
+  .prose h4 { font-size: 0.9375rem; }
+}
+
+/* Desktop 1080p (1280px - 1439px) - Compact mode */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  :root {
+    --fd-sidebar-width: 15rem; /* 240px */
+    --fd-toc-width: 15rem; /* 240px */
+    --fd-layout-width: calc(100vw - 1.5rem);
+    --fd-page-width: clamp(
+      37.5rem,
+      calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 2.5rem),
+      100rem
+    ); /* 600px to 1600px */
+  }
+  
+  .prose {
+    font-size: 0.9375rem;
+  }
+  
   .prose h1 { font-size: 1.75rem; }
-  .prose h2 { font-size: 1.375rem; }
+  .prose h2 { font-size: 1.3125rem; }
   .prose h3 { font-size: 1.125rem; }
+  .prose h4 { font-size: 1rem; }
 }
 
-/* Tablet styles (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Large desktop / 2K (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
   :root {
-    --fd-layout-width: calc(100vw - 2rem);
-    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 3rem);
+    --fd-sidebar-width: 16rem; /* 256px */
+    --fd-toc-width: 16rem; /* 256px */
+    --fd-layout-width: calc(100vw - 1.5rem);
+    --fd-page-width: clamp(
+      43.75rem,
+      calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 2rem),
+      120rem
+    ); /* 700px to 1920px */
+  }
+  
+  .prose {
+    font-size: 0.9375rem;
   }
 }
 
-/* Small desktop (1025px - 1279px) */
-@media (min-width: 1025px) and (max-width: 1279px) {
-  :root {
-    --fd-layout-width: calc(100vw - 2rem);
-    --fd-page-width: calc(100vw - var(--fd-sidebar-width) - 3rem);
-  }
-}
-
-/* Large desktop (1280px+) */
-@media (min-width: 1280px) {
-  :root {
-    --fd-layout-width: min(calc(100vw - 2rem), 1920px);
-    --fd-page-width: min(calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 4rem), 1200px);
-  }
-}
-
-/* Extra large desktop (1920px+) - ensure centered content */
+/* Extra large desktop / 4K (1920px+) */
 @media (min-width: 1920px) {
   :root {
-    --fd-layout-width: 1920px;
-    --fd-page-width: 1200px;
+    --fd-sidebar-width: 16rem;
+    --fd-toc-width: 16rem;
+    --fd-layout-width: calc(100vw - 1.5rem);
+    --fd-page-width: clamp(
+      43.75rem,
+      calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 2rem),
+      120rem
+    );
   }
 }
 
@@ -673,7 +752,7 @@ article + div [role="button"] {
    ============================================ */
 
 /* Ensure tables display properly on desktop */
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .prose table {
     display: table;
     width: 100%;
@@ -685,7 +764,8 @@ article + div [role="button"] {
   .prose table th {
     word-break: break-word;
     overflow-wrap: break-word;
-    padding: 0.5rem 0.75rem;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.875rem;
   }
   
   /* Allow horizontal scrolling only if table is wider than container */
@@ -705,7 +785,7 @@ article + div [role="button"] {
    ============================================ */
 
 /* Smooth scrolling for mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   html {
     scroll-behavior: smooth;
   }
@@ -730,5 +810,37 @@ article + div [role="button"] {
   
   #nd-page {
     overflow-x: hidden;
+  }
+}
+
+/* ============================================
+   TOC (Table of Contents) Compact Styling
+   ============================================ */
+#nd-toc {
+  font-size: 0.8125rem;
+}
+
+#nd-toc h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Zoom-friendly adjustments
+   Using rem units that scale with browser zoom
+   ============================================ */
+
+/* Ensure layout doesn't break on zoom */
+@media (min-width: 768px) {
+  #nd-docs-layout {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  /* Prevent content from getting too narrow on zoom in */
+  #nd-page article {
+    min-width: 0;
+    max-width: 100%;
   }
 }

@@ -127,7 +127,7 @@ export function DocsLayout({
       (item.on === 'nav' || item.on === 'all' || !item.on),
   );
   const sidebarVariables = cn(
-    'md:[--fd-sidebar-width:240px] lg:[--fd-sidebar-width:260px]',
+    'md:[--fd-sidebar-width:14.5rem] lg:[--fd-sidebar-width:16rem]',
   );
 
   function sidebar() {
@@ -150,10 +150,10 @@ export function DocsLayout({
         {links
           .filter((v) => v.type !== 'icon')
           .map((item, i, list) => (
-            <SidebarLinkItem
+              <SidebarLinkItem
               key={i}
               item={item}
-              className={cn(i === list.length - 1 && 'mb-4')}
+              className={cn(i === list.length - 1 && 'mb-3')}
             />
           ))}
         <SidebarPageTree components={components} />
@@ -218,7 +218,7 @@ export function DocsLayout({
           <div className="flex">
             <Link
               href={nav.url ?? '/'}
-              className="inline-flex text-[15px] items-center gap-2.5 font-medium me-auto"
+              className="inline-flex text-[0.875rem] items-center gap-2 font-medium me-auto"
             >
               {nav.title}
             </Link>
@@ -354,7 +354,7 @@ export function DocsLayout({
         <LayoutBody
           {...props.containerProps}
           className={cn(
-            'md:[&_#nd-page_article]:pt-8 xl:[&_#nd-page_article]:px-6',
+            'md:[&_#nd-page_article]:pt-6 xl:[&_#nd-page_article]:px-5',
             sidebarEnabled && sidebarVariables,
             props.containerProps?.className,
           )}
@@ -363,7 +363,7 @@ export function DocsLayout({
           {tabMode === 'top' && tabs.length > 0 && (
             <LayoutTabs
               options={tabs}
-              className="sticky top-[calc(var(--fd-nav-height)+var(--fd-tocnav-height))] z-10 bg-fd-background border-b px-6 pt-3 xl:px-8 max-md:hidden"
+              className="sticky top-[calc(var(--fd-nav-height)+var(--fd-tocnav-height))] z-10 bg-fd-background border-b px-5 pt-2.5 xl:px-6 max-md:hidden"
             />
           )}
           {children}
