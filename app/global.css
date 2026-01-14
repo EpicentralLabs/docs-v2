@@ -36,23 +36,25 @@
 }
 
 /* Dark mode - Primary theme */
-.dark {
-  --color-fd-background: hsl(0, 0%, 4%);
-  --color-fd-foreground: hsl(0, 0%, 95%);
-  --color-fd-muted: hsl(220, 8%, 10%);
-  --color-fd-muted-foreground: hsla(0, 0%, 75%, 0.85);
-  --color-fd-popover: hsl(220, 8%, 7%);
-  --color-fd-popover-foreground: hsl(0, 0%, 90%);
-  --color-fd-card: hsl(220, 8%, 6%);
-  --color-fd-card-foreground: hsl(0, 0%, 95%);
-  --color-fd-border: hsla(220, 30%, 25%, 0.25);
-  --color-fd-primary: hsl(220, 100%, 64%);
-  --color-fd-primary-foreground: hsl(0, 0%, 100%);
-  --color-fd-secondary: hsl(220, 8%, 12%);
-  --color-fd-secondary-foreground: hsl(0, 0%, 92%);
-  --color-fd-accent: hsla(220, 80%, 55%, 0.12);
-  --color-fd-accent-foreground: hsl(0, 0%, 92%);
-  --color-fd-ring: hsl(220, 100%, 64%);
+@layer theme {
+  .dark {
+    --color-fd-background: hsl(0, 0%, 4%);
+    --color-fd-foreground: hsl(0, 0%, 95%);
+    --color-fd-muted: hsl(220, 8%, 10%);
+    --color-fd-muted-foreground: hsla(0, 0%, 75%, 0.85);
+    --color-fd-popover: hsl(220, 8%, 7%);
+    --color-fd-popover-foreground: hsl(0, 0%, 90%);
+    --color-fd-card: hsl(220, 8%, 6%);
+    --color-fd-card-foreground: hsl(0, 0%, 95%);
+    --color-fd-border: hsla(220, 30%, 25%, 0.25);
+    --color-fd-primary: hsl(220, 100%, 64%);
+    --color-fd-primary-foreground: hsl(0, 0%, 100%);
+    --color-fd-secondary: hsl(220, 8%, 12%);
+    --color-fd-secondary-foreground: hsl(0, 0%, 92%);
+    --color-fd-accent: hsla(220, 80%, 55%, 0.12);
+    --color-fd-accent-foreground: hsl(0, 0%, 92%);
+    --color-fd-ring: hsl(220, 100%, 64%);
+  }
 }
 
 /* ============================================
@@ -72,7 +74,7 @@
   --fd-page-width: clamp(
     37.5rem,
     calc(100vw - var(--fd-sidebar-width) - var(--fd-toc-width) - 3rem),
-    1100rem
+    110rem
   ); /* ~600px to 1760px */
   
   /* Layout width - fully dynamic */
