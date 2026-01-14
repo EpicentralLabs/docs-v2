@@ -57,14 +57,14 @@ export function LLMCopyButton({
         buttonVariants({
           color: 'secondary',
           size: 'sm',
-          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground min-h-[44px] min-w-[44px]',
+          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground min-h-[32px] min-w-[32px] sm:min-h-[36px] sm:min-w-0 text-xs',
         }),
       )}
       onClick={onClick}
     >
       {checked ? <Check /> : <Copy />}
-      <span className="hidden sm:inline">Copy Markdown</span>
-      <span className="sm:hidden">Copy</span>
+      <span className="hidden sm:inline">{checked ? 'Page Copied' : 'Copy Page'}</span>
+      <span className="sm:hidden">{checked ? 'Copied' : 'Copy'}</span>
     </button>
   );
 }
@@ -221,7 +221,7 @@ export function ViewOptions({
           buttonVariants({
             color: 'secondary',
             size: 'sm',
-            className: 'gap-2 min-h-[44px] min-w-[44px]',
+            className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground min-h-[32px] min-w-[32px] sm:min-h-[36px] sm:min-w-0 text-xs',
           }),
         )}
       >

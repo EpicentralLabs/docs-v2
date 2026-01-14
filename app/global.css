@@ -585,39 +585,66 @@ select,
   margin-bottom: 0.1875rem;
 }
 
-/* Page action buttons (Edit on GitHub, Copy Markdown, Open) */
+/* Page action buttons (Edit on GitHub, Copy Page, Open) */
 /* Match PopoverContent theme: darker background, rounder corners, reduced vertical padding */
-/* Target buttons in the action bar container */
-.prose + div button,
-.prose + div [role="button"],
-article + div button,
-article + div [role="button"],
-.prose + div a[class*="button"],
-article + div a[class*="button"],
-/* Target buttons with secondary color variant used in page actions */
-div[class*="border-b"][class*="pt-2"] button,
-div[class*="border-b"][class*="pt-2"] a[class*="button"],
-div[class*="border-b"][class*="pt-2"] [role="button"] {
+/* Target all interactive elements in the page action bar */
+div[class*="border-b"][class*="pt-2"] > button,
+div[class*="border-b"][class*="pt-2"] > a,
+div[class*="border-b"][class*="pt-2"] > [role="button"] {
   padding: 0.375rem 0.625rem !important;
   font-size: 0.75rem;
   border-radius: 0.75rem !important;
   /* Match PopoverContent background - use full opacity version */
   background: hsl(0, 0%, 100%) !important;
   border-color: hsla(220, 15%, 80%, 0.4) !important;
+  /* Consistent sizing */
+  min-height: 36px !important;
+  min-width: auto !important;
+  /* Smooth transition for hover */
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease !important;
 }
 
-.dark .prose + div button,
-.dark .prose + div [role="button"],
-.dark article + div button,
-.dark article + div [role="button"],
-.dark .prose + div a[class*="button"],
-.dark article + div a[class*="button"],
-.dark div[class*="border-b"][class*="pt-2"] button,
-.dark div[class*="border-b"][class*="pt-2"] a[class*="button"],
-.dark div[class*="border-b"][class*="pt-2"] [role="button"] {
+/* Hover effect for page action buttons */
+div[class*="border-b"][class*="pt-2"] > button:hover,
+div[class*="border-b"][class*="pt-2"] > a:hover,
+div[class*="border-b"][class*="pt-2"] > [role="button"]:hover {
+  background: hsl(220, 10%, 95%) !important;
+  border-color: hsla(220, 15%, 70%, 0.5) !important;
+}
+
+/* Mobile-specific styles for smaller buttons */
+@media (max-width: 640px) {
+  div[class*="border-b"][class*="pt-2"] > button,
+  div[class*="border-b"][class*="pt-2"] > a,
+  div[class*="border-b"][class*="pt-2"] > [role="button"] {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.6875rem !important;
+    min-height: 32px !important;
+    min-width: 32px !important;
+  }
+  
+  div[class*="border-b"][class*="pt-2"] > button svg,
+  div[class*="border-b"][class*="pt-2"] > a svg,
+  div[class*="border-b"][class*="pt-2"] > [role="button"] svg {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+  }
+}
+
+.dark div[class*="border-b"][class*="pt-2"] > button,
+.dark div[class*="border-b"][class*="pt-2"] > a,
+.dark div[class*="border-b"][class*="pt-2"] > [role="button"] {
   /* Match PopoverContent dark mode background exactly */
   background: hsl(220, 8%, 7%) !important;
   border-color: hsla(220, 30%, 25%, 0.3) !important;
+}
+
+/* Dark mode hover effect */
+.dark div[class*="border-b"][class*="pt-2"] > button:hover,
+.dark div[class*="border-b"][class*="pt-2"] > a:hover,
+.dark div[class*="border-b"][class*="pt-2"] > [role="button"]:hover {
+  background: hsl(220, 10%, 15%) !important;
+  border-color: hsla(220, 30%, 35%, 0.4) !important;
 }
 
 /* ============================================

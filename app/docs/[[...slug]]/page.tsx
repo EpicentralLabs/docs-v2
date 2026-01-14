@@ -55,7 +55,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
               buttonVariants({
                 color: 'secondary',
                 size: 'sm',
-                className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground min-h-[44px] min-w-[44px]',
+                className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground min-h-[32px] min-w-[32px] sm:min-h-[36px] sm:min-w-0 text-xs',
               }),
               'not-prose'
             )}
