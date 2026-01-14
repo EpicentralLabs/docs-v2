@@ -5,12 +5,7 @@ description: A detailed overview of the flow of instructions in the Staking Prog
 
 import { Step, Steps } from '@/components/steps';
 
-# Instruction Flow
-
-<Steps>
-  <Step>
-
-### Pool Initialization
+## Pool Initialization
 
 The `initialize_stake_pool` instruction creates both the config and pool accounts atomically:
 
@@ -53,10 +48,9 @@ pub fn initialize_pool_handler(ctx: Context<InitializeStakePool>, emission_bps: 
 - `stake_mint` and `reward_mint` decimals cannot exceed `12`
 - Only signers listed in the [`AUTHORITIES`](./index.mdx#access-control) constant are permitted to initialize the pool
 
-</Step>
-<Step>
+---
 
-### Staking
+## Staking
 
 The `stake_to_stake_pool` instruction handles both new and existing stake accounts:
 
@@ -100,10 +94,10 @@ pub fn stake_handler(ctx: Context<StakeToStakePool>, amount: u64) -> Result<()> 
     Transfers `stake_mint` tokens from user's associated token account (ATA) to pool vault
   </Step>
 </Steps>
-</Step>
-<Step>
 
-### Claiming Rewards
+---
+
+## Claiming Rewards
 
 The `claim_rewards` instruction mints `reward_mint` tokens based on accrued rewards:
 
@@ -140,10 +134,10 @@ The `process_claim` utility function orchestrates the complete claim flow:
     Resets the baseline interest index via `apply_claim`
   </Step>
 </Steps>
-</Step>
-<Step>
 
-### Unstaking
+---
+
+## Unstaking
 
 The `unstake_from_stake_pool` instruction handles both partial and full withdrawals:
 
@@ -187,5 +181,3 @@ pub fn unstake_handler(ctx: Context<UnstakeFromStakePool>, amount: u64) -> Resul
 | **Full unstake**  | Automatically claims rewards and closes the `StakeAccount`, refunding the user's [`rent`](https://docs.anza.xyz/implemented-proposals/rent) on the account |
 | **Partial unstake** | Updates the [Global Interest Index](/docs/staking-lab/staking-program/reward-calculation-system#global-interest-index), recalculates pending rewards, and resets the baseline interest index |
 
-</Step>
-</Steps>
