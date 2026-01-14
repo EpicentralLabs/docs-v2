@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     shortcut: '/epicentral-labs-logo.svg',
     apple: '/epicentral-labs-logo.svg',
   },
-  manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'en_US',
