@@ -3,6 +3,22 @@ title: The Staking Lab - Changelogs
 description: https://stake.opx.markets
 ---
 
+## 1.2.7 - 2026-01-14
+<ChangelogBadge type="PATCH" />
+
+**CHANGES:**
+- Adjusted priority fee compute unit allocations across transaction priority levels for enhanced transaction processing:
+#### New Priority Fee CU Allocations:
+| Priority Level        | Compute Units |
+|----------------------|---------------|
+| Standard (default)   | 200,000       |
+| Low                  | 350,000       |
+| Medium               | 550,000       |
+| High                 | 750,000       |
+
+**OPTIMIZATIONS:**
+- Improved transaction-error messaging with clearer guidance for users to adjust priority fee settings
+
 ## 1.2.6 - 2026-01-07
 <ChangelogBadge type="PATCH" />
 
