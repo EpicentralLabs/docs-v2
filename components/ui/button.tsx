@@ -16,10 +16,10 @@ export const buttonVariants = cva(
       // fumadocs use `color` instead of `variant`
       color: variants,
       size: {
-        sm: 'gap-1 px-2 py-1.5 text-xs',
-        icon: 'p-1.5 [&_svg]:size-5',
-        'icon-sm': 'p-1.5 [&_svg]:size-4.5',
-        'icon-xs': 'p-1 [&_svg]:size-4',
+        sm: 'gap-1.5 px-3 py-2 text-xs min-h-[36px]',
+        icon: 'p-2 [&_svg]:size-5 min-h-[44px] min-w-[44px] md:p-1.5 md:min-h-0 md:min-w-0',
+        'icon-sm': 'p-2 [&_svg]:size-4.5 min-h-[44px] min-w-[44px] md:p-1.5 md:min-h-0 md:min-w-0',
+        'icon-xs': 'p-1.5 [&_svg]:size-4 min-h-[40px] min-w-[40px] md:p-1 md:min-h-0 md:min-w-0',
       },
     },
   },

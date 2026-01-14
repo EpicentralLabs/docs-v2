@@ -23,11 +23,11 @@ export function PageTOCTitle(props: ComponentProps<'h2'>) {
       id="toc-title"
       {...props}
       className={cn(
-        'inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground',
+        'inline-flex items-center gap-1 text-[0.6875rem] text-fd-muted-foreground uppercase tracking-wider font-semibold',
         props.className,
       )}
     >
-      <Text className="size-4" />
+      <Text className="size-3" />
       <I18nLabel label="toc" />
     </h3>
   );
@@ -60,7 +60,7 @@ export function PageArticle(props: ComponentProps<'article'>) {
     <article
       {...props}
       className={cn(
-        'flex min-w-0 w-full flex-col gap-4 pt-8 px-4 md:px-6 md:mx-auto',
+        'flex min-w-0 w-full flex-col gap-2.5 sm:gap-3 pt-5 sm:pt-6 px-3.5 sm:px-4 md:px-5 md:mx-auto pb-6',
         props.className,
       )}
     >
@@ -79,7 +79,7 @@ export function PageRoot({ toc = false, children, ...props }: RootProps) {
       id="nd-page"
       {...props}
       className={cn(
-        'flex flex-1 w-full mx-auto max-w-(--fd-page-width) pt-(--fd-tocnav-height) pe-(--fd-toc-width)',
+        'flex flex-1 w-full mx-auto max-w-(--fd-page-width) pt-(--fd-tocnav-height) md:pe-(--fd-toc-width)',
         props.className,
       )}
     >

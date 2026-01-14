@@ -1,0 +1,106 @@
+---
+title: The Staking Lab - Changelogs
+description: https://stake.opx.markets
+---
+
+## 1.2.7 - 2026-01-14
+<ChangelogBadge type="PATCH" />
+
+**CHANGES:**
+- Adjusted priority fee compute unit allocations across transaction priority levels for enhanced transaction processing:
+
+| Priority Level      | Compute Units (Old → New)   |
+|---------------------|-----------------------------|
+| Standard (default)  | 100,000 → **200,000**       |
+| Low                 | 150,000 → **350,000**       |
+| Medium              | 250,000 → **550,000**       |
+| High                | 450,000 → **750,000**       |
+
+**OPTIMIZATIONS:**
+- Improved transaction-error messaging with clearer guidance for users to adjust priority fee settings
+
+---
+
+## 1.2.6 - 2026-01-07
+<ChangelogBadge type="PATCH" />
+
+**OPTIMIZATIONS:**
+- 1D chart now shows 1hr aggregate data points
+- 7D chart now shows 4h aggregate data points
+- Volume bars now align with the line graph chart
+- xLABS accumulation counter now animates at a smooth **30 fps** (removed random jitter)
+
+**BUG FIXES:**
+- Fixed all de-sync issues for pending "xLABS to Claim" (99.98% accuracy), (please claim xLABS once to sync with database)
+- Fixed incorrect date/time on aggregate chart data (for all timeframes)
+- Fixed on-hover chart tooltip text and color for privacy browsers: (Brave, Avast, Firefox, etc.)
+
+---
+
+## 1.2.5 - 2025-12-31
+<ChangelogBadge type="PATCH" />
+
+**OPTIMIZATIONS:**
+- USD volume (LABS/xLABS) is now tracked and stored in backend (no frontend implementation at this time)
+
+**BUG FIXES:**
+- "xLABS Claimed" for the user should display accurate values for everyone now.
+
+---
+
+## 1.2.0 - 2025-12-30
+<ChangelogBadge type="UPDATE" />
+
+**FEATURES:**
+- 24h timeframe added to charts, aggregated data shown at 5min intervals
+- 7D timeframe now shows aggregated data at 1 hour intervals
+- 30D & All Time timeframe shows aggregated data at 24 hour intervals
+- Charts show Volume of LABS Staked and xLABS Claimed, respective to each timeframe (24h, 7D, 30D, All Time)
+- Updated Stake/Unstake Modals Styles
+
+**OPTIMIZATIONS:**
+- Removed laggy `gsap` scripts (replacing header text, removing text-splits and animated background)
+- Refactored "Transaction History" list (removed `gsap` scripts)
+- Reduced webpage load times (LCP): from Avg: **5.39 secs -→ 1.55 secs** (-76.4% decrease)
+- Optimized RPC calls from Daily Avg  **2,200,000 requests -→ 75,000 requests** (-96.5% decrease)
+- Improved tx/claim-history loading by **+100%** (data parsed into off-chain database)
+- Optimized xLABS accumulation counter avg latency from **13,530+ ms -→ 367 ms**  (-97.28% decrease)
+- Added lazyloading to Charts (app performance upgrade)
+
+**BUG FIXES:**
+- Fixed "gray" browser overlay/bug (blocked `gsap` scripts) on privacy browsers: Brave, Firefox, Avast, etc.
+- Fixed (partial) xLABS accumulation counter de-sync issue (claim your xLABS to see the update) (partial-fix).
+
+![Staking Lab 1.2.0 Update](/changelog-images/staking-lab/1.2.0-pic.png)
+
+---
+
+## 1.1.0 - 2025-12-26
+<ChangelogBadge type="UPDATE" />
+
+**FEATURES:**
+- Added user-based claim history tracking (each wallet is now tracked accurately, individually) You *may* see your "xLABS Claimed" value reset (dont worry, its just a database update).
+- Added "Governance" link to navigation (Epicentral DAO) and "Epicentral Labs" along with a logo on the top left to help navigate to the main web page.
+- Added WebGL fallback for animation compatibility on privacy-focused browsers (this should fix the grey overlay for some browsers. If it still occurs, please ensure that scripts are not blocked - as that is a user-based setting, not browser, open a support ticket if you have issues).
+
+**OPTIMIZATIONS:**
+- Refactored the "Pending xLABS" calculation accuracy, (calculates fast, real-time accumulation). xLABS accumulation is now synced properly with on-chain data and UI.
+- Improved chart display by removing visible datapoints clogging the line, better time-span options, fixed x-axis dates (added actual dates, not just timestamps), and added % change across all charts.
+- Added transaction finalization verification for more accurate claim amounts (Transaction History and notification popups).
+- Replaced "Docs" with "How it Works" in navigation for clarity.
+
+---
+
+## 1.0.1 - 2025-12-22
+<ChangelogBadge type="HOTFIX" />
+
+**BUG FIXES:**
+- Staking Lab historical data bug caused by incorrect cron job configurations
+
+---
+
+## 1.0.0 - 2025-12-22
+<ChangelogBadge type="RELEASE" />
+- Initial Release of The Staking Lab, visit https://stake.opx.markets
+
+---

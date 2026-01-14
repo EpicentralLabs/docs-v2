@@ -21,7 +21,7 @@ export function Navbar(props: ComponentProps<'header'>) {
       id="nd-subnav"
       {...props}
       className={cn(
-        'fixed top-(--fd-banner-height) left-0 right-(--removed-body-scroll-bar-size,0) z-30 flex items-center ps-4 pe-2.5 border-b transition-colors backdrop-blur-sm',
+        'fixed top-(--fd-banner-height) left-0 right-(--removed-body-scroll-bar-size,0) z-30 flex items-center ps-3.5 pe-2 border-b transition-colors backdrop-blur-sm',
         !isTransparent && 'bg-fd-background/80',
         props.className,
       )}
@@ -39,7 +39,7 @@ export function LayoutBody(props: ComponentProps<'main'>) {
       id="nd-docs-layout"
       {...props}
       className={cn(
-        'flex flex-1 flex-col pt-(--fd-nav-height) transition-[padding] fd-default-layout',
+        'flex flex-1 flex-col pt-(--fd-nav-height) transition-[padding] duration-200 fd-default-layout',
         !collapsed && 'mx-(--fd-layout-offset)',
         props.className,
       )}
@@ -48,7 +48,9 @@ export function LayoutBody(props: ComponentProps<'main'>) {
         paddingInlineStart: collapsed
           ? 'min(calc(100vw - var(--fd-page-width)), var(--fd-sidebar-width))'
           : 'var(--fd-sidebar-width)',
-      }}
+        // Dynamic layout offset - centers content dynamically
+        '--fd-layout-offset': `max(0px, calc((100vw - var(--fd-layout-width) - var(--fd-sidebar-width)) / 2))`,
+      } as React.CSSProperties}
     >
       {props.children}
     </main>
@@ -61,11 +63,11 @@ export function CollapsibleControl() {
   return (
     <div
       className={cn(
-        'fixed flex shadow-lg transition-opacity rounded-xl p-0.5 border bg-fd-muted text-fd-muted-foreground z-10 max-md:hidden xl:start-4 max-xl:end-4',
+        'fixed flex shadow-lg transition-opacity rounded-lg p-0.5 border bg-fd-muted text-fd-muted-foreground z-10 max-md:hidden xl:start-3 max-xl:end-3',
         !collapsed && 'pointer-events-none opacity-0',
       )}
       style={{
-        top: 'calc(var(--fd-banner-height) + var(--fd-tocnav-height) + var(--spacing) * 4)',
+        top: 'calc(var(--fd-banner-height) + var(--fd-tocnav-height) + var(--spacing) * 3)',
       }}
     >
       <SidebarCollapseTrigger
@@ -73,13 +75,13 @@ export function CollapsibleControl() {
           buttonVariants({
             color: 'ghost',
             size: 'icon-sm',
-            className: 'rounded-lg',
+            className: 'rounded-md',
           }),
         )}
       >
         <SidebarIcon />
       </SidebarCollapseTrigger>
-      <SearchToggle className="rounded-lg" hideIfDisabled />
+      <SearchToggle className="rounded-md" hideIfDisabled />
     </div>
   );
 }
@@ -99,7 +101,7 @@ export function LayoutTabs({
     <div
       {...props}
       className={cn(
-        'flex flex-row items-end gap-6 overflow-auto',
+        'flex flex-row items-end gap-5 overflow-auto',
         props.className,
       )}
     >
@@ -126,7 +128,7 @@ function LayoutTab({
       href={url}
       {...props}
       className={cn(
-        'inline-flex border-b-2 border-transparent transition-colors items-center pb-1.5 font-medium gap-2 text-fd-muted-foreground text-sm text-nowrap hover:text-fd-accent-foreground',
+        'inline-flex border-b-2 border-transparent transition-colors items-center pb-1 font-medium gap-1.5 text-fd-muted-foreground text-[0.8125rem] text-nowrap hover:text-fd-accent-foreground',
         unlisted && !selected && 'hidden',
         selected && 'border-fd-primary text-fd-primary',
         props?.className,

@@ -1,9 +1,10 @@
 {
   "title": "Legal",
-  "children": [
+  "description": "Terms of Service, Privacy Policy, and more.",
+  "icon": "Scale",
+  "pages": [
     "tos",
     "oa",
     "pp"
   ]
 }
-

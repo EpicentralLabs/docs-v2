@@ -52,7 +52,7 @@ export function PageTOCPopoverTrigger(props: ComponentProps<'button'>) {
     <CollapsibleTrigger
       {...props}
       className={cn(
-        'flex w-full h-(--fd-tocnav-height) items-center text-sm text-fd-muted-foreground gap-2.5 px-4 py-2.5 text-start focus-visible:outline-none [&_svg]:size-4 md:px-6',
+        'flex w-full h-(--fd-tocnav-height) items-center text-[0.8125rem] text-fd-muted-foreground gap-2 px-3 py-2 text-start focus-visible:outline-none [&_svg]:size-3.5 md:px-5',
         props.className,
       )}
     >
@@ -153,7 +153,7 @@ export function PageTOCPopoverContent(props: ComponentProps<'div'>) {
     <CollapsibleContent
       data-toc-popover=""
       {...props}
-      className={cn('flex flex-col px-4 max-h-[50vh] md:px-6', props.className)}
+      className={cn('flex flex-col px-3 max-h-[50vh] md:px-5', props.className)}
     >
       {props.children}
     </CollapsibleContent>
@@ -245,7 +245,7 @@ export function PageLastUpdate({
   return (
     <p
       {...props}
-      className={cn('text-sm text-fd-muted-foreground', props.className)}
+      className={cn('text-[0.75rem] text-fd-muted-foreground', props.className)}
     >
       {text.lastUpdate} {date}
     </p>
@@ -310,7 +310,7 @@ export function PageFooter({ items, ...props }: FooterProps) {
     <div
       {...props}
       className={cn(
-        '@container grid gap-4 pb-6',
+        '@container grid gap-3 pb-5',
         previous && next ? 'grid-cols-2' : 'grid-cols-1',
         props.className,
       )}
@@ -329,20 +329,20 @@ function FooterItem({ item, index }: { item: Item; index: 0 | 1 }) {
     <Link
       href={item.url}
       className={cn(
-        'flex flex-col gap-2 rounded-lg border p-4 text-sm transition-colors hover:bg-fd-accent/80 hover:text-fd-accent-foreground @max-lg:col-span-full',
+        'flex flex-col gap-1.5 rounded-md border p-3 text-[0.8125rem] transition-colors hover:bg-fd-accent/80 hover:text-fd-accent-foreground @max-lg:col-span-full',
         index === 1 && 'text-end',
       )}
     >
       <div
         className={cn(
-          'inline-flex items-center gap-1.5 font-medium',
+          'inline-flex items-center gap-1 font-medium',
           index === 1 && 'flex-row-reverse',
         )}
       >
-        <Icon className="-mx-1 size-4 shrink-0 rtl:rotate-180" />
+        <Icon className="-mx-0.5 size-3.5 shrink-0 rtl:rotate-180" />
         <p>{item.name}</p>
       </div>
-      <p className="text-fd-muted-foreground truncate">
+      <p className="text-fd-muted-foreground truncate text-[0.75rem]">
         {item.description ?? (index === 0 ? text.previousPage : text.nextPage)}
       </p>
     </Link>
@@ -373,7 +373,7 @@ export function PageBreadcrumb({
     <div
       {...props}
       className={cn(
-        'flex items-center gap-1.5 text-sm text-fd-muted-foreground',
+        'flex items-center gap-1 text-[0.75rem] text-fd-muted-foreground',
         props.className,
       )}
     >
@@ -385,7 +385,7 @@ export function PageBreadcrumb({
 
         return (
           <Fragment key={i}>
-            {i !== 0 && <ChevronRight className="size-3.5 shrink-0" />}
+            {i !== 0 && <ChevronRight className="size-3 shrink-0" />}
             {item.url ? (
               <Link
                 href={item.url}
@@ -412,16 +412,17 @@ export function PageTOC(props: ComponentProps<'div'>) {
       id="nd-toc"
       {...props}
       className={cn(
-        'fixed bottom-0 pt-12 pb-2 pr-(--removed-body-scroll-bar-size,0) xl:on-root:[--fd-toc-width:286px] max-xl:hidden',
+        'fixed bottom-0 pt-10 pb-2 pr-(--removed-body-scroll-bar-size,0) max-xl:hidden',
         props.className,
       )}
       style={{
         ...props.style,
         top: 'calc(var(--fd-banner-height) + var(--fd-nav-height))',
-        insetInlineEnd: `max(${offset}, calc(50vw - var(--fd-sidebar-width)/2 - var(--fd-page-width)/2))`,
+        // Dynamic positioning - fully responsive
+        insetInlineEnd: `max(${offset}, calc((100vw - var(--fd-sidebar-width) - var(--fd-page-width)) / 2 - var(--fd-toc-width) / 2 + 0.5rem))`,
       }}
     >
-      <div className="flex h-full w-(--fd-toc-width) max-w-full flex-col pe-4">
+      <div className="flex h-full w-(--fd-toc-width) max-w-full flex-col pe-3">
         {props.children}
       </div>
     </div>

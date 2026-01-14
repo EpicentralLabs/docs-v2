@@ -1,9 +1,10 @@
 {
-    "title": "OPX",
-    "children": [
-        "omlp",
-        "fees",
-        "opm"
-    ]
+  "title": "OPX Platform",
+  "description": "Learn about the OPX platform and how it works.",
+  "icon": "LayoutDashboard",
+  "pages": [
+    "omlp",
+    "fees",
+    "opm"
+  ]
 }
-

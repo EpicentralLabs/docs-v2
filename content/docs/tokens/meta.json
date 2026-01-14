@@ -1,10 +1,10 @@
 {
   "title": "Tokens",
-  "description": "Learn about LABS and xLABS tokens",
-  "children": [
+  "description": "Learn about LABS, and other tokens in the Epicentral ecosystem.",
+  "icon": "Coins",
+  "pages": [
     "labs-token",
-    "wattlabs-token",
-    "xlabs-token"
+    "xlabs-token",
+    "wattlabs-token"
   ]
 }
-
