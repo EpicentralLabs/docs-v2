@@ -3,6 +3,39 @@ title: The Staking Lab - Changelogs
 description: https://stake.opx.markets
 ---
 
+## 1.3.0 - 2026-02-13
+<ChangelogBadge type="UPDATE" />
+
+**FEATURES:**
+- Added RealmsAPI to display live and historical governance proposals
+- Added governance proposal voting interface to allow for casting/withdrawing with the staked governance votes
+- Added finalize and execute capabilities to governance proposals
+- Added "Reward Pool" interface components to display future implementation (visible but disabled currently)
+- Added "Reward Pool" Stats card and chart to display future implementation (visible but disabled currently)
+- Added an "FAQs" section
+- Added "The Staking Lab" header
+- Added Stake Interface headers
+
+**CHANGES:**
+- Extended Transaction History to include vote records (that are casted through The Staking Lab UI)
+- Enhanced error logging and diagnostics for transaction handling
+- Updated User Interface layout and design (moved transaction history to the top)
+- Changed default timeframe to 7D timeframe (previously 1D or 24hr timeframe)
+- Implemented Fees: (0.002 SOL fee when claiming xLABS, 0.005 SOL convienience fee for casting votes within the UI)
+- Updated App Header/Navbar title from "Epientral Labs | The Staking Lab" to "Epicentral Labs | OPX"
+
+**OPTIMIZATIONS:**
+- Improved transaction-error messaging with clearer guidance for users to adjust priority fee settings
+- Optimized RPC calls and data fetching from both RealmsAPI and internal database APIs
+- Optimized Mobile Layout for smaller screens, including tablets and laptops
+- Updated animation library dependencies to latest versions
+- Codebase cleanup for performance and maintainability
+
+**BUG FIXES:**
+- Fixed prolonged-modal loading issue when Staking and Unstaking. Modal now closes after wallet signature by the user.
+
+![Staking Lab 1.3.0 Update](/changelog-images/staking-lab/1.3.0-update.png)
+
 ## 1.2.7 - 2026-01-14
 <ChangelogBadge type="PATCH" />
 
